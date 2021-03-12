@@ -1,0 +1,154 @@
+---
+title: "Current Difference"
+author: "G$"
+date: "2/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/censat/figures/violin"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+censat = read_tsv(paste0(dat, "/annotations/t2t_cenAnnotation.v2.021621.bed"), col_names = F) %>%
+  mutate(name = ifelse(grepl("hsat1", X4), "HSAT1", X4)) %>%
+  mutate(name = ifelse(grepl("hsat2", X4), "HSAT2", name)) %>%
+  mutate(name = ifelse(grepl("hsat3", X4), "HSAT3", name)) %>%
+  mutate(name = ifelse(grepl("hsat4", X4), "HSAT4", name)) %>%
+  mutate(name = ifelse(grepl("hsat5", X4), "HSAT5", name)) %>%
+  mutate(name = ifelse(grepl("hsat6", X4), "HSAT6", name)) %>%
+  mutate(name = ifelse(grepl("ct", X4), "CT", name)) %>%
+  mutate(name = ifelse(grepl("bsat", X4), "BSAT", name)) %>%
+  mutate(name = ifelse(grepl("dhor", X4), "DHOR", name)) %>%
+  mutate(name = ifelse(grepl("hor", name), "HOR", name)) %>%
+  mutate(name = ifelse(grepl("mon", X4), "MON", name)) %>%
+  mutate(name = ifelse(grepl("GSAT", X4), "GSAT", name)) %>%
+  dplyr::select(c(X1, X2, X3, name)) %>%
+  dplyr::rename("chrom" =1, "start" = 2 ,"end" =3) 
+
+censatColors =c("(CATTC)n" = "#E87C71",
+                "(GAATC)n"="#E28455",
+                "HOR"="#D78C32",
+                "BSAT"="#E370AB",
+                "CER" = "#CE9334",
+                "HSAT2"="#C19935",
+                "HSAT1"="#A2A638",
+                "HSAT3"="#8CAC3E",
+                "Low_complexity"="#75B042",
+                "LSAU"="#54B346",
+                "LTR"="#51B756",
+                "MST"="#53BB73",
+                "GSAT"="#55BE8D",
+                "RNA"="#54C0A5",
+                "rRNA"="#52BEBB",
+                "SAR"="#51BDCE",
+                "ACRO1"="#9400D3",
+                "HSAT4"="#53B0E3",
+                "SATR"="#5AA5DA",
+                "CT"="#6B9AD2",
+                "Simple_repeat"="#8992C8",
+                "SINE"="#9A8AC1",
+                "MON"="#A885BC",
+                "SST"="#C378B2",
+                "HSAT5"="#ED72A5",
+                "HSAT6"="#EF768C", 
+                "gap-rDNA"="#ff4000",
+                "TE" = "#ffbf00", 
+                "TAR"= "#0080ff",
+                "ACRO"="#9400D3", 
+                "DHOR" = "gray")
+
+list=c("HSAT1", "HSAT2", "HSAT3", "HSAT4", "HSAT5", "HSAT6", "CT", "BSAT", "DHOR", "HOR", "MON", "GSAT")
+
+for (i in list){
+  print(i)
+  df = censat %>%
+    filter(name == i)
+  write.table(df, paste0(dat, "/reference/repeat_fasta/beds/", i, ".bed"), sep = "\t", col.names = F, row.names = F, quote=F)
+}
+
+# use these bed files to extract kmers 
+# script for extracting kmers /kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/reference/repeat_fasta/beds/kmer_counts.sh
+
+```
+
+
+
+```{r}
+sats <- data.frame()
+for (i in list){
+  print(i)
+  
+  repdat <- read_tsv(paste0(dat, "/reference/repeat_fasta/beds/", i, "_k6.txt"), col_names = c("kmer", "freq")) %>%
+    mutate(rep =i)
+  
+  sats <- rbind(sats, repdat)
+}
+
+
+cg.sats <- sats %>%
+  filter(grepl("CG", kmer))
+
+meth <- read_tsv("~/repos/nanopolish/etc/r9-models/r9.4_450bps.cpg.6mer.template.model", skip=7, col_names = c("kmer", "mean_meth", "sd_meth")) %>%
+  filter(grepl("MG", kmer)) %>%
+  mutate(kmer=str_replace(kmer,"MG", "CG")) %>%
+  filter((!grepl("M", kmer)))
+
+unmeth <- read_tsv("~/repos/nanopolish/etc/r9-models/r9.4_450bps.nucleotide.6mer.template.model", skip=7, col_names = c("kmer", "mean_unmeth", "sd_unmeth"))
+
+
+
+unmeth.dat <- merge(cg.sats, unmeth, by="kmer")
+meth.dat <- merge(cg.sats, meth, by="kmer")
+
+dat <- merge(unmeth.dat, meth.dat, by=c("kmer", "freq", "rep")) %>%
+  group_by(rep, kmer) %>%
+  mutate(dif=abs(mean_unmeth-mean_meth))
+
+ggplot(dat, aes(x=rep, y=dif, weight = freq, fill=rep))+geom_boxplot(outlier.shape = NA)+theme_classic()+labs(x="Repeat Type", y="Mean Current Difference")+theme(text=element_text(size=20))+ scale_fill_manual(values = censatColors, drop = FALSE)
+
+ggsave("CurrentMean.pdf",path = "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures",plot = last_plot(), 
+       height=5, 
+       width=8)
+
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/censat/figures"
+
+perc <- read_tsv(paste0(figs, "/allCenSat_PercentCalled.tsv" )) %>%
+  rename(X10="rep")
+
+repdat.sum <- dat %>%
+  group_by(rep) %>%
+  summarize(mean_diff=weighted.mean(dif, freq))
+  
+stat.sum <- merge(perc, repdat.sum, by="rep")
+
+ggplot(stat.sum, aes(x=perc_high, y=mean_diff, color=rep))+geom_point(size=3)+theme_classic()+ scale_color_manual(values = censatColors, drop = FALSE)+theme(text=element_text(size=20))
+
+ggsave("CurrentMean_vsPercHigh.pdf",path = "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures",plot = last_plot(), 
+       height=5, 
+       width=8)
+
+```
+```{r}
+cov <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/reference/repeat_fasta/coverage_repeat_intersections.bed", col_names = F) %>%
+  select(X1, X2, X3, X4, X8) %>%
+  filter(X8 %in% list) %>%
+  rename(X1="chr", X2="start", X3="end", X4="cov", X8="rep")
+
+cov.stat <- cov %>%
+  group_by(rep) %>%
+  summarise(meanCov=mean(cov), sdCov=sd(cov))
+
+all.sum <- merge(stat.sum, cov.stat, by="rep")
+
+ggplot(all.sum, aes(x=perc_high, y=meanCov, color=rep))+geom_point(size=3)+theme_classic()+ scale_color_manual(values = censatColors, drop = FALSE)+theme(text=element_text(size=20))
+
+ggsave("meanCov_vsPercHigh.pdf",path = "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures",plot = last_plot(), 
+       height=5, 
+       width=8)
+```
+

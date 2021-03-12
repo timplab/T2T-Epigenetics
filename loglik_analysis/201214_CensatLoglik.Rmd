@@ -1,0 +1,99 @@
+---
+title: "load_methyl_bed"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+library(tidyverse)
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+library("ggsci")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/censat/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+calls <- read_tsv(paste0(dat, "/methylation_calls/repeat_intersect/50kb_methylationCalls_censatIntersect.bed"), col_names = F)
+
+
+censatColors =c("(CATTC)n" = "#E87C71",
+                "(GAATC)n"="#E28455",
+                "HOR"="#D78C32",
+                "BSAT"="#E370AB",
+                "CER" = "#CE9334",
+                "HSAT2"="#C19935",
+                "HSAT1"="#A2A638",
+                "HSAT3"="#8CAC3E",
+                "Low_complexity"="#75B042",
+                "LSAU"="#54B346",
+                "LTR"="#51B756",
+                "MST"="#53BB73",
+                "GSAT"="#55BE8D",
+                "RNA"="#54C0A5",
+                "rRNA"="#52BEBB",
+                "SAR"="#51BDCE",
+                "ACRO1"="#9400D3",
+                "HSAT4"="#53B0E3",
+                "SATR"="#5AA5DA",
+                "CT"="#6B9AD2",
+                "Simple_repeat"="#8992C8",
+                "SINE"="#9A8AC1",
+                "MON"="#A885BC",
+                "SST"="#C378B2",
+                "HSAT5"="#ED72A5",
+                "HSAT6"="#EF768C", 
+                "gap-rDNA"="#ff4000",
+                "TE" = "#ffbf00", 
+                "TAR"= "#0080ff",
+                "ACRO"="#9400D3")
+
+```
+
+
+```{r}
+list <- c("BSAT", "HOR", "MON", "CT", "CER", "SST", "HSAT1", "HSAT2", "HSAT3", "HSAT4", "HSAT6", "GSAT")
+sub <- calls %>%
+  filter(X10 %in% list)
+  
+p <- ggplot(sub, aes(y=X6, x = X10, fill = X10))+geom_violin()+geom_hline(yintercept = c(1.5,-1.5), linetype = "dashed")+ scale_fill_manual(values = censatColors, drop = FALSE)+ylim(-20,20)+geom_boxplot(width=.1, outlier.shape = NA)+theme_classic()
+p
+
+ggsave(
+  paste0(figs, "/CensatLoglik.pdf"),
+  plot = p,
+  scale = 1,
+  width = 8,
+  height = 5,
+)
+```
+
+```{r}
+perc <- sub %>%
+  mutate(quality = case_when(X6 >1.5 | X6 < -1.5 ~ "high", 
+                             TRUE ~ "low")) %>%
+  group_by(X10, quality) %>%
+  tally() %>%
+  ungroup() %>%
+  spread(quality, n) %>%
+  mutate(total = high+low, perc_high = (high/total)*100)
+  
+write.table(perc, file = paste0(figs, "/allCenSat_PercentCalled.tsv" ), quote=F, sep = "\t", row.names = F, col.names = T)
+
+p <- ggplot(perc, aes(y=perc_high, x = X10, fill = X10))+geom_bar(stat = "identity")+ scale_fill_manual(values = censatColors, drop = FALSE)+theme_classic()+ylim(0,100)
+p
+
+ggsave(
+  paste0(figs, "/CensatQualityBar.pdf"),
+  plot = p,
+  scale = 1,
+  width = 8,
+  height = 5,
+)
+
+```
+

@@ -1,0 +1,216 @@
+---
+title: "Generate Binned Metadata"
+author: "G$"
+date: "1/25/2021"
+output: pdf_document
+---
+
+R markdown will load all bed files from chm13 final bed data and aggregate all data into 10kb binned meta data file.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# load libraries
+library(tidyverse)
+library(Biostrings)
+options(scipen=999)
+library(zoo)
+library(BSgenome.t2t.v1.0.release)
+options(knitr.duplicate.label = 'allow')
+source("~/projects/chm13_meth/scripts/v1.0_final_assembly/utils/ilee_plot_utils.R")
+source("~/projects/chm13_meth/scripts/v1.0_final_assembly/utils/methylation_R_utils.R")
+
+# set data output path
+
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+list=seqnames(BSgenome.t2t.v1.0.release)
+
+# don't keep chrM, problems arise later because not all beds have chrM
+list=list[1:23]
+
+# read methylation GRanges data
+
+chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
+  mutate(called_sites_unmethylated = called_sites - called_sites_methylated) %>%
+  filter(chromosome %in% list) %>%
+  GRanges()
+
+# centromere boundaries
+
+cen <- read_tsv(paste0(dat, "/chm13_final_beds/cenRegions.bed"), col_names = c("chr", "start", "end","name")) %>%
+  filter(chr %in% list)
+cen.gr <- GRanges(cen)
+
+
+# read in all bed files as GRanges objects 
+SD <- read_tsv(paste0(dat, "/chm13_final_beds/chm13.draft_v1.0_plus38Y.SDs.bed"), skip=1, col_names = c("chr", "start", "end")) %>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  mutate(sd_num=1) %>%
+  GRanges()
+
+kmer <- read_tsv(paste0(dat, "/chm13_final_beds/chm13.v1.single.k51.mrg.bed"), col_names = c("chr", "start", "end"))%>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  mutate(kmer_num=1) %>%
+  GRanges()
+
+transmap <- read_tsv(paste0(dat, "/chm13_final_beds/filtered_transmap.bed"), col_names = c("chr", "start", "end"))%>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  mutate(gene_num=1) %>%
+  GRanges()
+
+isoseq <- read_tsv(paste0(dat, "/chm13_final_beds/isoseq_annotation.bed"), col_names = c("chr", "start", "end"))%>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  mutate(iso_num=1) %>%
+  GRanges()
+
+cat_anno <- read_tsv(paste0(dat, "/chm13_final_beds/CHM13.category-colors.bed.gz"), col_names = c("chr", "start", "end"))%>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  mutate(cat_num=1) %>%
+  GRanges()
+
+ultra10 <- read_tsv(paste0(dat, "/chm13_final_beds/ultra10.BED"), col_names = c("chr", "start", "end"))%>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  mutate(ul10_num=1) %>%
+  GRanges()
+
+ultra100 <- read_tsv(paste0(dat, "/chm13_final_beds/ultra100.BED"), col_names = c("chr", "start", "end"))%>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  mutate(ul100_num=1) %>%
+  GRanges()
+
+ultra500 <- read_tsv(paste0(dat, "/chm13_final_beds/ultra500.BED"), col_names = c("chr", "start", "end"))%>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  mutate(ul500_num=1) %>%
+  GRanges()
+
+proA <- read_tsv(paste0(dat, "/proseq/51mers/IlluminaPCRfree_20200922-assembly_51mers_single_mrg_meryl.over.CHM13-5A_proseq_cutadapt-2_bt2-vs-filtered_bt2-N0-k100-chm13-20200922_COV.bed"), col_names = c("chr", "start", "end", "proA_cov"))%>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  #mutate(proA_num=1) %>%
+  GRanges()
+
+proB <- read_tsv(paste0(dat, "/proseq/51mers/IlluminaPCRfree_20200922-assembly_51mers_single_mrg_meryl.over.CHM13-5B_proseq_cutadapt-2_bt2-vs-filtered_bt2-N0-k100-chm13-20200922_COV.bed"), col_names = c("chr", "start", "end", "proB_cov"))%>%
+  mutate(end=start) %>%
+  filter(chr %in% list) %>%
+  #mutate(proB_num=1) %>%
+  GRanges()
+```
+
+
+```{r}
+
+# split t2t genome into 10kb bins
+blocks <- genomeBlocks(BSgenome.t2t.v1.0.release, chrs = list, width = 10000)
+
+
+# find overlaps between all bed and 10kb bins, get bin average for all features 
+
+chr.meth <- chm13_meth[seqnames(chm13_meth) %in% list]
+chr.sd <- SD[seqnames(SD)  %in% list]   
+chr.kmer <- kmer[seqnames(kmer)  %in% list]
+chr.transmap <- transmap[seqnames(transmap)  %in% list]
+chr.iso <- isoseq[seqnames(isoseq)  %in% list]
+chr.cat <- cat_anno[seqnames(cat_anno)  %in% list]
+chr.ul10 <- ultra10[seqnames(ultra10)  %in% list]
+chr.ul100 <- ultra100[seqnames(ultra100)  %in% list]
+chr.ul500 <- ultra500[seqnames(ultra500)  %in% list]
+chr.proA <- proA[seqnames(proA)  %in% list]
+chr.proB <- proB[seqnames(proB)  %in% list]
+
+
+  score1 <- coverage(chr.meth, weight="called_sites_methylated")
+  score2 <- coverage(chr.meth, weight="called_sites_unmethylated")
+  score3 <- coverage(chr.meth, weight="num_motifs_in_group")
+  score4 <- coverage(chr.sd, weight="sd_num")
+  score5 <- coverage(chr.kmer, weight="kmer_num")
+  score6 <- coverage(chr.transmap, weight="gene_num")
+  score7 <- coverage(chr.iso, weight="iso_num")
+  score8 <- coverage(chr.cat, weight="cat_num")
+  score9 <- coverage(chr.ul10, weight="ul10_num")
+  score10 <- coverage(chr.ul100, weight="ul100_num")
+  score11 <- coverage(chr.ul500, weight="ul500_num")
+  score12 <- coverage(chr.proA, weight="proA_cov")
+  score13 <- coverage(chr.proB, weight="proB_cov")
+  
+  
+
+  gc.content <- CalculateCG(BSgenome.t2t.v1.0.release, blocks, as.prob = F)
+gc.content.blocks <- GRanges(blocks, gc = gc.content) %>%
+  as.data.frame() %>%
+  mutate(gc.content=gc.C.G/width) %>%
+  dplyr::select(gc.content)
+
+  binned_meth <- binnedSum(blocks, numvar = score1, "called_sites_methylated") %>%
+    as.data.frame()
+  
+  binned_unmeth <-binnedSum(blocks, numvar = score2, "called_sites_unmethylated")%>%
+    as.data.frame()
+  
+  binned_cov <- binnedMean(blocks, numvar = score3, "num_motifs_in_group") %>%
+    as.data.frame()
+  
+  # make meth bins and smooth with a rolling mean to make plot prettier
+  meth_bins <- merge(binned_meth, binned_unmeth, by = c("start", "end", "seqnames", "width", "strand")) %>%
+  merge(binned_cov, by = c("start", "end", "seqnames", "width", "strand")) %>%
+    filter(seqnames %in% list) %>%
+   # filter(start > rstart) %>%
+   # filter(end < rend) %>%
+    group_by(start, end, seqnames) %>%
+    mutate(sites = called_sites_methylated+called_sites_unmethylated) %>%
+    mutate(freq = called_sites_methylated/sites) %>%
+    ungroup() %>%
+    group_by(seqnames) %>%
+    arrange(start,seqnames) %>%
+    mutate(smooth = rollmean(freq, 3, fill = NA), site_smooth = rollmean(num_motifs_in_group, 3, fill = NA)) %>%
+    ungroup() %>%
+    arrange(seqnames, start)
+  
+# get binned mean for all features
+binned_sd <- binnedMean(blocks, numvar = score4, "sd_num") %>%
+    as.data.frame() %>%
+  dplyr::select(sd_num)
+binned_kmer <- binnedMean(blocks, numvar = score5, "kmer_num") %>%
+    as.data.frame() %>%
+  dplyr::select(kmer_num)
+
+
+binned_transmap <- binnedMean(blocks, numvar = score6, "gene_num") %>%
+    as.data.frame()%>%
+  dplyr::select(gene_num)
+binned_iso <- binnedMean(blocks, numvar = score7, "iso_num") %>%
+    as.data.frame()%>%
+  dplyr::select(iso_num)
+binned_cat <- binnedMean(blocks, numvar = score8, "cat_num") %>%
+    as.data.frame()%>%
+  dplyr::select(cat_num)
+binned_ul10 <- binnedMean(blocks, numvar = score9, "ul10_num") %>%
+    as.data.frame()%>%
+  dplyr::select(ul10_num)
+binned_ul100 <- binnedMean(blocks, numvar = score10, "ul100_num") %>%
+    as.data.frame()%>%
+  dplyr::select(ul100_num)
+binned_ul500 <- binnedMean(blocks, numvar = score11, "ul500_num") %>%
+    as.data.frame()%>%
+  dplyr::select(ul500_num)
+binned_proA <- binnedMean(blocks, numvar = score12, "proA_cov") %>%
+    as.data.frame()%>%
+  dplyr::select(proA_cov)
+binned_proB <- binnedMean(blocks, numvar = score13, "proB_cov") %>%
+    as.data.frame()%>%
+  dplyr::select(proB_cov)
+
+# merge into one data frame, save as tsv
+binned.all <- cbind(meth_bins, binned_sd, binned_kmer, binned_cat, binned_transmap,binned_iso,binned_ul10,binned_ul100,binned_ul500,binned_proA,binned_proB,gc.content.blocks)
+
+write.table(binned.all, paste0(dat, "/chm13_final_beds/210126_AllCen_10kbBinned_ALL.bed"), col.names = T, row.names = F, quote=F, sep = "\t")
+```
+
+

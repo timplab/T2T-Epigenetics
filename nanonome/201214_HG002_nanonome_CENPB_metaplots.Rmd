@@ -1,0 +1,274 @@
+---
+title: "load_methyl_bed"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+library(knitr)
+library(tidyverse)
+library(bsseq)
+library(Biostrings)
+library(ggplot2)
+library(png)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+options(knitr.duplicate.label = 'allow')
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+library("ggsci")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+library(mclust)
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002"
+
+hg002_meth <- read_csv(paste0(dat, "/nanonome/methylation_calls/pooled/HG002_nanonome_chrX_CpGmethylation_ByCall.csv")) %>%
+  GRanges() 
+```
+
+```{r, function}
+
+  
+order_reads_facet <- function(x,offset = 0, bounds=NULL, qorder = NULL){
+  # get boundaries of reads if not provided
+  if (is.null(bounds)){
+    bounds <- x %>% group_by(qname, group) %>%
+      summarize(start = min(start),
+                end = max(end))
+    # label y based on order of smallest start
+    # if q order is given, use this to order
+    if (!is.null(qorder)) {
+      bounds <- bounds %>%
+        mutate(qname = factor(qname,levels = qorder)) %>%
+        arrange(qname) 
+    } else {
+      bounds<- bounds %>% 
+        arrange(start, end) 
+    }
+    bounds <- bounds %>%
+      ungroup() %>%
+      group_by(group) %>%
+        mutate(
+          readi = row_number(),
+          ymin = -readi - 0.8 - offset, 
+          ymax = ymin + 0.6)
+  }
+  
+  x <- x %>%
+    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+           ymax = bounds$ymax[match(qname,bounds$qname)])
+  bounds <- bounds %>%
+    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+           ymax = bounds$ymax[match(qname,bounds$qname)])
+  return(list(x = x,bounds = bounds))
+}
+
+order_reads_freq <- function(x,offset = 0, bounds=NULL, qorder = NULL){
+  # get boundaries of reads if not provided
+  if (is.null(bounds)){
+    bounds <- x %>% group_by(qname) %>%
+      summarize(start = min(start),
+                end = max(end))
+    # label y based on order of smallest start
+    # if q order is given, use this to order
+    if (!is.null(qorder)) {
+      bounds <- bounds %>%
+        mutate(qname = factor(qname,levels = qorder)) %>%
+        arrange(qname) 
+    } else {
+      bounds<- bounds %>% 
+        arrange(start, end) 
+    }
+    bounds <- bounds %>%
+        mutate(
+          readi = seq_len(length(unique(x$qname))),
+          ymin = -readi - 0.8 - offset, 
+          ymax = ymin + 0.6)
+  }
+  x <- x %>%
+    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+           ymax = bounds$ymax[match(qname,bounds$qname)])
+  bounds <- bounds %>%
+    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+           ymax = bounds$ymax[match(qname,bounds$qname)])
+  return(list(x = x,bounds = bounds))
+}
+
+smoothCalls <- function(calls,what = c("all","site"),reg=NULL,bandwidth = 40,thr = 0.2,pad = 1000){
+  # "what" is whether I'm only calling on the sites or estimating every nucleotide; default all
+  if (length(what) != 1){ what = "all" }
+  calls <- calls %>%
+    mutate(mcall = ifelse(abs(score)>1,sign(score),score)) # ceiling based on log-lik ratio 
+  if (is.null(reg)) {
+    if (what == "site"){ 
+      xpoints <- calls$start
+    } else if (what == "all"){ 
+      xpoints <- seq(min(calls$start),max(calls$start))
+    }
+  } else {
+    reg <- as_tibble(reg)
+    # pad by 1kb each side to include runs going outside the region
+    if ( what == "site"){
+      xpoints <- calls %>% 
+        filter(start >= reg$start - pad , start <= reg$end + pad) %>% 
+        .$start
+    } else if (what == "all") { 
+      xpoints <- seq(reg$start-pad,reg$end+pad)
+    }
+  }
+  ks <- ksmooth(calls$start,calls$mcall,bandwidth = bandwidth,kernel = "normal",x.points = xpoints)
+  tibble(
+    chrom = calls$chrom[1],
+    start = ks$x,
+    end = start,
+    qname = calls$qname[1],
+    llr_smooth = ks$y, 
+    mcall = case_when(
+      llr_smooth > thr ~ 1,
+      llr_smooth < -thr ~ 0,
+      TRUE ~ -1)
+  )
+}
+
+```
+
+
+```{r}
+return.dat <- readRDS(paste0(dat, "/CENPB_GC_readLevel_all.rds"))
+```
+
+
+
+```{r}
+
+GpC_unmeth <- return.dat %>%
+  mutate(meth_group=case_when(meth < 1 ~ "unmeth", 
+                              TRUE ~ "meth")) %>%
+  group_by(start, meth_group) %>%
+  filter(start > 55000000) %>%
+  filter(start < 60000000) %>%
+  summarise(num_meth = sum(mcall == 1), num_unmeth = sum(mcall == 0), center = center, meth_freq = num_meth/(num_meth+num_unmeth), 	
+Strand = 	X.Strand) %>%
+  mutate(dist = ifelse(Strand == "      +",start - center, center - start)) %>%
+  ungroup() %>%
+  group_by(dist, meth_group) %>%
+  mutate(med_meth = mean(meth_freq)) %>%
+  distinct()
+  
+ggplot(GpC_unmeth, aes(x = dist, y = med_meth))+ylim(0,1)+geom_smooth(method = "loess",se = F, span=.25)+xlim(-500,500)+geom_vline(xintercept = 0, linetype = "dashed")
+
+ggsave(
+  paste0(figs, "/HG002_CENPB_nucleosomesAll55-60.pdf"),
+  plot = last_plot(),
+  width = 5,
+  height = 5
+)
+
+
+GpC_unmeth <- return.dat %>%
+  mutate(meth_group=case_when(meth < 1 ~ "unmeth", 
+                              TRUE ~ "meth")) %>%
+  group_by(start, meth_group) %>%
+  filter(start > 55000000) %>%
+  filter(start < 60000000) %>%
+  summarise(num_meth = sum(mcall == 1), num_unmeth = sum(mcall == 0), center = center, meth_freq = num_meth/(num_meth+num_unmeth), 	
+Strand = 	X.Strand) %>%
+  mutate(dist = ifelse(Strand == "      +",start - center, center - start)) %>%
+  ungroup() %>%
+  group_by(dist, meth_group) %>%
+  mutate(med_meth = mean(meth_freq)) %>%
+  distinct()
+
+```
+
+```{r}
+GpC <- return.dat %>%
+  mutate(meth_group=case_when(meth < 1 ~ "unmeth", 
+                              TRUE ~ "meth")) %>%
+  group_by(start, meth_group) %>%
+  filter(start > 55500000) %>%
+  filter(start < 58500000) %>%
+  summarise(num_meth = sum(mcall == 1), num_unmeth = sum(mcall == 0), center = center, meth_freq = num_meth/(num_meth+num_unmeth), 	
+Strand = 	X.Strand) %>%
+  mutate(dist = ifelse(Strand == "      +",start - center, center - start))
+
+close <- GpC %>%
+  filter(dist < 100) %>%
+  filter(dist > -100) %>%
+  mutate(freq = num_meth/(num_meth+num_unmeth)) %>%
+  distinct() 
+
+ggplot(close, aes(y = freq, x = meth_group, fill = meth_group))+geom_violin(adjust = .8)
+
+bound <- close %>%
+  filter(meth_group == "unmeth") %>%
+  group_by(center) %>%
+  summarise(total_meth = mean(freq)) %>%
+  filter(total_meth == 0) %>%
+  distinct()
+  
+ggplot(bound, aes(y = total_meth, x= "1"))+geom_violin(adjust = .8)
+```
+
+
+
+```{r}
+bound_gc <- return.dat %>%
+  filter(center %in% bound$center)
+
+GpC_unmeth <- bound_gc %>%
+  filter(start > 57000000) %>%
+  filter(start < 58000000) %>%
+  group_by(start) %>%
+  summarise(num_meth = sum(mcall == 1), num_unmeth = sum(mcall == 0), center = center, meth_freq = num_meth/(num_meth+num_unmeth), 	
+Strand = 	X.Strand) %>%
+  mutate(dist = ifelse(Strand == "      +",start - center, center - start)) %>%
+  ungroup()
+  
+ggplot(GpC_unmeth, aes(x = dist, y = meth_freq))+ylim(0,1)+geom_point()+xlim(-150,150)+geom_smooth(method = "loess",se = F, span =.3)+geom_vline(xintercept = 0, linetype = "dashed")+geom_point()
+```
+
+
+
+
+
+```{r}
+cenpb_GpC <- readRDS(paste0(dat, "/CENPB_GC_readLevelOverlaps.rds"))
+
+#57495001-57570000 
+reg <- cenpb_GpC %>%
+  mutate(regs=case_when(start > 57495001 & start < 57570000 ~ "CENPA",
+         start > 57000000 & start < 57075000 ~ "HOR",
+         start > 59291184 & start < 59374631 ~ "MON", 
+         TRUE ~ "out")) %>%
+  filter(regs != "out")
+
+GpC_unmeth <- reg %>%
+  group_by(start, regs) %>%
+  summarise(num_meth = sum(mcall == 1), num_unmeth = sum(mcall == 0), center = center, meth_freq = num_meth/(num_meth+num_unmeth), 	
+Strand = 	X.Strand) %>%
+  mutate(dist = ifelse(Strand == "      +",start - center, center - start)) %>%
+  ungroup() %>%
+  group_by(dist) %>%
+  mutate(med_meth = median(meth_freq)) %>%
+  distinct()
+  
+ggplot(GpC_unmeth, aes(x = dist, y = med_meth, color = regs))+ylim(0,1)+geom_smooth(method = "loess", span = 0.21,se = F)+xlim(-500,500)+coord_cartesian(ylim=c(0,.3))+geom_vline(xintercept = 0, linetype = "dashed")
+
+
+ggsave(
+  paste0(figs, "/Nucleosome_DipvsNonDip.pdf"),
+  plot = last_plot(),
+  scale = 1,
+  width = 8,
+  height = 5
+)
+
+```
+

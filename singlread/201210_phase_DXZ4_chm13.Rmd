@@ -1,0 +1,333 @@
+---
+title: "load_methyl_bed"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+library(knitr)
+library(tidyverse)
+library(bsseq)
+library(Biostrings)
+library(ggplot2)
+library(png)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+options(knitr.duplicate.label = 'allow')
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+library("ggsci")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+library(mclust)
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+censat = read_tsv(paste0(dat, "/annotations/t2t-chm13.v1.0.cenSat_annotation.bed"), col_names = F) %>%
+  mutate(name = ifelse(grepl("HSat1", X4), "HSAT1", X4)) %>%
+  mutate(name = ifelse(grepl("HSat2", X4), "HSAT2", name)) %>%
+  mutate(name = ifelse(grepl("HSat3", X4), "HSAT3", name)) %>%
+  mutate(name = ifelse(grepl("HSat4", X4), "HSAT4", name)) %>%
+  mutate(name = ifelse(grepl("HSat5", X4), "HSAT5", name)) %>%
+  mutate(name = ifelse(grepl("HSat6", X4), "HSAT6", name)) %>%
+  mutate(name = ifelse(grepl("ct", X4), "CT", name)) %>%
+  mutate(name = ifelse(grepl("bsat", X4), "BSAT", name)) %>%
+  mutate(name = ifelse(grepl("hor", X4), "HOR", name)) %>%
+  mutate(name = ifelse(grepl("mon", X4), "MON", name)) %>%
+  mutate(name = ifelse(grepl("Alu", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("SATR", X4), "SATR", name)) %>%
+  mutate(name = ifelse(grepl("ACRO", X4), "ACRO", name)) %>%
+  mutate(name = ifelse(grepl("GSATII", X4), "GSATII", name)) %>%
+  mutate(name = ifelse(grepl("TAR", X4), "TAR", name)) %>%
+  mutate(name = ifelse(grepl("TE", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("MER", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("MST", X4), "MST", name)) %>%
+  mutate(name = ifelse(grepl("CER", X4), "CER", name)) %>%
+  mutate(name = ifelse(grepl("L1", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("SST", X4), "SST", name)) %>%
+  mutate(name = ifelse(grepl("LSAU", X4), "LSAU", name)) %>%
+  mutate(name = ifelse(grepl("GSAT", X4), "GSAT", name)) %>%
+  mutate(name = ifelse(grepl("MSAT", X4), "MSAT", name)) %>%
+  mutate(name = ifelse(grepl("novel", X4), "novel", name)) %>%
+  mutate(name = ifelse(grepl("HERV", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("LT", X4), "TE", name)) %>%
+  dplyr::select(c(X1, X2, X3, name)) %>%
+  dplyr::rename("chrom" =1, "start" = 2 ,"end" =3) %>%
+  group_by(name) %>%
+  filter(n() >= 3) %>%
+  ungroup()
+table(censat$name)
+censat.gr <- GRanges(as.data.frame(censat))
+
+repeatColors =c("(CATTC)n" = "#E87C71",
+    "(GAATC)n"="#E28455",
+    "HOR"="#D78C32",
+    "BSAT"="#E370AB",
+    "CER" = "#CE9334",
+    "HSAT2"="#C19935",
+    "HSAT1"="#A2A638",
+    "HSAT3"="#8CAC3E",
+    "Low_complexity"="#75B042",
+    "LSAU"="#54B346",
+    "LTR"="#51B756",
+    "MST"="#53BB73",
+    "GSAT"="#55BE8D",
+    "RNA"="#54C0A5",
+    "rRNA"="#52BEBB",
+    "SAR"="#51BDCE",
+    "ACRO"="#4EB8DF",
+    "HSAT4"="#53B0E3",
+    "SATR"="#5AA5DA",
+    "CT"="#6B9AD2",
+    "Simple_repeat"="#8992C8",
+    "SINE"="#9A8AC1",
+    "MON"="#A885BC",
+    "SST"="#C378B2",
+    "HSAT5"="#ED72A5",
+    "HSAT6"="#EF768C", 
+    "gap-rDNA"="#ff4000",
+    "TE" = "#ffbf00", 
+   "TAR"= "#0080ff" )
+
+```
+
+```{r, function}
+
+  # get boundaries of reads if not provided
+#bounds <- all_runs %>% group_by(qname) %>%
+#      summarize(start = min(start),
+#                end = max(end), 
+#                freq = freq) %>%
+#  distinct()
+#  
+#
+#bounds<- bounds %>% 
+#  arrange(freq, start, end) 
+#
+#    bounds <- bounds %>%
+#      ungroup() %>%
+#        mutate(
+#          readi = as.numeric(seq_len(length(unique(all_runs$qname)))),
+#          ymin = -readi - 0.8, 
+#          ymax = ymin + 0.6)
+#
+#  all_runs <- all_runs %>%
+#    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+#           ymax = bounds$ymax[match(qname,bounds$qname)])
+#  bounds <- bounds %>%
+#    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+#           ymax = bounds$ymax[match(qname,bounds$qname)])
+#  
+  
+order_reads_facet <- function(x,offset = 0, bounds=NULL, qorder = NULL){
+  # get boundaries of reads if not provided
+  if (is.null(bounds)){
+    bounds <- x %>% group_by(qname, group) %>%
+      summarize(start = min(start),
+                end = max(end))
+    # label y based on order of smallest start
+    # if q order is given, use this to order
+    if (!is.null(qorder)) {
+      bounds <- bounds %>%
+        mutate(qname = factor(qname,levels = qorder)) %>%
+        arrange(qname) 
+    } else {
+      bounds<- bounds %>% 
+        arrange(start, end) 
+    }
+    bounds <- bounds %>%
+      ungroup() %>%
+      group_by(group) %>%
+        mutate(
+          readi = row_number(),
+          ymin = -readi - 0.8 - offset, 
+          ymax = ymin + 0.6)
+  }
+  
+  x <- x %>%
+    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+           ymax = bounds$ymax[match(qname,bounds$qname)])
+  bounds <- bounds %>%
+    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+           ymax = bounds$ymax[match(qname,bounds$qname)])
+  return(list(x = x,bounds = bounds))
+}
+
+```
+
+
+```{r bis, echo=F}
+reads <- tabix_mbed(paste0(dat, "/censat/dxz4.bed"),extcol = "motif",by = "read") 
+
+chr="chrX"
+start=114117750
+end=114324768
+size_sel <- reads %>%
+  dplyr::mutate(rlen = end-start) %>%
+  filter(rlen >= 50000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall)
+
+
+bis <- cgcalls %>% 
+  group_by(chrom, start) %>%
+  summarise(meth_freq = mean(mcall), cov = n()) %>%
+  mutate(smooth = rollmean(meth_freq, 50, fill = NA)) %>%
+  mutate(cov_smooth = rollmean(cov, 50, fill = NA))
+
+meth <- ggplot(bis, aes(x = (start/1e6), y= smooth))+geom_line(size =1) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 25)+ylim(0,1)+xlim((start/1e6),(end/1e6))
+
+cov <- ggplot(bis, aes(x = (start/1e6), y= cov_smooth))+geom_line(size =1) + labs(x="Genomic coordinates (Mb)", y="Coverage")+theme_classic(base_size = 25)+xlim(start,end)
+
+meth
+
+
+#ggsave(
+#  paste0(figs, "/", chr, "DXZ4_methyl_pattern.pdf"),
+#  plot = meth,
+#  scale = 1,
+#  width = 12,
+#  height = 6,
+#)
+
+```
+
+```{r mclust, echo=F}
+
+
+# determine which promoters are hets
+
+regions <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/final_assembly/DXZ4/DXZ4_nhmmer_ctcf.tsv", col_names = F) %>%
+  filter(X3 >114126505) %>%
+  filter(X2 < 114291509)
+
+
+cg_list <- list()
+for (i in 1:length(regions$X1)){
+ 
+  cgcalls_sub <- cgcalls %>%
+  filter(start > (regions$X3[i]-500)) %>%
+  filter(start < (regions$X2[i]+500)) %>%
+   # filter(start > 114133265) %>%
+   # filter(start < 114134881) %>%
+  select(c(qname, start,mcall)) 
+
+  allele <- cgcalls_sub %>%
+    group_by(qname) %>%
+    summarise(mfreq = mean(mcall))%>%
+    mutate(group = case_when(mfreq > .5 ~ "meth", 
+                         mfreq < .5 ~ "unmeth")) %>%
+    select(c(qname, group))
+  
+  mat <- spread(cgcalls_sub, start, mcall)
+  mat <- mat  %>%
+  column_to_rownames("qname")
+  
+  mat[is.na(mat)] <- -1
+  model1 <- Mclust(mat,G = 1:2, modelNames = "EII")
+  summary(model1)
+  clust <- model1$classification
+  
+  if (is.null(clust)) { 
+    print(i)
+    print("no clust")
+     next 
+  } else{print("yes! clust")}
+  
+ 
+  
+  dat <- as.data.frame(unlist(clust)) %>%
+  rownames_to_column() %>%
+  dplyr::rename("qname" = 1, "clust" = 2)
+  
+ dat <-  merge(dat, allele, by = "qname")
+  num = mean(dat$clust)
+  
+if ((between(num,1.35, 1.65))) { 
+  print(i)
+  print("It's a het!")
+  cg_list[[i]] <- data.frame(dat)
+  } else{next}
+  
+}
+
+df <- bind_rows(cg_list) 
+```
+
+
+```{r plot, echo=F}
+
+
+df_meth <- df %>%
+  distinct() %>%
+  select(c(qname, group)) %>%
+  distinct() %>%
+  group_by(qname) %>%
+  dplyr::slice(1L)
+
+cgcalls_dx <- cgcalls %>%
+  filter(start >114176505) %>%
+  filter(end < 114211509)
+
+cpg_runs <-getRuns(cgcalls_dx, maxGap = 100)
+
+all_runs <- merge(cpg_runs,df_meth, by = "qname" )
+
+cpg_runs.ordered <- order_reads_facet(all_runs)
+
+
+
+cpg_runs_plot <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+  
+
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+#ids <- order(sapply(seq_along(gcruns.list),function(i){length(unique(gcruns.list$qname))}))
+
+
+g <- ggplot(cpg_runs_plot,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax))+ geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80")+ 
+    geom_rect(aes(fill = m))+scale_fill_manual(name = "State", values = meth_pal)+facet_wrap(~group, ncol =1)#+coord_cartesian(xlim=c(114176505, 114211509))+ theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))+theme_classic()
+  print(g)
+  
+  ggsave(
+paste0(figs, "/DXZ4_phasedReadLevel.pdf"),
+        plot = g,
+        scale = 1,
+        width = 12,
+        height = 10,
+        )
+  
+  
+  
+phased_calls <- merge(cgcalls,df_meth, by = "qname") 
+
+bis2 <- phased_calls %>% 
+  group_by(group, start) %>%
+  summarise(meth_freq = mean(mcall), cov = n()) %>%
+  mutate(smooth = rollmean(meth_freq, 50, fill = NA)) %>%
+  mutate(cov_smooth = rollmean(cov, 50, fill = NA))
+
+meth <- ggplot(bis2, aes(x = (start/1e6), y= smooth))+geom_line(size =1) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 25)+ylim(0,1)+xlim((start/1e6),(end/1e6))+facet_wrap(~group, ncol = 1)
+meth
+#geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80") + 
+  #+coord_cartesian(xlim=c(114180053, 114210978))
+
+  
+ggsave(
+paste0(figs, "/DXZ4_phased_methylProfile.pdf"),
+        plot = meth,
+        scale = 1,
+        width = 12,
+        height = 10,
+        )
+  
+```

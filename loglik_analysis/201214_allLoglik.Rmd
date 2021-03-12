@@ -1,0 +1,93 @@
+---
+title: "load_methyl_bed"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+library(tidyverse)
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+library("ggsci")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/censat/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+calls <- read_delim(paste0(dat, "/methylation_calls/methylation_calls_50kb_LogLikCounts.tsv"), col_names = F, delim=" ")
+
+```
+
+
+```{r}
+ggplot(calls, aes(x=X1, y=X2))+geom_histogram(stat="identity", position="jitter", binwidth = 10)+xlim(-20,20)+theme(text = element_text(size=20))+labs(ylab = "Counts", xlab = "Log_lik Ratio")+theme_classic()+geom_vline(xintercept = c(-1.5,1.5), linetype="dashed")
+
+ggsave(
+  paste0(figs, "/allLoglik.pdf"),
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+```
+
+```{r}
+perc <- calls %>%
+  mutate(quality = case_when(X1 >1.5 | X1 < -1.5 ~ "high", 
+                             TRUE ~ "low")) %>%
+  group_by(quality) %>%
+  summarise(total = sum(X2)) %>%
+  spread(quality, total)
+
+perc_high <- (perc$high/(perc$high + perc$low))*100
+
+
+```
+
+```{r}
+cov <- read_tsv(paste0(dat, "/methylation_calls/bam/ont.primary_meth50kb.bedgraph"), col_names = c("seqnames", "start", "end", "cov")) %>%
+  GRanges()
+
+
+
+library(BSgenome.t2t.v1.0.release)
+chm13.gr <- GRanges(seqinfo(BSgenome.t2t.v1.0.release))
+
+
+blocks <- genomeBlocks(BSgenome.t2t.v1.0.release, chrs = c("chr1","chr2" , "chr3",  "chr4" , "chr5" , "chr6",  "chr7" , "chr8" , "chr9" , "chr10" ,"chr11", "chr12", "chr13", "chr14" ,"chr15",
+ "chr16" ,"chr17", "chr18", "chr19" ,"chr20" ,"chr21" ,"chr22","chrX"), width = 20000)
+
+binnedSum <- function(bins, numvar, mcolname)
+{
+  stopifnot(is(bins, "GRanges"))
+  stopifnot(is(numvar, "RleList"))
+  stopifnot(identical(seqlevels(bins), names(numvar)))
+  bins_per_chrom <- split(ranges(bins), seqnames(bins))
+  sums_list <- lapply(names(numvar),
+      function(seqname) {
+          views <- Views(numvar[[seqname]],
+                         bins_per_chrom[[seqname]])
+          viewSums(views)
+      })
+  new_mcol <- unsplit(sums_list, as.factor(seqnames(bins)))
+  mcols(bins)[[mcolname]] <- new_mcol
+  bins
+}
+
+score1 <- coverage(cov, weight="cov")
+
+binned_cov <- binnedSum(blocks, numvar = score1, "cov") %>%
+  as.data.frame() %>%
+  mutate(cov = cov/20000) %>%
+  mutate(z_score = (cov - mean(cov)) / sd(cov))
+
+qual <- binned_cov %>%
+  summarise( bad= sum(z_score > 3 | z_score < -3 ), good = sum(z_score <= 3 | z_score <= -3)) %>%
+  mutate(total = good+bad, perc = (bad/total)*100)
+
+```
+

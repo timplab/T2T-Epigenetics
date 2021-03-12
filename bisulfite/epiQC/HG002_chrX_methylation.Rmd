@@ -1,0 +1,154 @@
+---
+title: "HG002 Bisulfite CENX"
+author: "G$"
+date: "2/16/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(bsseq)
+library(tidyverse)
+library(zoo)
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures"
+```
+
+```{r functions}
+binnedSum <- function(bins, numvar, mcolname)
+{
+  stopifnot(is(bins, "GRanges"))
+  stopifnot(is(numvar, "RleList"))
+  stopifnot(identical(seqlevels(bins), names(numvar)))
+  bins_per_chrom <- split(ranges(bins), seqnames(bins))
+  sums_list <- lapply(names(numvar),
+      function(seqname) {
+          views <- Views(numvar[[seqname]],
+                         bins_per_chrom[[seqname]])
+          viewSums(views)
+      })
+  new_mcol <- unsplit(sums_list, as.factor(seqnames(bins)))
+  mcols(bins)[[mcolname]] <- new_mcol
+  bins
+}
+
+repeatColors =c("HSAT2"="#C19935",
+                "HSAT1"="#A2A638",
+                "HSAT3"="#8CAC3E",
+                "(CATTC)n" = "#E87C71",
+                "HSAT4"="#53B0E3",
+                "HSAT5"="#ED72A5",
+                "HSAT6"="#EF768C", 
+                "(GAATC)n"="#E28455",
+                "ALR/Alpha"="#D78C32",
+                "6kbHsap" = "#D8BFD8",
+                "BSR/Beta"="#E370AB",
+                "CER" = "#CE9334",
+                "DNA"="#C19935",
+                "DNA?"="#C19935",
+                "GSAT"="#4169E1",
+                "LINE"="#FFA500",
+                "Low_complexity"="#75B042",
+                "LSAU"="#54B346",
+                "LTR"="#51B756",
+                "RC"="#53BB73",
+                "Retroposon"="#55BE8D",
+                "RNA"="#54C0A5",
+                "rRNA"="#52BEBB",
+                "SAR"="#51BDCE",
+                "SATR2"="#4EB8DF",
+                "GSATII"="#6B8E23",
+                "SATR1"="#5AA5DA",
+                "scRNA"="#6B9AD2",
+                "Simple_repeat"="#8992C8",
+                "SINE"="#9A8AC1",
+                "snRNA"="#A885BC",
+                "srpRNA"="#B67EB6",
+                "SST1"="#C378B2",
+                "HSATII"="#D173AF",
+                "tRNA"="#006400",
+                "ACRO1"="#9400D3",
+                "Unknown"="#BA55D3", 
+                "(GAATG)n"="#ff4000",
+                "D20S16" = "#ffbf00", 
+                "SATR2"= "#0080ff", 
+                "TAR1" = "#000080", 
+                "SUBTEL2_sat"= "#FFB6C1", 
+                "GSATX" = "#D2691E", 
+                "MSR1" = "#708090")
+
+
+reps <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002/annotations/hg002.chrX.fasta_rm.bed", col_names = F) %>%
+  mutate(name = ifelse(X7 == "Satellite", X4, X7))
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+
+cgcalls <- read_tsv("/atium/Data/Nanopore/projects/210124_mason_bisulfite/bsseq/CpGcalls/TruSeq_HG002_LAB01_REP02_ILM_merge.R1_bismark_bt2_pe.bismark.cov.gz", col_names = c("chr", "start", "end", "percent_meth", "num_meth", "num_unmeth")) %>%
+  filter(chr == "chrX")
+
+cgcalls.gr <- cgcalls %>%
+  mutate(total=num_meth+num_unmeth) %>%
+  filter(total > 3) %>%
+  mutate(num=1) %>%
+  GRanges()
+library(BSgenome.HG002.chrX)
+chrx.gr <- GRanges(seqinfo(BSgenome.HG002.chrX))
+
+
+blocks <- genomeBlocks(BSgenome.HG002.chrX, chrs = seqnames(BSgenome.HG002.chrX), width = 15000)
+score1 <- coverage(cgcalls.gr, weight="num_meth")
+score2 <- coverage(cgcalls.gr, weight="num_unmeth")
+score3 <- coverage(cgcalls.gr, weight="num")
+
+binned_meth <- binnedSum(blocks, numvar = score1, "num_meth") %>%
+  as.data.frame()
+binned_unmeth <-binnedSum(blocks, numvar = score2, "num_unmeth")%>%
+  as.data.frame()
+binned_CGs <-binnedSum(blocks, numvar = score3, "num")%>%
+  as.data.frame()
+
+meth_bins <- merge(binned_meth, binned_unmeth, by = c("start", "end", "seqnames", "width", "strand")) %>%
+  merge(binned_CGs, by = c("start", "end", "seqnames", "width", "strand")) %>%
+  group_by(start, end) %>%
+  mutate(sites = num_meth+num_unmeth) %>%
+  mutate(freq = num_meth/sites) %>%
+  mutate(cov=sites/num) %>%
+  ungroup() %>%
+  mutate(freq_smooth = rollmean(freq, 3, fill= NA)) %>%
+  na.omit()
+
+```
+
+```{r}
+
+rstart=53000000
+rend=63000000
+meth <- ggplot(meth_bins, aes(x = (start/1e6), y= freq_smooth))+geom_line(size =1) + labs(y="Methylation")+theme_classic(base_size = 10)+xlim((rstart/1e6),(rend/1e6))+theme(axis.title.x=element_blank(),axis.text.x=element_blank(), axis.ticks.x=element_blank(),axis.line.x = element_blank())+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))+ylim(0,1)
+
+cov.plot <- ggplot(meth_bins, aes(x = (start/1e6), y= cov))+geom_bar(size =1, stat="identity",color="gray48") + labs(y="Coverage")+theme_classic(base_size = 10)+xlim((rstart/1e6),(rend/1e6))+ theme(axis.title.x=element_blank(),axis.text.x=element_blank(), axis.ticks.x=element_blank(),axis.line.x = element_blank())+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+
+
+
+rm.plot <- ggplot(data=reps, mapping=aes(xmin=(X2/1e6),xmax=(X3/1e6),ymin=0,ymax=.1,fill=name))+
+  geom_rect()+theme(legend.position="none") +labs(y="RM")+theme(legend.text=element_text(size=rel(1)))+theme(legend.title=element_blank()) +theme(axis.text.y=element_blank(), axis.ticks.y=element_blank())+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))+coord_cartesian(xlim=c(rstart/1e6,rend/1e6))+scale_fill_manual(values = repeatColors, drop = FALSE)+theme(panel.border=element_blank())
+
+
+top_row <- plot_grid(meth,cov.plot,rm.plot,ncol = 1, align="v",rel_heights = c(1/6, 1/6,1/20))
+
+top_row
+
+ggsave(
+  paste0(figs, "/methyl_profiles/HG002_chrX_BisulfitePanelPlot_rep2.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 2
+)
+
+```
+

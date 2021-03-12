@@ -1,0 +1,12 @@
+##Software to install
+nanopolish: /home/ubuntu/nanopolish
+winnowmap: /home/ubuntu/Winnowmap-2.0/bin
+nanopore-methylation-utilities: /home/ubuntu/nanopore-methylation-utilities
+##References
+#Must download
+reflist:
+     chm13: /home/ubuntu/ref/chm13.fasta
+     hg002: /home/ubuntu/ref/HG002.fasta
+base: /data
+outdir: /outdir
+

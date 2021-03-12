@@ -1,0 +1,472 @@
+---
+title: "Read plots"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+library(knitr)
+library(tidyverse)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+options(knitr.duplicate.label = 'allow')
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+library("ggsci")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/censat/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+```
+
+
+```{r chr1, echo=F}
+chr="chr1"
+
+reads <- tabix_mbed(paste0(dat, "/censat/", chr, "_cen.mbed"),extcol = "motif",by = "read") 
+#129004453       142241828 
+
+
+
+size_sel <- reads %>%
+  mutate(rlen = end-start) %>%
+  filter(rlen >= 50000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall)
+
+region_start=130000000
+region_end= region_start+50000
+reg = cgcalls %>%
+  dplyr::filter(start >= region_start) %>%
+  dplyr::filter(end <= region_end)
+  
+
+cpg_runs <-getRuns(reg, maxGap = 500)
+ 
+
+cpg_runs.ordered <- order_reads(cpg_runs)
+  
+ cpg_runs <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+#ids <- order(sapply(seq_along(gcruns.list),function(i){length(unique(gcruns.list$qname))}))
+
+
+bis <- reg %>% 
+  group_by(chrom, start) %>%
+  summarise(meth_freq = mean(mcall), cov = n()) 
+
+
+n_windows=500
+bis$cut = cut(bis$start, breaks=n_windows)
+
+meth.stat <- bis %>%
+  group_by(cut) %>%
+  summarise(med = median(meth_freq), top = quantile(meth_freq, 0.75), bot = quantile(meth_freq, 0.25), n_genes = length(meth_freq)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  mutate(med_smooth=rollmean(med, 10, NA))
+
+meth <- ggplot(meth.stat, aes(x = min, y= med_smooth))+geom_line()+ theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.y=element_blank(), axis.title.x=element_blank(), panel.spacing = unit(2, "lines"))#+coord_cartesian(xlim=(c(37595000,37600000)))
+meth
+
+g <- ggplot(cpg_runs,aes(xmin = start/1e6, xmax = end/1e6, ymin = ymin, ymax = ymax)) + geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80") + 
+    geom_rect(cpg_runs,aes(fill = m))  +
+#    geom_vline(xintercept = 127638255, linetype == "dashed") +
+    scale_fill_manual(name = "State", values = meth_pal) + theme(axis.text.y = element_blank(),  legend.position= "bottom",axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))
+
+top_row <- plot_grid(meth,g, align="v", ncol=1,rel_heights = c(1/10, 1/2))
+top_row
+  
+  ggsave(
+  paste0(figs, "/", chr, "HSAT2_singleread_period.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 6,
+)
+
+```
+
+
+```{r chr9, echo=F}
+chr="chr9"
+
+reads <- tabix_mbed(paste0(dat, "/censat/", chr, "_cen.mbed"),extcol = "motif",by = "read") 
+#129004453       142241828 
+
+
+
+size_sel <- reads %>%
+  mutate(rlen = end-start) %>%
+  filter(rlen >= 50000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall)
+
+region_start=72000000
+region_end= region_start+50000
+reg = cgcalls %>%
+  dplyr::filter(start >= region_start) %>%
+  dplyr::filter(end <= region_end)
+  
+
+cpg_runs <-getRuns(reg, maxGap = 100)
+ 
+
+cpg_runs.ordered <- order_reads(cpg_runs)
+  
+ cpg_runs <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+#ids <- order(sapply(seq_along(gcruns.list),function(i){length(unique(gcruns.list$qname))}))
+
+
+bis <- reg %>% 
+  group_by(chrom, start) %>%
+  summarise(meth_freq = mean(mcall), cov = n()) 
+
+n_windows=1000
+bis$cut = cut(bis$start, breaks=n_windows)
+
+meth.stat <- bis %>%
+  group_by(cut) %>%
+  summarise(med = median(meth_freq), top = quantile(meth_freq, 0.75), bot = quantile(meth_freq, 0.25), n_genes = length(meth_freq)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  mutate(med_smooth=rollmean(med, 10, NA))
+
+meth <- ggplot(meth.stat, aes(x = min, y= med_smooth))+geom_line()+ theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.y=element_blank(), axis.title.x=element_blank(), panel.spacing = unit(2, "lines"))#+coord_cartesian(xlim=(c(37595000,37600000)))
+meth
+
+g <- ggplot(cpg_runs,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax)) + geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80") + 
+    geom_rect(cpg_runs,aes(fill = m))+scale_fill_manual(name = "State", values = meth_pal) + theme(axis.text.y = element_blank(),  legend.position= "bottom",axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))
+
+top_row <- plot_grid(meth,g, align="v", ncol=1,rel_heights = c(1/10, 1/2))
+top_row
+  
+  ggsave(
+  paste0(figs, "/", chr, "HSAT2_singleread_period.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 8,
+  height = 10,
+)
+
+```
+
+```{r chr1, echo=F}
+chr="chr15"
+
+reads <- tabix_mbed(paste0(dat, "/censat/", chr, "_cen.mbed"),extcol = "motif",by = "read") 
+#129004453       142241828 
+
+
+
+size_sel <- reads %>%
+  mutate(rlen = end-start) %>%
+  filter(rlen >= 50000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall)
+
+region_start=10000000
+region_end= region_start+50000
+reg = cgcalls %>%
+  dplyr::filter(start >= region_start) %>%
+  dplyr::filter(end <= region_end)
+  
+
+cpg_runs <-getRuns(reg, maxGap = 500)
+ 
+
+cpg_runs.ordered <- order_reads(cpg_runs)
+  
+ cpg_runs <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+#ids <- order(sapply(seq_along(gcruns.list),function(i){length(unique(gcruns.list$qname))}))
+
+
+bis <- reg %>% 
+  group_by(chrom, start) %>%
+  summarise(meth_freq = mean(mcall), cov = n()) 
+
+
+n_windows=1000
+bis$cut = cut(bis$start, breaks=n_windows)
+
+meth.stat <- bis %>%
+  group_by(cut) %>%
+  summarise(med = median(meth_freq), top = quantile(meth_freq, 0.75), bot = quantile(meth_freq, 0.25), n_genes = length(meth_freq)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  mutate(med_smooth=rollmean(med, 10, NA))
+
+meth <- ggplot(meth.stat, aes(x = min, y= med_smooth))+geom_line()+ theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.y=element_blank(), axis.title.x=element_blank(), panel.spacing = unit(2, "lines"))#+coord_cartesian(xlim=(c(37595000,37600000)))
+meth
+
+g <- ggplot(cpg_runs,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax)) + geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80") + 
+    geom_rect(cpg_runs,aes(fill = m))  +
+#    geom_vline(xintercept = 127638255, linetype == "dashed") +
+    scale_fill_manual(name = "State", values = meth_pal) + theme(axis.text.y = element_blank(),  legend.position= "bottom",axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))
+
+top_row <- plot_grid(meth,g, align="v", ncol=1,rel_heights = c(1/10, 1/2))
+top_row
+  
+  ggsave(
+  paste0(figs, "/", chr, "HSAT3_singleread_period.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 6,
+)
+
+```
+
+```{r chr1, echo=F}
+chr="chr16"
+
+reads <- tabix_mbed(paste0(dat, "/censat/", chr, "_cen.mbed"),extcol = "motif",by = "read") 
+#129004453       142241828 
+
+
+
+size_sel <- reads %>%
+  mutate(rlen = end-start) %>%
+  filter(rlen >= 50000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall)
+
+region_start=47000000
+region_end= region_start+50000
+reg = cgcalls %>%
+  dplyr::filter(start >= region_start) %>%
+  dplyr::filter(end <= region_end)
+  
+
+cpg_runs <-getRuns(reg, maxGap = 500)
+ 
+
+cpg_runs.ordered <- order_reads(cpg_runs)
+  
+ cpg_runs <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+#ids <- order(sapply(seq_along(gcruns.list),function(i){length(unique(gcruns.list$qname))}))
+
+
+bis <- reg %>% 
+  group_by(chrom, start) %>%
+  summarise(meth_freq = mean(mcall), cov = n()) 
+
+
+n_windows=1000
+bis$cut = cut(bis$start, breaks=n_windows)
+
+meth.stat <- bis %>%
+  group_by(cut) %>%
+  summarise(med = median(meth_freq), top = quantile(meth_freq, 0.75), bot = quantile(meth_freq, 0.25), n_genes = length(meth_freq)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  mutate(med_smooth=rollmean(med, 10, NA))
+
+meth <- ggplot(meth.stat, aes(x = min, y= med_smooth))+geom_line()+ theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.y=element_blank(), axis.title.x=element_blank(), panel.spacing = unit(2, "lines"))#+coord_cartesian(xlim=(c(37595000,37600000)))
+meth
+
+g <- ggplot(cpg_runs,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax)) + geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80") + 
+    geom_rect(cpg_runs,aes(fill = m))  +
+#    geom_vline(xintercept = 127638255, linetype == "dashed") +
+    scale_fill_manual(name = "State", values = meth_pal) + theme(axis.text.y = element_blank(),  legend.position= "bottom",axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))
+
+top_row <- plot_grid(meth,g, align="v", ncol=1,rel_heights = c(1/10, 1/2))
+top_row
+  
+  ggsave(
+  paste0(figs, "/", chr, "HSAT2_singleread_period.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 8,
+  height = 10,
+)
+
+```
+```{r chr1, echo=F}
+chr="chrX"
+
+reads <- tabix_mbed(paste0(dat, "/censat/", chr, "_cen.mbed"),extcol = "motif",by = "read") 
+#129004453       142241828 
+
+
+
+size_sel <- reads %>%
+  mutate(rlen = end-start) %>%
+  filter(rlen >= 50000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall)
+
+region_start=57500000
+region_end= region_start+50000
+reg = cgcalls %>%
+  dplyr::filter(start >= region_start) %>%
+  dplyr::filter(end <= region_end)
+  
+
+cpg_runs <-getRuns(reg, maxGap = 500)
+ 
+
+cpg_runs.ordered <- order_reads(cpg_runs)
+  
+ cpg_runs <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+#ids <- order(sapply(seq_along(gcruns.list),function(i){length(unique(gcruns.list$qname))}))
+
+
+bis <- reg %>% 
+  group_by(chrom, start) %>%
+  summarise(meth_freq = mean(mcall), cov = n()) 
+
+
+n_windows=1000
+bis$cut = cut(bis$start, breaks=n_windows)
+
+meth.stat <- bis %>%
+  group_by(cut) %>%
+  summarise(med = median(meth_freq), top = quantile(meth_freq, 0.75), bot = quantile(meth_freq, 0.25), n_genes = length(meth_freq)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  mutate(med_smooth=rollmean(med, 10, NA))
+
+meth <- ggplot(meth.stat, aes(x = min, y= med_smooth))+geom_line()+ theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.y=element_blank(), axis.title.x=element_blank(), panel.spacing = unit(2, "lines"))#+coord_cartesian(xlim=(c(37595000,37600000)))
+meth
+
+g <- ggplot(cpg_runs,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax)) + geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80") + 
+    geom_rect(cpg_runs,aes(fill = m))  +
+#    geom_vline(xintercept = 127638255, linetype == "dashed") +
+    scale_fill_manual(name = "State", values = meth_pal) + theme(axis.text.y = element_blank(),  legend.position= "bottom",axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))
+
+top_row <- plot_grid(meth,g, align="v", ncol=1,rel_heights = c(1/10, 1/2))
+top_row
+  
+  ggsave(
+  paste0(figs, "/", chr, "HSAT4_singleread_period.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 8,
+  height = 10,
+)
+
+```
+
+```{r hsat1, echo=F}
+
+chr="chr3"
+
+reads <- tabix_mbed(paste0(dat, "/censat/", chr, "_cen.mbed"),extcol = "motif",by = "read") 
+#129004453       142241828 
+
+
+
+size_sel <- reads %>%
+  mutate(rlen = end-start) %>%
+  filter(rlen >= 50000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall)
+
+region_start=95000000
+region_end= region_start+50000
+
+#chr3    92903598        95366794
+reg = cgcalls %>%
+  dplyr::filter(start >= region_start) %>%
+  dplyr::filter(end <= region_end)
+  
+
+cpg_runs <-getRuns(reg, maxGap = 500)
+ 
+
+cpg_runs.ordered <- order_reads(cpg_runs)
+  
+ cpg_runs <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+#ids <- order(sapply(seq_along(gcruns.list),function(i){length(unique(gcruns.list$qname))}))
+
+bis <- reg %>% 
+  group_by(chrom, start) %>%
+  summarise(meth_freq = mean(mcall), cov = n()) 
+
+
+n_windows=1000
+bis$cut = cut(bis$start, breaks=n_windows)
+
+meth.stat <- bis %>%
+  group_by(cut) %>%
+  summarise(med = median(meth_freq), top = quantile(meth_freq, 0.75), bot = quantile(meth_freq, 0.25), n_genes = length(meth_freq)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  mutate(med_smooth=rollmean(med, 10, NA))
+
+meth <- ggplot(meth.stat, aes(x = min, y= med_smooth))+geom_line()+ theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.y=element_blank(), axis.title.x=element_blank(), panel.spacing = unit(2, "lines"))#+coord_cartesian(xlim=(c(37595000,37600000)))
+meth
+
+g <- ggplot(cpg_runs,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax)) + geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80") + 
+    geom_rect(cpg_runs,aes(fill = m))  +
+#    geom_vline(xintercept = 127638255, linetype == "dashed") +
+    scale_fill_manual(name = "State", values = meth_pal) + theme(axis.text.y = element_blank(),  legend.position= "bottom",axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))
+
+top_row <- plot_grid(meth,g, align="v", ncol=1,rel_heights = c(1/10, 1/2))
+top_row
+  
+  
+  ggsave(
+  paste0(figs, "/", chr, "HSAT1_singleread.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 6,
+)
+```
+
+

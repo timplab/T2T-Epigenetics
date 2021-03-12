@@ -1,0 +1,58 @@
+---
+title: "Nucleosomes CENX"
+author: "G$"
+date: "1/16/2021"
+output: html_document
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+library(knitr)
+library(tidyverse)
+library(bsseq)
+library(Biostrings)
+library(ggplot2)
+library(png)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+library(ggpmisc)
+library(Repitools)
+options(knitr.duplicate.label = 'allow')
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+library("ggsci")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/nanonome/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002/nanonome/methylation_calls"
+
+```
+
+```{r}
+runs <- readRDS(paste0(dat, "/pooled/HG002_nanonome_chrX_GpC_runsUnsmoothed.rds"))
+```
+
+```{r}
+regions <- runs %>%
+  filter(start > 53000000) %>%
+  filter(end < 63000000) %>%
+  mutate(reg=case_when(start > 55500894 & end < 55510540 ~ "HSAT4", 
+                       start > 55922986 & end < 58746125 ~ "ALPHA",
+                       start > 55675593 & end < 55715005 ~ "GSAT", 
+                       TRUE ~ "NON-SAT")) %>%
+  filter(reg != "NON-SAT") %>%
+  filter(color == "Inaccessible")
+
+g <- ggplot(regions,aes( x=width, color=reg))+geom_density(adjust=1.5)+xlim(0,800)+theme_classic(base_size = 25)+labs(x= "Inaccessible Run Length")
+
+ggsave(
+  paste0(figs, "/HG002_CENX_nucleosomeDensity.pdf"),
+  plot = g,
+  scale = 1,
+  width = 7,
+  height = 5
+)
+```
+

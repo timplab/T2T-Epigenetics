@@ -1,0 +1,279 @@
+---
+title: "Nanonome Read Binning"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+library(knitr)
+library(tidyverse)
+library(bsseq)
+library(Biostrings)
+library(ggplot2)
+library(png)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+library(ggpmisc)
+library(Repitools)
+options(knitr.duplicate.label = 'allow')
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+library("ggsci")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/nanonome/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002/nanonome/methylation_calls"
+
+```
+
+
+```{r functions, include = F}
+getQQ <- function(one,two,qs = seq(0,1,0.01)) {
+  tibble(one = quantile(one,qs,na.rm = T),
+         two = quantile(two,qs,na.rm = T),
+         qunatile = qs)
+}
+# https://stackoverflow.com/questions/43875716/find-start-and-end-positions-indices-of-runs-consecutive-values
+#getRuns <- function(calls){
+#  calls <- calls %>%
+#    filter(mcall != -1) %>%
+#    group_by(qname)
+#  calls.list <- calls %>%
+#    group_split(keep = F)
+#  names(calls.list) <- calls %>% group_keys() %>% .$qname
+#  runs.list <- lapply(calls.list,function(x){
+#    rle(x$mcall) %>%
+#    unclass() %>% as.tibble() %>%
+#    mutate( endi = cumsum(lengths),
+#            starti = c(1,dplyr::lag(endi)[-1]+1),
+#            start = x$start[starti],
+#            end = x$start[endi],
+#            width = end - start + 1) %>%
+#      filter( width >= 0) # remove negative widths (in case of dups, etc.)
+#  })
+#  runs <- bind_rows(runs.list,.id = "qname")
+#}
+order_reads <- function(x,bounds=NULL){
+  # get boundaries of reads if not provided
+  if (is.null(bounds)){
+    bounds <- x%>% group_by(qname) %>%
+      summarize(start = min(start),
+                end = max(end))
+    # label y based on order of smallest start
+    bounds<- bounds %>% arrange(start, end) %>%
+      mutate(
+        readi = seq_len(length(unique(x$qname))),
+        ymin = -readi - 0.8, 
+        ymax = ymin + 0.6)
+  }
+  x <- x %>%
+    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+           ymax = bounds$ymax[match(qname,bounds$qname)])
+  bounds <- bounds %>%
+    mutate(ymin = bounds$ymin[match(qname,bounds$qname)],
+           ymax = bounds$ymax[match(qname,bounds$qname)])
+  return(list(x = x,bounds = bounds))
+}
+
+smoothCalls <- function(calls,reg=NULL,bandwidth = 80){
+  calls <- calls %>%
+    mutate(mcall = ifelse(abs(score)>1,sign(score),score)) # ceiling based on log-lik ratio - this uses log-lik ratio when call is not obvious
+  if (is.null(reg)) {
+    xpoints <- seq(min(calls$start),max(calls$start))
+  } else {
+    reg <- as_tibble(reg)
+    xpoints <- seq(reg$start,reg$end)
+  }
+  ks <- ksmooth(calls$start,calls$mcall,bandwidth = 80,kernel = "normal",x.points = xpoints)
+  tibble(
+    start = ks$x,
+    mcall_smooth = ks$y, 
+    mcall = case_when(
+      mcall_smooth > 0 ~ 1,
+      mcall_smooth < 0 ~ 0,
+      TRUE ~ -1)) 
+}
+
+binnedSum <- function(bins, numvar, mcolname)
+{
+  stopifnot(is(bins, "GRanges"))
+  stopifnot(is(numvar, "RleList"))
+  stopifnot(identical(seqlevels(bins), names(numvar)))
+  bins_per_chrom <- split(ranges(bins), seqnames(bins))
+  sums_list <- lapply(names(numvar),
+      function(seqname) {
+          views <- Views(numvar[[seqname]],
+                         bins_per_chrom[[seqname]])
+          viewSums(views)
+      })
+  new_mcol <- unsplit(sums_list, as.factor(seqnames(bins)))
+  mcols(bins)[[mcolname]] <- new_mcol
+  bins
+}
+
+```
+
+```{r}
+
+
+repeatColors =c("HSAT2"="#C19935",
+                "HSAT1"="#A2A638",
+                "HSAT3"="#8CAC3E",
+                "(CATTC)n" = "#E87C71",
+                "HSAT4"="#53B0E3",
+                "HSAT5"="#ED72A5",
+                "HSAT6"="#EF768C", 
+                "(GAATC)n"="#E28455",
+                "ALR/Alpha"="#D78C32",
+                "6kbHsap" = "#D8BFD8",
+                "BSR/Beta"="#E370AB",
+                "CER" = "#CE9334",
+                "DNA"="#C19935",
+                "DNA?"="#C19935",
+                "GSAT"="#4169E1",
+                "LINE"="#FFA500",
+                "Low_complexity"="#75B042",
+                "LSAU"="#54B346",
+                "LTR"="#51B756",
+                "RC"="#53BB73",
+                "Retroposon"="#55BE8D",
+                "RNA"="#54C0A5",
+                "rRNA"="#52BEBB",
+                "SAR"="#51BDCE",
+                "SATR2"="#4EB8DF",
+                "GSATII"="#6B8E23",
+                "SATR1"="#5AA5DA",
+                "scRNA"="#6B9AD2",
+                "Simple_repeat"="#8992C8",
+                "SINE"="#9A8AC1",
+                "snRNA"="#A885BC",
+                "srpRNA"="#B67EB6",
+                "SST1"="#C378B2",
+                "HSATII"="#D173AF",
+                "tRNA"="#006400",
+                "ACRO1"="#9400D3",
+                "Unknown"="#BA55D3", 
+                "(GAATG)n"="#ff4000",
+                "D20S16" = "#ffbf00", 
+                "SATR2"= "#0080ff", 
+                "TAR1" = "#000080", 
+                "SUBTEL2_sat"= "#FFB6C1", 
+                "GSATX" = "#D2691E", 
+                "MSR1" = "#708090")
+
+
+reps <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002/annotations/hg002.chrX.fasta_rm.bed", col_names = F) %>%
+  mutate(name = ifelse(X7 == "Satellite", X4, X7))
+```
+
+```{r load_data, include=F}
+
+gc_bins <- readRDS(paste0(dat, "/pooled/ChrX_accessibilityZscore.rds"))
+```
+
+
+```{r binGC, echo=F}
+meth_GC <- ggplot(gc_bins, aes(x = start/1e6, y= z_score, fill = color))+geom_bar(stat = "identity", position = "dodge")+ylim(-4,5)+labs(x="Genomic coordinates (Mb)", y="Accessibility Z-score")+theme_classic(base_size = 25)+theme(legend.position = "none")+xlim(53,63)+geom_hline(yintercept = -3, linetype="dashed")
+meth_GC
+```
+
+
+```{r}
+
+igg <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/cut_and_run/bigwigs/HG002/HG002_IgG_cutnrun_hisalt_losalt.q10.F3852.bedgraph", col_names = c("chr", "start", "end", "coverage")) %>%
+  mutate(condition= "IgG")
+
+cenpa <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/cut_and_run/bigwigs/HG002/HG002_CA_cutnrun_hisalt_losalt.q10.F3852_chrX.bedgraph",col_names = c("chr", "start", "end", "coverage")) %>%
+  mutate(condition="CENP-A")
+cut <- rbind(igg,cenpa)
+
+cgcalls <- read_csv(paste0(dat, "/pooled/HG002_nanonome_chrX_CpGmethylation_ByCall.csv"))
+
+cgcalls.gr <-  cgcalls %>%
+  ungroup() %>%
+  group_by(start) %>%
+  summarise(num_meth = sum(mcall == 1), num_unmeth = sum(mcall == 0)) %>%
+  mutate(chr = "chrX", start = start, end = start) %>%
+  GRanges()
+
+library(BSgenome.HG002.chrX)
+chrx.gr <- GRanges(seqinfo(BSgenome.HG002.chrX))
+
+
+blocks <- genomeBlocks(BSgenome.HG002.chrX, chrs = seqnames(BSgenome.HG002.chrX), width = 15000)
+score1 <- coverage(cgcalls.gr, weight="num_meth")
+score2 <- coverage(cgcalls.gr, weight="num_unmeth")
+
+binned_meth <- binnedSum(blocks, numvar = score1, "num_meth") %>%
+  as.data.frame()
+binned_unmeth <-binnedSum(blocks, numvar = score2, "num_unmeth")%>%
+  as.data.frame()
+
+meth_bins <- merge(binned_meth, binned_unmeth, by = c("start", "end", "seqnames", "width", "strand")) %>%
+  group_by(start, end) %>%
+  mutate(sites = num_meth+num_unmeth) %>%
+  mutate(freq = num_meth/sites) %>%
+  na.omit()
+
+blocks <- genomeBlocks(BSgenome.HG002.chrX, chrs = seqnames(BSgenome.HG002.chrX), width = 15000)
+score1 <- coverage(cgcalls.gr, weight="num_meth")
+score2 <- coverage(cgcalls.gr, weight="num_unmeth")
+
+binned_meth <- binnedSum(blocks, numvar = score1, "num_meth") %>%
+  as.data.frame()
+binned_unmeth <-binnedSum(blocks, numvar = score2, "num_unmeth")%>%
+  as.data.frame()
+
+
+CA_plot <- ggplot(cut, aes(x = (start/1e6), y= coverage, color = condition, alpha=.5)) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 25)+geom_line(size =1)+xlim(53,63)+ scale_color_manual(values=c("red", "black"))+theme(legend.position = "none")
+
+meth_CG <- ggplot(meth_bins, aes(x = (start/1e6), y= freq)) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 25)+ylim(0,1)+geom_line(size =1)+xlim(53,63)
+
+rm_sub <- reps %>%
+  filter(X2 >53000000) %>%
+  filter(X3 < 63000000)
+rep_leg <- ggplot(data=rm_sub, mapping=aes(xmin=(X2/1e6),xmax=(X3/1e6),ymin=0,ymax=.1, fill = name))+
+  geom_rect()+theme(legend.position="top") +labs(y="Axis")+labs(y="Axis")+ scale_fill_manual(values = repeatColors, drop = FALSE)+theme(legend.text=element_text(size=rel(1.5)))+theme(legend.title=element_blank()) +theme(axis.title.y=element_blank(),axis.text.y=element_blank(), axis.ticks.y=element_blank(), legend.position = "none")
+
+
+top_row <- plot_grid(rep_leg, meth_CG,meth_GC,CA_plot, ncol =1,align = "v",rel_heights = c(1/4, 1/2, 1/2,1/2))
+top_row
+
+ggsave(
+  paste0(figs, "/NanonomeCpG_GpC_pooled_cenx_profileCENPA.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 10
+)
+```
+
+```{r}
+
+#57495001-57570000 
+meth_GC <- ggplot(gc_bins, aes(x = start/1e6, y= z_score, fill = color))+geom_bar(stat = "identity", position = "dodge")+ylim(-4,5)+labs(x="Genomic coordinates (Mb)", y="Accessibility Z-score")+theme_classic(base_size = 12)+theme(legend.position = "bottom")+xlim(57,58)+geom_hline(yintercept = -3, linetype="dashed")
+
+meth_CG <- ggplot(meth_bins, aes(x = (start/1e6), y= freq)) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 12)+ylim(0,1)+geom_line(size =1)+xlim(57,58)
+
+CA_plot <- ggplot(cut, aes(x = (start/1e6), y= coverage, color = condition, alpha=.5)) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 12)+geom_line(size =1)+xlim(57,58)+ scale_color_manual(values=c("red", "black"))+theme(legend.position = "none")
+
+
+top_row <- plot_grid(meth_CG,meth_GC, CA_plot,ncol =1,align = "v")
+top_row
+
+ggsave(
+  paste0(figs, "/NanonomeCpG_GpC_pooled_cenx_hypoCENPA.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 5,
+  height = 8
+)
+
+```
+
+
