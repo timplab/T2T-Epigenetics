@@ -1,6 +1,7 @@
 
 
-source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
 library(tidyverse)
 library(cowplot)
 
@@ -24,59 +25,6 @@ all.dat <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assem
   filter(start >= rstart) %>%
   filter(end <= rend)
 
-
-repeatColors =c("DNA"="#C19936",
-                "DNA?"="#C19935",
-                "LINE"="#FFA500",
-                "Low_complexity"="#75B043",
-                "LTR"="#51B756",
-                "RC"="#53BB74",
-                "Retroposon"="#55BE9D",
-                "RNA"="#ff4000",
-                "rRNA"="#52BEBB",
-                "scRNA"="#6B9AD3",
-                "Simple_repeat"="#8992C9",
-                "SINE"="#9A8AC1",
-                "snRNA"="#A886BC",
-                "srpRNA"="#B67EB6",
-                "Unspecified"="#C378B2",
-                "tRNA"="#006400",
-                "Unknown"="#BA55D3",
-                "Satellite"="#53B0E4")
-
-defaultColor = "#000080"
-
-censatColors =c("TE" = "#E87C71",
-                "MER"="#E28455",
-                "HOR"="#D78C32",
-                "BSAT"="#E370AB",
-                "CER" = "#CE9334",
-                "HSAT2"="#C19935",
-                "HSAT1"="#A2A638",
-                "HSAT3"="#8CAC3E",
-                "L1"="#75B042",
-                "LSAU"="#54B346",
-                "LTR"="#51B756",
-                "MST"="#53BB73",
-                "GSAT"="#55BE8D",
-                "GSATII"="#54C0A5",
-                "rRNA"="#52BEBB",
-                "SAR"="#51BDCE",
-                "novel"="#9400D3",
-                "HSAT4"="#53B0E4",
-                "SATR"="#5AA5DA",
-                "CT"="#6B9AD2",
-                "HERV"="#8992C8",
-                "MSAT"="#9A8AC2",
-                "MON"="#A885BC",
-                "SST"="#C378B2",
-                "HSAT5"="#ED72A5",
-                "HSAT6"="#EF768C", 
-                "gap-rDNA"="#ff4000",
-                "L1" = "#ffbf00", 
-                "TAR"= "#0080ff",
-                "ACRO"="#9400D4",
-                "Alu"="#9A8AC3")
 
 SAT = c("GSAT", "DHOR", "BSAT","HSAT1", "HSAT2", "HSAT3", "HSAT4", "HSAT5", "HSAT6","HOR", "MON", "CT", "gap-rDNA")
 censat = read_tsv(paste0(dat, "/annotations/t2t_cenAnnotation.v2.021621FORMATTED.bed"), col_names = F) %>%

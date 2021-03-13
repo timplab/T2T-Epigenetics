@@ -16,8 +16,8 @@ options(scipen=999)
 library(zoo)
 library(BSgenome.t2t.v1.0.release)
 options(knitr.duplicate.label = 'allow')
-source("~/projects/chm13_meth/scripts/v1.0_final_assembly/utils/ilee_plot_utils.R")
-source("~/projects/chm13_meth/scripts/v1.0_final_assembly/utils/methylation_R_utils.R")
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
 
 # set data output path
 
