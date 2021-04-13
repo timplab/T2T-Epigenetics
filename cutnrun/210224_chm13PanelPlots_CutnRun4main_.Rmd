@@ -1,0 +1,158 @@
+---
+title: "CHM13 Cut&Run Cen Panel Plots"
+author: "G$"
+date: "2/16/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+```
+
+
+```{r , echo=FALSE}
+
+# load and parse censat files
+
+censat = read_tsv(paste0(dat, "/annotations/t2t_cenAnnotation.v2.021621.bed"), col_names = F) %>%
+  mutate(name = ifelse(grepl("hsat1", X4), "HSAT1", X4)) %>%
+  mutate(name = ifelse(grepl("hsat2", X4), "HSAT2", name)) %>%
+  mutate(name = ifelse(grepl("hsat3", X4), "HSAT3", name)) %>%
+  mutate(name = ifelse(grepl("hsat4", X4), "HSAT4", name)) %>%
+  mutate(name = ifelse(grepl("hsat5", X4), "HSAT5", name)) %>%
+  mutate(name = ifelse(grepl("hsat6", X4), "HSAT6", name)) %>%
+  mutate(name = ifelse(grepl("ct", X4), "CT", name)) %>%
+  mutate(name = ifelse(grepl("bsat", X4), "BSAT", name)) %>%
+  mutate(name = ifelse(grepl("dhor", X4), "DHOR", name)) %>%
+  mutate(name = ifelse(grepl("hor", name), "HOR", name)) %>%
+  mutate(name = ifelse(grepl("mon", X4), "MON", name)) %>%
+  mutate(name = ifelse(grepl("GSAT", X4), "GSAT", name)) %>%
+  dplyr::select(c(X1, X2, X3, name)) %>%
+  dplyr::rename("chr" =1, "start" = 2 ,"end" =3) 
+
+k21 <- read_tsv(paste0(dat, "/chm13_final_beds/chm13.v1.k21.single.mrg.markerdesert.bed"), col_names = c("chr", "start", "end", "name"))
+k51 <- read_tsv(paste0(dat, "/chm13_final_beds/chm13.v1.k51.single.mrg.markerdesert.bed"),col_names = c("chr", "start", "end", "name"))
+```
+
+
+```{r}
+name="_cutnrun-202021_losalt.F3852.over.IlluminaPCRfree_v1.0-assembly_51mers_single_mrg_meryl_sort.bigwig"
+path="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/cut_and_run/210204_alignments/022021_CUTRUN"
+
+bw <- paste0(path,"/CENPA/CHM13_CA",name)
+cenpa <- import(bw, format="bigwig")
+
+bw <- paste0(path,"/IgG/CHM13_IgG",name)
+igg <- import(bw, format="bigwig")
+
+bw <- paste0(path,"/CENPB/CHM13_CB",name)
+cenpb <- import(bw, format="bigwig")
+
+bw <- paste0(path, "/CENPC/CHM13_CC",name)
+cenpc <- import(bw, format="bigwig")
+
+seqlevels(cenpa) <- seqnames(BSgenome.t2t.v1.0.release)
+seqlevels(igg) <- seqnames(BSgenome.t2t.v1.0.release)
+seqlevels(cenpb) <- seqnames(BSgenome.t2t.v1.0.release)
+seqlevels(cenpc) <- seqnames(BSgenome.t2t.v1.0.release)
+
+blocks <- genomeBlocks(BSgenome.t2t.v1.0.release, chrs = seqnames(BSgenome.t2t.v1.0.release), width = 5000)
+score1 <- coverage(cenpa, weight="score")
+score2 <- coverage(igg, weight="score")
+score3 <- coverage(cenpb, weight="score")
+score4 <- coverage(cenpc, weight="score")
+
+
+ binned_cenpa <- binnedMean(blocks, numvar = score1, "score") %>%
+    as.data.frame() %>%
+   mutate(sample="CENPA")
+  
+  binned_igg <-binnedMean(blocks, numvar = score2, "score")%>%
+    as.data.frame()%>%
+   mutate(sample="IgG")
+  
+  binned_cenpb <- binnedMean(blocks, numvar = score3, "score") %>%
+    as.data.frame()%>%
+   mutate(sample="CENPB")
+  binned_cenpc <- binnedMean(blocks, numvar = score4, "score") %>%
+    as.data.frame()%>%
+   mutate(sample="CENPC")
+  
+  
+binned_CR <- rbind(binned_cenpa, binned_cenpb, binned_cenpc, binned_igg)
+```
+
+```{r}
+SAT = c("GSAT", "DHOR", "BSAT","HSAT1", "HSAT2", "HSAT3", "HSAT4", "HSAT5", "HSAT6","HOR", "MON", "CT")
+cen <- read_tsv(paste0(dat, "/annotations/t2t_cenRegions.v2.021621.bed"), col_names = c("chr", "start", "end","name")) 
+hor = read_tsv(paste0(dat, "/annotations/t2t_cenAnnotation.v2.021621.bed"), col_names = F) %>%
+    dplyr::filter(grepl("hor", X4))%>%
+    mutate(status = ifelse(grepl("L", X4), "live", "dead")) %>%
+    filter(status == "live") %>%
+    group_by(X1) %>%
+    summarise(start=min(X2), end=max(X3)) %>%
+    rename(X1 = "chr")
+
+
+cutColors =c("CENPB"="seagreen",
+              "CENPA"="red4",
+              "IgG"="grey41", 
+             "CENPC" = "dodgerblue")
+
+for (i in (1:length(hor$chr))){
+chrom=hor$chr[i]
+rstart=hor$start[i]
+rend=hor$end[i]
+
+all.dat <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/chm13_final_beds/210126_Allchr_10kbBinned_ALL.bed") %>%
+  filter(seqnames == chrom) %>%
+  filter(start >= rstart) %>%
+  filter(end <= rend)
+
+
+meth <- ggplot(all.dat, aes(x = (start/1e6), y= smooth))+geom_line(size =1) + labs(y="Methylation")+theme_classic(base_size = 10)+xlim((rstart/1e6),(rend/1e6))+theme(axis.title.x=element_blank())+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))+ylim(0,1)
+
+binned_CR.reg <- binned_CR %>%
+  filter(seqnames == chrom) %>%
+  filter(start >= rstart) %>%
+  filter(end <= rend)
+  
+k9 <- ggplot(binned_CR.reg, aes(x = (start/1e6), y= score, color=sample, alpha=.2))+geom_bar(size =1, stat="identity") + labs(y="Cut&Run Coverage")+theme_classic(base_size = 10)+xlim((rstart/1e6),(rend/1e6))+theme(axis.title.x=element_blank(),axis.text.x=element_blank(), axis.ticks.x=element_blank(),axis.line.x = element_blank())+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))+theme(legend.position = "none")+facet_wrap(~sample, ncol=1)+scale_color_manual(values=cutColors)
+
+censat_sub <- censat %>%
+  dplyr::filter(chr == chrom) %>%
+  filter(name %in% SAT)
+
+censat.plot <- ggplot(data=censat_sub, mapping=aes(xmin=(start/1e6),xmax=(end/1e6),ymin=0,ymax=.1,fill=name))+
+  geom_rect()+theme(legend.position="none") +labs(y="CenSat")+theme(legend.text=element_text(size=rel(1)))+theme(legend.title=element_blank()) +theme(axis.text.y=element_blank(), axis.ticks.y=element_blank())+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))+scale_fill_manual(values = censatColors, drop = F)+theme(legend.title=element_blank(),panel.border=element_blank())+coord_cartesian(xlim=c(rstart/1e6,rend/1e6))
+
+k51.sub <- k51 %>%
+  filter(chr == chrom)
+  
+k51.plot <- ggplot()+geom_rect(data=k51.sub, aes(xmin=(start/1e6),xmax=(end/1e6),ymin=0,ymax=.1),fill="red", alpha=.5)+theme(legend.title=element_blank()) +theme(axis.text.y=element_blank(), axis.ticks.y=element_blank())+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))+theme(axis.text.x=element_blank(), axis.ticks.x=element_blank(),panel.border=element_blank(), legend.position = "none")+coord_cartesian(xlim=c(rstart/1e6,rend/1e6))
+
+top_row <- plot_grid(meth,k9,k51.plot,ncol = 1, align="v",rel_heights = c(1/6, 1/2,1/20,1/15))
+
+top_row
+
+ggsave(
+  paste0(figs, "/methyl_profiles/", chrom,"_PanelPlotCutnRunrep2020214_k51_4censat.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 5
+)
+
+}
+
+
+```
+

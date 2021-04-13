@@ -214,3 +214,49 @@ write.table(binned.all, paste0(dat, "/chm13_final_beds/210126_AllCen_10kbBinned_
 ```
 
 
+```{r}
+blocks <- genomeBlocks(BSgenome.t2t.v1.0.release, chrs = list, width = 10000)
+
+hg002_meth <- read_tsv(paste0(dat, "/HG002/nanonome/methylation_calls/whole_genome/chm13_hg002_reference_pooled/HG002_nanonome_CpGmethylationFrequency_20kb.tsv")) %>%
+  mutate(called_sites_unmethylated = called_sites - called_sites_methylated) %>%
+  filter(chromosome != "chrY") %>%
+  filter(chromosome != "chrM") %>%
+  GRanges()
+
+
+  score1 <- coverage(hg002_meth, weight="called_sites_methylated")
+  score2 <- coverage(hg002_meth, weight="called_sites_unmethylated")
+  score3 <- coverage(hg002_meth, weight="num_motifs_in_group")
+  
+  
+  binned_meth <- binnedSum(blocks, numvar = score1, "called_sites_methylated") %>%
+    as.data.frame()
+  
+  binned_unmeth <-binnedSum(blocks, numvar = score2, "called_sites_unmethylated")%>%
+    as.data.frame()
+  
+  binned_cov <- binnedMean(blocks, numvar = score3, "num_motifs_in_group") %>%
+    as.data.frame()
+  
+  # make meth bins and smooth with a rolling mean to make plot prettier
+  meth_bins <- merge(binned_meth, binned_unmeth, by = c("start", "end", "seqnames", "width", "strand")) %>%
+  merge(binned_cov, by = c("start", "end", "seqnames", "width", "strand")) %>%
+    filter(seqnames %in% list) %>%
+   # filter(start > rstart) %>%
+   # filter(end < rend) %>%
+    group_by(start, end, seqnames) %>%
+    mutate(sites = called_sites_methylated+called_sites_unmethylated) %>%
+    mutate(freq = called_sites_methylated/sites) %>%
+    ungroup() %>%
+    group_by(seqnames) %>%
+    arrange(start,seqnames) %>%
+    mutate(smooth = rollmean(freq, 3, fill = NA), site_smooth = rollmean(num_motifs_in_group, 3, fill = NA)) %>%
+    ungroup() %>%
+    arrange(seqnames, start) %>%
+    filter(seqnames != "chrX")
+  
+# merge into one data frame, save as tsv
+
+write.table(meth_bins, paste0(dat, "/chm13_final_beds/HG002_autosomes_AllCen_10kbBinned_ALL.bed"), col.names = T, row.names = F, quote=F, sep = "\t")
+```
+

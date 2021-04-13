@@ -194,6 +194,11 @@ reg = cgcalls %>%
   dplyr::filter(start >= region_start) %>%
   dplyr::filter(end <= region_end)
   
+sites = read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/censat/restriction_sites/chm13.GGTACC.frags.bed.gz", col_names = c("chr", "start", "end")) %>%
+  filter(chr=="chr15") %>%
+  dplyr::filter(start >= region_start) %>%
+  dplyr::filter(end <= region_end) %>%
+  mutate(len=end-start) 
 
 cpg_runs <-getRuns(reg, maxGap = 500)
  
@@ -231,9 +236,13 @@ meth
 g <- ggplot(cpg_runs,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax)) + geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80") + 
     geom_rect(cpg_runs,aes(fill = m))  +
 #    geom_vline(xintercept = 127638255, linetype == "dashed") +
-    scale_fill_manual(name = "State", values = meth_pal) + theme(axis.text.y = element_blank(),  legend.position= "bottom",axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))
+    scale_fill_manual(name = "State", values = meth_pal) + theme(axis.text.y = element_blank(),  legend.position= "none",axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))
 
-top_row <- plot_grid(meth,g, align="v", ncol=1,rel_heights = c(1/10, 1/2))
+arrow <- ggplot()+ geom_segment(data = sites, aes(x = start, xend = end, y = 0, yend = 0, group = chr), 
+               colour = "black", 
+               arrow = arrow())+theme_void()
+
+top_row <- plot_grid(meth,g,arrow, align="v", ncol=1,rel_heights = c(1/10, 1/2,1/10))
 top_row
   
   ggsave(
@@ -319,6 +328,7 @@ top_row
 )
 
 ```
+
 ```{r chr1, echo=F}
 chr="chrX"
 

@@ -2,45 +2,14 @@
 
 ### This script takes output of encode reads aligned per repeat array and generates boxplots for log2 fold enrichment
 #load libraries
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
 library(tidyverse)
+library(cowplot)
 
 # load data
 figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures"
 en <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/encode/210308_alignments/bt2.chm13v1_array_enrichmentsv2.tsv")
-
-
-#set colors
-censatColors =c("(CATTC)n" = "#E87C71",
-                "(GAATC)n"="#E28455",
-                "HOR"="#D78C32",
-                "BSAT"="#E370AB",
-                "CER" = "#CE9334",
-                "HSAT2"="#C19935",
-                "HSAT1"="#A2A638",
-                "HSAT3"="#8CAC3E",
-                "Low_complexity"="#75B042",
-                "LSAU"="#54B346",
-                "LTR"="#51B756",
-                "MST"="#53BB73",
-                "GSAT"="#55BE8D",
-                "RNA"="#54C0A5",
-                "rRNA"="#52BEBB",
-                "SAR"="#51BDCE",
-                "ACRO1"="#9400D3",
-                "HSAT4"="#53B0E3",
-                "SATR"="#5AA5DA",
-                "CT"="#6B9AD2",
-                "Simple_repeat"="#8992C8",
-                "SINE"="#9A8AC1",
-                "MON"="#A885BC",
-                "SST"="#C378B2",
-                "HSAT5"="#ED72A5",
-                "HSAT6"="#EF768C", 
-                "gap-rDNA"="#ff4000",
-                "TE" = "#ffbf00", 
-                "TAR"= "#0080ff",
-                "ACRO"="#9400D3", 
-                "DHOR" = "gray")
 
 totals <- en %>%
   filter(Array == "Total") %>%
@@ -52,7 +21,7 @@ reads <- en %>%
 
 sum <- merge(reads, totals, by=c("Cell type", "Mark"))
 
-SAT = c("GSAT", "DHOR", "BSAT","HSAT1", "HSAT2", "HSAT3", "HSAT4", "HSAT5", "HSAT6","HOR", "MON", "CT")
+SAT = c("HSAT1", "HSAT2", "HSAT3","HOR", "CT")
 
 stat.sum <- sum %>%
   group_by(`Cell type`, Mark,Array,total_control,total_treat) %>%

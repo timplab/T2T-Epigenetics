@@ -8,49 +8,14 @@ output: html_document
 
 ```{r include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
-library(knitr)
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
 library(tidyverse)
-library(ggplot2)
 library(cowplot)
-options(scipen=999)
-library(zoo)
-options(knitr.duplicate.label = 'allow')
-library(rtracklayer)
-source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
-library("ggsci")
-source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
-
-censatColors =c("(CATTC)n" = "#E87C71",
-                "(GAATC)n"="#E28455",
-                "HOR"="#D78C32",
-                "BSAT"="#E370AB",
-                "CER" = "#CE9334",
-                "HSAT2"="#C19935",
-                "HSAT1"="#A2A638",
-                "HSAT3"="#8CAC3E",
-                "Low_complexity"="#75B042",
-                "LSAU"="#54B346",
-                "LTR"="#51B756",
-                "MST"="#53BB73",
-                "GSAT"="#55BE8D",
-                "RNA"="#54C0A5",
-                "rRNA"="#52BEBB",
-                "SAR"="#51BDCE",
-                "ACRO1"="#9400D3",
-                "HSAT4"="#53B0E3",
-                "SATR"="#5AA5DA",
-                "CT"="#6B9AD2",
-                "Simple_repeat"="#8992C8",
-                "SINE"="#9A8AC1",
-                "MON"="#A885BC",
-                "SST"="#C378B2",
-                "HSAT5"="#ED72A5",
-                "HSAT6"="#EF768C", 
-                "gap-rDNA"="#ff4000",
-                "TE" = "#ffbf00", 
-                "TAR"= "#0080ff",
-                "ACRO"="#9400D3", 
-                "DHOR" = "gray")
+library(BSgenome.t2t.v1.0.release)
+list=seqnames(BSgenome.t2t.v1.0.release)
+# don't keep chrM, problems arise later because not all beds have chrM
+list=list[1:23]
 ```
 
 ```{r mbed}
@@ -100,54 +65,25 @@ igg2 <- import(bw, format="bigwig")
 
 ```{r}
 censat.gr <- GRanges(censat)
-keepi <- findOverlaps(rep1,censat.gr)
-freq.matched <- rep1[queryHits(keepi)]
 
-mcols(freq.matched) <- cbind.data.frame(
-  mcols(freq.matched),
-  mcols(censat.gr[subjectHits(keepi)]))
-
-rep1.censat <- as.data.frame(freq.matched) %>%
+rep1.censat <- FindOvls(rep1,censat.gr) %>%
   mutate(treat="h3k9me3") %>%
-  mutate(rep="rep1")
+  mutate(rep="rep022021")
 
-censat.gr <- GRanges(censat)
-keepi <- findOverlaps(igg1,censat.gr)
-freq.matched <- igg1[queryHits(keepi)]
-
-mcols(freq.matched) <- cbind.data.frame(
-  mcols(freq.matched),
-  mcols(censat.gr[subjectHits(keepi)]))
-
-igg1.censat <- as.data.frame(freq.matched) %>%
+igg1.censat <- FindOvls(igg1,censat.gr) %>%
   mutate(treat="igg") %>%
-  mutate(rep="rep1")
+  mutate(rep="rep022021")
 
 
 # rep 2
 
-keepi <- findOverlaps(rep2,censat.gr)
-freq.matched <- rep2[queryHits(keepi)]
-
-mcols(freq.matched) <- cbind.data.frame(
-  mcols(freq.matched),
-  mcols(censat.gr[subjectHits(keepi)]))
-
-rep2.censat <- as.data.frame(freq.matched) %>%
+rep2.censat <- FindOvls(rep2,censat.gr) %>%
   mutate(treat="h3k9me3") %>%
-  mutate(rep="rep2")
+  mutate(rep="rep122920")
 
-censat.gr <- GRanges(censat)
-keepi <- findOverlaps(igg2,censat.gr)
-freq.matched <- igg2[queryHits(keepi)]
-
-mcols(freq.matched) <- cbind.data.frame(
-  mcols(freq.matched),
-  mcols(censat.gr[subjectHits(keepi)]))
-
-igg2.censat <- as.data.frame(freq.matched) %>%
+igg2.censat <- FindOvls(igg2,censat.gr) %>%
   mutate(treat="igg") %>%
-  mutate(rep="rep2")
+  mutate(rep="rep122920")
 
 all.h3k9 <- rbind(rep1.censat, rep2.censat, igg1.censat,igg2.censat)
 ```
@@ -155,7 +91,7 @@ all.h3k9 <- rbind(rep1.censat, rep2.censat, igg1.censat,igg2.censat)
 
 ```{r}
 
-SAT = c("GSAT", "DHOR", "BSAT","HSAT1", "HSAT2", "HSAT3", "HSAT4", "HSAT5", "HSAT6","HOR", "MON", "CT")
+SAT = c("HSAT1", "HSAT2", "HSAT3","HOR", "CT")
 
 merged_treat <- all.h3k9 %>%
   filter(name %in% SAT)
@@ -173,12 +109,12 @@ stat.sum <- merged_treat %>%
   summarise(reads=sum(score)) %>%
   spread(treat, reads) %>%
   ungroup() %>%
-  group_by(name) %>%
-  summarise(enrich=if_else(rep=="rep1",log2((h3k9me3/igg)*ratio1),log((h3k9me3/igg)*ratio2)))
+  group_by(name,rep) %>%
+  summarise(enrich=if_else(rep=="rep022021",log2((h3k9me3/igg)*ratio1),log2((h3k9me3/igg)*ratio2)))
 
 write.table(stat.sum, "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/cut_and_run/H3K9me3_51merintersections_log2FC", row.names = F, quote=F, sep="\t")
 
-ggplot(stat.sum, aes(x=name, y=enrich, color=name))+geom_point(position = "jitter")+ scale_color_manual(values = censatColors, drop = FALSE)+geom_hline(yintercept = 0, linetype="dashed")
+ggplot(stat.sum, aes(x=name, y=enrich, color=name))+geom_point(position = "dodge",size=2.5)+ scale_color_manual(values = censatColors, drop = FALSE)+geom_hline(yintercept = 0, linetype="dashed")+facet_wrap(~rep)
 
 
 ggsave(

@@ -813,3 +813,16 @@ CalculateCG <- function (obj, ..., view.width, as.prob = TRUE)
   }
   res
 }
+
+########## overlaps ################
+FindOvls <- function(obj1,obj2){
+  
+keepi <- findOverlaps(obj1,obj2)
+freq.matched <- obj1[queryHits(keepi)]
+
+mcols(freq.matched) <- cbind.data.frame(
+  mcols(freq.matched),
+  mcols(obj2[subjectHits(keepi)]))
+return(as.data.frame(freq.matched))
+}
+  
