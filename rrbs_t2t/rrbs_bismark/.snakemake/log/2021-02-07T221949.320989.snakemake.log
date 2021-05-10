@@ -1,0 +1,3 @@
+NameError in line 15 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+name 'csv' is not defined
+  File "/home/phook2/code/rrbs/rrbs_data_parse.smk", line 15, in <module>

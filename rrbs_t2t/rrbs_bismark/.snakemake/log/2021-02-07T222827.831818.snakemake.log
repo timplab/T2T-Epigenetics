@@ -1,0 +1,10 @@
+KeyError in line 8 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+'0'
+  File "/home/phook2/code/rrbs/rrbs_data_parse.smk", line 8, in <module>
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.5/site-packages/pandas/core/frame.py", line 2688, in __getitem__
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.5/site-packages/pandas/core/frame.py", line 2695, in _getitem_column
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.5/site-packages/pandas/core/generic.py", line 2489, in _get_item_cache
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.5/site-packages/pandas/core/internals.py", line 4115, in get
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.5/site-packages/pandas/core/indexes/base.py", line 3080, in get_loc
+  File "pandas/_libs/index.pyx", line 140, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 164, in pandas._libs.index.IndexEngine.get_loc

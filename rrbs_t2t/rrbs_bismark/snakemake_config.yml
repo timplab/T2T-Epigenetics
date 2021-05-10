@@ -1,0 +1,5 @@
+workdir: /mithril/Data/NGS/projects/rrbs_chm13/fastq # path to datadir, the directory with all the rrbs
+outdir: /kyber/Data/NGS/projects/rrbs_chm13 # path to the output dir, this may need to go somewhere else than the data bc of size
+codedir: /home/phook2/code/rrbs # path to this dir
+reference: /home/phook2/code/rrbs/chm13 # path to reference genome
+threads: 4 # available cores

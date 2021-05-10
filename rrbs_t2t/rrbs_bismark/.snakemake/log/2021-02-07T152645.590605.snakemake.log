@@ -1,0 +1,32 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 60
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	methylation_extract
+	2
+
+[Sun Feb  7 15:26:45 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/Bisulfite_Genome
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.CX_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.cytosine_context_summary.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/SRR951000.meth_call.log
+    jobid: 3
+    wildcards: sample=SRR951000
+
+[Sun Feb  7 15:26:50 2021]
+Error in rule methylation_extract:
+    jobid: 3
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.CX_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.cytosine_context_summary.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/SRR951000.meth_call.log (check log file(s) for error message)
+    shell:
+        [ -e /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls ]||mkdir -p /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls && /home/phook2/software/Bismark-0.22.2/bismark_methylation_extractor -s /
+   	   --comprehensive            --merge_non_CpG 	   -o /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls 	   --bedGraph 	   --gzip 	   --remove_spaces 	   --CX 	   --cytosine_report 	   --genome_folder /kyber/Data/NGS/projects/rrbs_chm13/Bisulfite_Genome 	   /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000_bismark_bt2_pe.bam &> /kyber/Data/NGS/projects/rrbs_chm13/SRR951000.meth_call.log
+   
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/phook2/code/rrbs/.snakemake/log/2021-02-07T152645.590605.snakemake.log

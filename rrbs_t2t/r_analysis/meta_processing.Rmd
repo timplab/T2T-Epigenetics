@@ -1,0 +1,39 @@
+---
+title: "rrbs_meta"
+author: "Paul Hook"
+date: "2/26/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup}
+library(readr)
+library(tidyverse)
+library(stringr)
+
+meta_dir <- "/mithril/Data/NGS/projects/rrbs_chm13"
+setwd(meta_dir)
+```
+
+```{r read_data}
+# This was pre-filtered data from "sra_result.tsv"
+sra_meta <- readr::read_tsv("rrbs_sra_metadata.tsv",
+                            col_names = c("experiment","run","reads","project","sample","organism","assay")) %>%
+  dplyr::select(run,reads,sample) %>%
+  dplyr::mutate(sample=stringr::str_remove(sample,pattern="_embryo")) %>%
+  dplyr::mutate(sample=stringr::str_remove(sample,pattern="RRBS_")) %>%
+  dplyr::mutate(sample=stringr::str_replace(sample,pattern="MII_",replacement = "MII-")) %>%
+  dplyr::mutate(sample=stringr::str_replace(sample,pattern="1st_",replacement = "1st-")) %>%
+  dplyr::mutate(sample=stringr::str_replace(sample,pattern="2nd_",replacement = "2nd-")) %>%
+  tidyr::separate(sample,sep="_",into=c("tissue","replicate")) %>%
+  dplyr::group_by(tissue) %>%
+  summarize(replicates = str_c(replicate, collapse = ","),
+            total.reads = sum(reads),
+            runs=str_c(run, collapse = ","))
+
+write_tsv(sra_meta,na=".",col_names = TRUE,path = "processed_sra_meta.tsv")
+
+```

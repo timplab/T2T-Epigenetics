@@ -1,0 +1,5 @@
+Building DAG of jobs...
+MissingInputException in line 38 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Missing input files for rule trim_adaptors:
+/mithril/Data/NGS/projects/rrbs_chm13/fastq/0_pass_2.fastq.gz
+/mithril/Data/NGS/projects/rrbs_chm13/fastq/0_pass_1.fastq.gz

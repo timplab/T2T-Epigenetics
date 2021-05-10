@@ -1,0 +1,2 @@
+SyntaxError in line 56 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Unexpected keyword R1_trim in rule definition (rrbs_data_parse.smk, line 56)

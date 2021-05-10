@@ -1,0 +1,32 @@
+Building DAG of jobs...
+Job counts:
+	count	jobs
+	1	all
+	1	bismark_align_pe
+	1	bismark_prepare_genome
+	3
+
+[Fri Feb  5 16:55:23 2021]
+rule bismark_prepare_genome:
+    input: /kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/reference/chm13.draft_v1.0.fasta
+    output: /kyber/Data/NGS/projects/rrbs_chm13/Bisulfite_Genome
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsgenomeprep.log
+    jobid: 2
+
+
+[Fri Feb  5 16:55:23 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_2.fastq.gz, /kyber/Data/NGS/projects/rrbs_chm13/Bisulfite_Genome, /kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/reference/chm13.draft_v1.0.fasta
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000_bismark_bt2_pe.bam
+    log: /kyber/Data/NGS/projects/rrbs_chm13/SRR951000.align.log
+    jobid: 1
+    wildcards: sample=SRR951000
+    threads: 2
+
+RuleException in line 34 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+'Params' object has no attribute 'p'
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.9/site-packages/snakemake/executors/__init__.py", line 136, in run_jobs
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.9/site-packages/snakemake/executors/__init__.py", line 145, in run
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.9/site-packages/snakemake/executors/__init__.py", line 156, in _run
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.9/site-packages/snakemake/executors/__init__.py", line 176, in printjob
+  File "/home/phook2/miniconda3/envs/snakemake/lib/python3.9/site-packages/snakemake/executors/__init__.py", line 162, in printjob

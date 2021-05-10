@@ -1,0 +1,5 @@
+Building DAG of jobs...
+MissingInputException in line 34 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Missing input files for rule bismark_align_pe:
+/mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000.R1.fastq.gz
+/mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000.R2.fastq.gz

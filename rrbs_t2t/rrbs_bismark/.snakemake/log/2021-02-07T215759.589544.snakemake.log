@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 17 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Missing input files for rule all:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark.report.html

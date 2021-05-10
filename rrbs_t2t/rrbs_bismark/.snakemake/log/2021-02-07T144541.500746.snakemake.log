@@ -1,0 +1,32 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 60
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	bismark_align_pe
+	2
+
+[Sun Feb  7 14:45:41 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_2.fq.gz, /kyber/Data/NGS/projects/rrbs_chm13/Bisulfite_Genome, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000_bismark_bt2_pe.bam
+    log: /kyber/Data/NGS/projects/rrbs_chm13/SRR951000.align.log
+    jobid: 2
+    wildcards: sample=SRR951000
+    threads: 4
+
+[Sun Feb  7 15:17:54 2021]
+Finished job 2.
+1 of 2 steps (50%) done
+
+[Sun Feb  7 15:17:54 2021]
+localrule all:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_2.fq.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000_bismark_bt2_pe.bam
+    jobid: 0
+
+[Sun Feb  7 15:17:54 2021]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: /home/phook2/code/rrbs/.snakemake/log/2021-02-07T144541.500746.snakemake.log

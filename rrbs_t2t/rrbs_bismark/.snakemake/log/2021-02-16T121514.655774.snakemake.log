@@ -1,0 +1,760 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 60
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	44	methylation_extract
+	45
+
+[Tue Feb 16 12:23:26 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/SRR950994_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/CpG_context_SRR950994_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/Non_CpG_context_SRR950994_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/CpG_context_SRR950994_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/Non_CpG_context_SRR950994_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994.meth_call.log
+    jobid: 63
+    wildcards: sample=SRR950994
+
+
+[Tue Feb 16 12:23:34 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/SRR951019_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/CpG_context_SRR951019_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/Non_CpG_context_SRR951019_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/CpG_context_SRR951019_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/Non_CpG_context_SRR951019_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019.meth_call.log
+    jobid: 65
+    wildcards: sample=SRR951019
+
+
+[Tue Feb 16 12:23:41 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/SRR950995_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/CpG_context_SRR950995_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/Non_CpG_context_SRR950995_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/CpG_context_SRR950995_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/Non_CpG_context_SRR950995_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995.meth_call.log
+    jobid: 66
+    wildcards: sample=SRR950995
+
+
+[Tue Feb 16 12:23:48 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/SRR951005_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/CpG_context_SRR951005_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/Non_CpG_context_SRR951005_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/CpG_context_SRR951005_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/Non_CpG_context_SRR951005_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005.meth_call.log
+    jobid: 67
+    wildcards: sample=SRR951005
+
+
+[Tue Feb 16 12:23:56 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/SRR950983_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/CpG_context_SRR950983_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/Non_CpG_context_SRR950983_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/CpG_context_SRR950983_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/Non_CpG_context_SRR950983_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983.meth_call.log
+    jobid: 69
+    wildcards: sample=SRR950983
+
+
+[Tue Feb 16 12:24:07 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/SRR951012_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/CpG_context_SRR951012_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/Non_CpG_context_SRR951012_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/CpG_context_SRR951012_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/Non_CpG_context_SRR951012_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012.meth_call.log
+    jobid: 76
+    wildcards: sample=SRR951012
+
+
+[Tue Feb 16 12:24:12 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/SRR950977_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/CpG_context_SRR950977_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/Non_CpG_context_SRR950977_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/CpG_context_SRR950977_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/Non_CpG_context_SRR950977_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977.meth_call.log
+    jobid: 8
+    wildcards: sample=SRR950977
+
+
+[Tue Feb 16 12:24:18 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/SRR950982_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/CpG_context_SRR950982_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/Non_CpG_context_SRR950982_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/CpG_context_SRR950982_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/Non_CpG_context_SRR950982_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982.meth_call.log
+    jobid: 77
+    wildcards: sample=SRR950982
+
+
+[Tue Feb 16 12:24:32 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/SRR951004_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/CpG_context_SRR951004_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/Non_CpG_context_SRR951004_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/CpG_context_SRR951004_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/Non_CpG_context_SRR951004_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004.meth_call.log
+    jobid: 9
+    wildcards: sample=SRR951004
+
+
+[Tue Feb 16 12:24:40 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/SRR950979_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/CpG_context_SRR950979_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/Non_CpG_context_SRR950979_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/CpG_context_SRR950979_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/Non_CpG_context_SRR950979_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979.meth_call.log
+    jobid: 94
+    wildcards: sample=SRR950979
+
+
+[Tue Feb 16 12:24:44 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998.meth_call.log
+    jobid: 78
+    wildcards: sample=SRR950998
+
+
+[Tue Feb 16 12:24:50 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/SRR950976_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/CpG_context_SRR950976_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/Non_CpG_context_SRR950976_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/CpG_context_SRR950976_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/Non_CpG_context_SRR950976_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976.meth_call.log
+    jobid: 13
+    wildcards: sample=SRR950976
+
+
+[Tue Feb 16 12:24:55 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/SRR951006_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/CpG_context_SRR951006_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/Non_CpG_context_SRR951006_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/CpG_context_SRR951006_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/Non_CpG_context_SRR951006_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006.meth_call.log
+    jobid: 17
+    wildcards: sample=SRR951006
+
+
+[Tue Feb 16 12:25:01 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/SRR951008_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008.meth_call.log
+    jobid: 18
+    wildcards: sample=SRR951008
+
+
+[Tue Feb 16 12:25:07 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/SRR951001_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001.meth_call.log
+    jobid: 104
+    wildcards: sample=SRR951001
+
+
+[Tue Feb 16 12:25:13 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/SRR951017_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/CpG_context_SRR951017_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/Non_CpG_context_SRR951017_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/CpG_context_SRR951017_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/Non_CpG_context_SRR951017_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017.meth_call.log
+    jobid: 86
+    wildcards: sample=SRR951017
+
+
+[Tue Feb 16 12:25:21 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/SRR950980_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/CpG_context_SRR950980_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/Non_CpG_context_SRR950980_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/CpG_context_SRR950980_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/Non_CpG_context_SRR950980_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980.meth_call.log
+    jobid: 21
+    wildcards: sample=SRR950980
+
+
+[Tue Feb 16 12:25:27 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/SRR951018_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/CpG_context_SRR951018_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/Non_CpG_context_SRR951018_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/CpG_context_SRR951018_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/Non_CpG_context_SRR951018_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018.meth_call.log
+    jobid: 88
+    wildcards: sample=SRR951018
+
+
+[Tue Feb 16 12:25:33 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/SRR950985_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/CpG_context_SRR950985_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/Non_CpG_context_SRR950985_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/CpG_context_SRR950985_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/Non_CpG_context_SRR950985_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985.meth_call.log
+    jobid: 23
+    wildcards: sample=SRR950985
+
+
+[Tue Feb 16 12:25:36 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/SRR950988_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/CpG_context_SRR950988_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/Non_CpG_context_SRR950988_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/CpG_context_SRR950988_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/Non_CpG_context_SRR950988_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988.meth_call.log
+    jobid: 95
+    wildcards: sample=SRR950988
+
+
+[Tue Feb 16 12:25:43 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/SRR951014_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/CpG_context_SRR951014_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/Non_CpG_context_SRR951014_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/CpG_context_SRR951014_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/Non_CpG_context_SRR951014_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014.meth_call.log
+    jobid: 75
+    wildcards: sample=SRR951014
+
+
+[Tue Feb 16 12:25:47 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000.meth_call.log
+    jobid: 98
+    wildcards: sample=SRR951000
+
+
+[Tue Feb 16 12:25:50 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/SRR950989_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/CpG_context_SRR950989_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/Non_CpG_context_SRR950989_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/CpG_context_SRR950989_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/Non_CpG_context_SRR950989_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989.meth_call.log
+    jobid: 99
+    wildcards: sample=SRR950989
+
+
+[Tue Feb 16 12:26:07 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/SRR950997_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/CpG_context_SRR950997_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/Non_CpG_context_SRR950997_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/CpG_context_SRR950997_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/Non_CpG_context_SRR950997_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997.meth_call.log
+    jobid: 101
+    wildcards: sample=SRR950997
+
+
+[Tue Feb 16 12:26:13 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/SRR950993_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/CpG_context_SRR950993_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/Non_CpG_context_SRR950993_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/CpG_context_SRR950993_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/Non_CpG_context_SRR950993_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993.meth_call.log
+    jobid: 132
+    wildcards: sample=SRR950993
+
+
+[Tue Feb 16 12:26:19 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/SRR951015_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015.meth_call.log
+    jobid: 33
+    wildcards: sample=SRR951015
+
+
+[Tue Feb 16 12:26:22 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/SRR951003_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/CpG_context_SRR951003_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/Non_CpG_context_SRR951003_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/CpG_context_SRR951003_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/Non_CpG_context_SRR951003_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003.meth_call.log
+    jobid: 97
+    wildcards: sample=SRR951003
+
+
+[Tue Feb 16 12:26:43 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/SRR951013_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/CpG_context_SRR951013_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/Non_CpG_context_SRR951013_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/CpG_context_SRR951013_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/Non_CpG_context_SRR951013_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013.meth_call.log
+    jobid: 103
+    wildcards: sample=SRR951013
+
+
+[Tue Feb 16 12:26:54 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/SRR950990_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/CpG_context_SRR950990_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/Non_CpG_context_SRR950990_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/CpG_context_SRR950990_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/Non_CpG_context_SRR950990_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990.meth_call.log
+    jobid: 108
+    wildcards: sample=SRR950990
+
+
+[Tue Feb 16 12:27:09 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984.meth_call.log
+    jobid: 10
+    wildcards: sample=SRR950984
+
+
+[Tue Feb 16 12:27:14 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986.meth_call.log
+    jobid: 44
+    wildcards: sample=SRR950986
+
+
+[Tue Feb 16 12:27:16 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/SRR951011_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/CpG_context_SRR951011_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/Non_CpG_context_SRR951011_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/CpG_context_SRR951011_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/Non_CpG_context_SRR951011_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011.meth_call.log
+    jobid: 45
+    wildcards: sample=SRR951011
+
+
+[Tue Feb 16 12:27:21 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/SRR951002_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/CpG_context_SRR951002_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/Non_CpG_context_SRR951002_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/CpG_context_SRR951002_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/Non_CpG_context_SRR951002_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002.meth_call.log
+    jobid: 117
+    wildcards: sample=SRR951002
+
+
+[Tue Feb 16 12:27:25 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/SRR950978_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/CpG_context_SRR950978_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/Non_CpG_context_SRR950978_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/CpG_context_SRR950978_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/Non_CpG_context_SRR950978_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978.meth_call.log
+    jobid: 46
+    wildcards: sample=SRR950978
+
+
+[Tue Feb 16 12:27:42 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/SRR951007_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/CpG_context_SRR951007_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/Non_CpG_context_SRR951007_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/CpG_context_SRR951007_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/Non_CpG_context_SRR951007_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007.meth_call.log
+    jobid: 47
+    wildcards: sample=SRR951007
+
+
+[Tue Feb 16 12:27:51 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/SRR951010_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/CpG_context_SRR951010_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/Non_CpG_context_SRR951010_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/CpG_context_SRR951010_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/Non_CpG_context_SRR951010_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010.meth_call.log
+    jobid: 79
+    wildcards: sample=SRR951010
+
+
+[Tue Feb 16 12:27:56 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996.meth_call.log
+    jobid: 50
+    wildcards: sample=SRR950996
+
+
+[Tue Feb 16 12:28:09 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/SRR950992_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/CpG_context_SRR950992_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/Non_CpG_context_SRR950992_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/CpG_context_SRR950992_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/Non_CpG_context_SRR950992_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992.meth_call.log
+    jobid: 51
+    wildcards: sample=SRR950992
+
+
+[Tue Feb 16 12:28:13 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/SRR951009_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/CpG_context_SRR951009_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/Non_CpG_context_SRR951009_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/CpG_context_SRR951009_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/Non_CpG_context_SRR951009_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009.meth_call.log
+    jobid: 123
+    wildcards: sample=SRR951009
+
+
+[Tue Feb 16 12:28:16 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/SRR950991_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/CpG_context_SRR950991_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/Non_CpG_context_SRR950991_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/CpG_context_SRR950991_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/Non_CpG_context_SRR950991_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991.meth_call.log
+    jobid: 54
+    wildcards: sample=SRR950991
+
+
+[Tue Feb 16 12:28:18 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/SRR951016_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/CpG_context_SRR951016_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/Non_CpG_context_SRR951016_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/CpG_context_SRR951016_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/Non_CpG_context_SRR951016_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016.meth_call.log
+    jobid: 87
+    wildcards: sample=SRR951016
+
+
+[Tue Feb 16 12:28:21 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/SRR950999_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/CpG_context_SRR950999_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/Non_CpG_context_SRR950999_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/CpG_context_SRR950999_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/Non_CpG_context_SRR950999_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999.meth_call.log
+    jobid: 126
+    wildcards: sample=SRR950999
+
+
+[Tue Feb 16 12:28:26 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/SRR950987_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/CpG_context_SRR950987_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/Non_CpG_context_SRR950987_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/CpG_context_SRR950987_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/Non_CpG_context_SRR950987_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987.meth_call.log
+    jobid: 122
+    wildcards: sample=SRR950987
+
+
+[Tue Feb 16 12:28:45 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/SRR950981_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/CpG_context_SRR950981_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/Non_CpG_context_SRR950981_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/CpG_context_SRR950981_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/Non_CpG_context_SRR950981_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981.meth_call.log
+    jobid: 61
+    wildcards: sample=SRR950981
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/Non_CpG_context_SRR951019_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/CpG_context_SRR951019_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/Non_CpG_context_SRR951019_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/CpG_context_SRR951019_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/Non_CpG_context_SRR951013_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/CpG_context_SRR951013_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/Non_CpG_context_SRR951013_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/CpG_context_SRR951013_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/Non_CpG_context_SRR950999_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/CpG_context_SRR950999_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/Non_CpG_context_SRR950999_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/CpG_context_SRR950999_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/Non_CpG_context_SRR951014_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/CpG_context_SRR951014_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/Non_CpG_context_SRR951014_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/CpG_context_SRR951014_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/Non_CpG_context_SRR950987_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/CpG_context_SRR950987_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/Non_CpG_context_SRR950987_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/CpG_context_SRR950987_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/Non_CpG_context_SRR950989_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/CpG_context_SRR950989_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/Non_CpG_context_SRR950989_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/CpG_context_SRR950989_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/Non_CpG_context_SRR951005_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/CpG_context_SRR951005_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/Non_CpG_context_SRR951005_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/CpG_context_SRR951005_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/Non_CpG_context_SRR950985_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/CpG_context_SRR950985_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/Non_CpG_context_SRR950985_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/CpG_context_SRR950985_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/Non_CpG_context_SRR951003_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/CpG_context_SRR951003_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/Non_CpG_context_SRR951003_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/CpG_context_SRR951003_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/Non_CpG_context_SRR951012_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/CpG_context_SRR951012_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/Non_CpG_context_SRR951012_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/CpG_context_SRR951012_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/Non_CpG_context_SRR950976_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/CpG_context_SRR950976_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/Non_CpG_context_SRR950976_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/CpG_context_SRR950976_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/Non_CpG_context_SRR950988_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/CpG_context_SRR950988_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/Non_CpG_context_SRR950988_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/CpG_context_SRR950988_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/Non_CpG_context_SRR951007_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/CpG_context_SRR951007_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/Non_CpG_context_SRR951007_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/CpG_context_SRR951007_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/Non_CpG_context_SRR951002_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/CpG_context_SRR951002_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/Non_CpG_context_SRR951002_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/CpG_context_SRR951002_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/Non_CpG_context_SRR950993_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/CpG_context_SRR950993_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/Non_CpG_context_SRR950993_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/CpG_context_SRR950993_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/Non_CpG_context_SRR950977_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/CpG_context_SRR950977_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/Non_CpG_context_SRR950977_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/CpG_context_SRR950977_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/Non_CpG_context_SRR950997_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/CpG_context_SRR950997_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/Non_CpG_context_SRR950997_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/CpG_context_SRR950997_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/Non_CpG_context_SRR951009_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/CpG_context_SRR951009_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/Non_CpG_context_SRR951009_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/CpG_context_SRR951009_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/Non_CpG_context_SRR951004_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/CpG_context_SRR951004_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/Non_CpG_context_SRR951004_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/CpG_context_SRR951004_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/Non_CpG_context_SRR950983_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/CpG_context_SRR950983_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/Non_CpG_context_SRR950983_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/CpG_context_SRR950983_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/Non_CpG_context_SRR951016_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/CpG_context_SRR951016_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/Non_CpG_context_SRR951016_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/CpG_context_SRR951016_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/Non_CpG_context_SRR951006_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/CpG_context_SRR951006_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/Non_CpG_context_SRR951006_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/CpG_context_SRR951006_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/Non_CpG_context_SRR950992_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/CpG_context_SRR950992_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/Non_CpG_context_SRR950992_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/CpG_context_SRR950992_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/Non_CpG_context_SRR950990_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/CpG_context_SRR950990_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/Non_CpG_context_SRR950990_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/CpG_context_SRR950990_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/Non_CpG_context_SRR950978_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/CpG_context_SRR950978_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/Non_CpG_context_SRR950978_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/CpG_context_SRR950978_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/Non_CpG_context_SRR950994_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/CpG_context_SRR950994_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/Non_CpG_context_SRR950994_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/CpG_context_SRR950994_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/Non_CpG_context_SRR951010_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/CpG_context_SRR951010_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/Non_CpG_context_SRR951010_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/CpG_context_SRR951010_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/Non_CpG_context_SRR950980_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/CpG_context_SRR950980_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/Non_CpG_context_SRR950980_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/CpG_context_SRR950980_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/Non_CpG_context_SRR950981_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/CpG_context_SRR950981_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/Non_CpG_context_SRR950981_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/CpG_context_SRR950981_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/Non_CpG_context_SRR950979_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/CpG_context_SRR950979_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/Non_CpG_context_SRR950979_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/CpG_context_SRR950979_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/Non_CpG_context_SRR950995_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/CpG_context_SRR950995_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/Non_CpG_context_SRR950995_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/CpG_context_SRR950995_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/Non_CpG_context_SRR950991_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/CpG_context_SRR950991_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/Non_CpG_context_SRR950991_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/CpG_context_SRR950991_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/Non_CpG_context_SRR951018_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/CpG_context_SRR951018_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/Non_CpG_context_SRR951018_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/CpG_context_SRR951018_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/Non_CpG_context_SRR951011_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/CpG_context_SRR951011_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/Non_CpG_context_SRR951011_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/CpG_context_SRR951011_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/Non_CpG_context_SRR950982_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/CpG_context_SRR950982_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/Non_CpG_context_SRR950982_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/CpG_context_SRR950982_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.bismark.cov.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 95 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/Non_CpG_context_SRR951017_bismark_bt2_pe.txt.gz.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.CX_report.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/CpG_context_SRR951017_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/Non_CpG_context_SRR951017_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/CpG_context_SRR951017_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.bismark.cov.gz
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/phook2/code/rrbs/.snakemake/log/2021-02-16T121514.655774.snakemake.log

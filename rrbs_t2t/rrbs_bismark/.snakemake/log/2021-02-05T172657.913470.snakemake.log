@@ -1,0 +1,44 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 60
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	bismark_align_pe
+	1	bismark_prepare_genome
+	3
+
+[Fri Feb  5 17:26:58 2021]
+rule bismark_prepare_genome:
+    input: /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/Bisulfite_Genome
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsgenomeprep.log
+    jobid: 2
+
+[Fri Feb  5 19:26:51 2021]
+Finished job 2.
+1 of 3 steps (33%) done
+
+[Fri Feb  5 19:26:51 2021]
+rule bismark_align_pe:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/Bisulfite_Genome, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_2.fastq.gz
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000_bismark_bt2_pe.bam
+    log: /kyber/Data/NGS/projects/rrbs_chm13/SRR951000.align.log
+    jobid: 1
+    wildcards: sample=SRR951000
+    threads: 4
+
+[Fri Feb  5 19:26:52 2021]
+Error in rule bismark_align_pe:
+    jobid: 1
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000_bismark_bt2_pe.bam
+    log: /kyber/Data/NGS/projects/rrbs_chm13/SRR951000.align.log (check log file(s) for error message)
+    shell:
+        [ -e /kyber/Data/NGS/projects/rrbs_chm13/tmp/SRR951000 ]||mkdir -p /kyber/Data/NGS/projects/rrbs_chm13/tmp/SRR951000 && /home/phook2/software/Bismark-0.22.2/bismark --bam 	  --bowtie2 	  --rrbs --genome /home/phook2/code/rrbs/chm13 	  -1 /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_1.fastq.gz -2 /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_2.fastq.gz 	  --temp_dir /kyber/Data/NGS/projects/rrbs_chm13/tmp/SRR951000 	  --output_dir /kyber/Data/NGS/projects/rrbs_chm13/bsseq &> /kyber/Data/NGS/projects/rrbs_chm13/SRR951000.align.log && touch /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000_bismark_bt2_pe.bam 
+	
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/phook2/code/rrbs/.snakemake/log/2021-02-05T172657.913470.snakemake.log

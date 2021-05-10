@@ -1,0 +1,38 @@
+Building DAG of jobs...
+Job counts:
+	count	jobs
+	1	all
+	1	bismark_align_pe
+	1	methylation_extract
+	1	methylation_report
+	4
+
+[Sun Feb  7 18:39:10 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/SRR951000.align.log
+    jobid: 4
+    wildcards: sample=SRR951000
+    threads: 4
+
+
+[Sun Feb  7 18:39:10 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.cytosine_context_summary.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000.meth_call.log
+    jobid: 3
+    wildcards: sample=SRR951000
+
+
+[Sun Feb  7 18:39:10 2021]
+rule methylation_report:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.M-bias.txt
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark.report.html
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000.meth_report.log
+    jobid: 1
+    wildcards: sample=SRR951000
+
+RuleException in line 127 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+NameError: The name 'sample' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}

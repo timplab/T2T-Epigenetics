@@ -1,0 +1,17 @@
+Building DAG of jobs...
+Job counts:
+	count	jobs
+	1	all
+	1	bismark_align_pe
+	1	trim_adaptors
+	3
+
+[Sat Feb  6 18:45:24 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_1.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_2.fq.gz
+    jobid: 2
+    wildcards: sample=SRR951000
+
+RuleException in line 25 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+NameError: The name 'sample' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}

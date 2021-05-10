@@ -1,0 +1,969 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 60
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	44	bismark_align_pe
+	44	methylation_extract
+	44	trim_adaptors
+	133
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951014_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951014_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951014_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951014_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951014_trim.log
+    jobid: 67
+    wildcards: sample=SRR951014
+
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950998_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950998_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950998_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950998_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950998_trim.log
+    jobid: 27
+    wildcards: sample=SRR950998
+
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951002_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951002_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951002_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951002_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951002_trim.log
+    jobid: 74
+    wildcards: sample=SRR951002
+
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951009_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951009_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951009_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951009_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951009_trim.log
+    jobid: 76
+    wildcards: sample=SRR951009
+
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950979_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950979_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950979_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950979_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950979_trim.log
+    jobid: 11
+    wildcards: sample=SRR950979
+
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950978_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950978_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950978_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950978_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950978_trim.log
+    jobid: 77
+    wildcards: sample=SRR950978
+
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950996_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950996_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950996_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950996_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950996_trim.log
+    jobid: 13
+    wildcards: sample=SRR950996
+
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_trim.log
+    jobid: 16
+    wildcards: sample=SRR951000
+
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950992_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950992_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950992_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950992_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950992_trim.log
+    jobid: 80
+    wildcards: sample=SRR950992
+
+
+[Sun Feb  7 22:36:41 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950986_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950986_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950986_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950986_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950986_trim.log
+    jobid: 91
+    wildcards: sample=SRR950986
+
+
+[Sun Feb  7 22:36:42 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950988_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950988_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950988_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950988_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950988_trim.log
+    jobid: 9
+    wildcards: sample=SRR950988
+
+
+[Sun Feb  7 22:36:43 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951017_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951017_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951017_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951017_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951017_trim.log
+    jobid: 21
+    wildcards: sample=SRR951017
+
+
+[Sun Feb  7 22:36:45 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951010_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951010_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951010_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951010_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951010_trim.log
+    jobid: 103
+    wildcards: sample=SRR951010
+
+
+[Sun Feb  7 22:36:46 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951006_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951006_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951006_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951006_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951006_trim.log
+    jobid: 131
+    wildcards: sample=SRR951006
+
+
+[Sun Feb  7 22:36:46 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950983_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950983_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950983_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950983_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950983_trim.log
+    jobid: 23
+    wildcards: sample=SRR950983
+
+
+[Sun Feb  7 22:36:46 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950981_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950981_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950981_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950981_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950981_trim.log
+    jobid: 4
+    wildcards: sample=SRR950981
+
+
+[Sun Feb  7 22:36:46 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950995_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950995_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950995_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950995_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950995_trim.log
+    jobid: 88
+    wildcards: sample=SRR950995
+
+
+[Sun Feb  7 22:36:46 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951013_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951013_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951013_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951013_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951013_trim.log
+    jobid: 25
+    wildcards: sample=SRR951013
+
+
+[Sun Feb  7 22:36:46 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950999_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950999_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950999_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950999_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950999_trim.log
+    jobid: 46
+    wildcards: sample=SRR950999
+
+
+[Sun Feb  7 22:36:46 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950985_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950985_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950985_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950985_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950985_trim.log
+    jobid: 93
+    wildcards: sample=SRR950985
+
+
+[Sun Feb  7 22:36:46 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950991_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950991_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950991_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950991_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950991_trim.log
+    jobid: 28
+    wildcards: sample=SRR950991
+
+
+[Sun Feb  7 22:36:46 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951008_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951008_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951008_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951008_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951008_trim.log
+    jobid: 94
+    wildcards: sample=SRR951008
+
+
+[Sun Feb  7 22:36:47 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951018_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951018_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951018_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951018_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951018_trim.log
+    jobid: 130
+    wildcards: sample=SRR951018
+
+
+[Sun Feb  7 22:36:48 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950993_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950993_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950993_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950993_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950993_trim.log
+    jobid: 98
+    wildcards: sample=SRR950993
+
+
+[Sun Feb  7 22:36:52 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951001_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951001_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951001_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951001_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951001_trim.log
+    jobid: 100
+    wildcards: sample=SRR951001
+
+
+[Sun Feb  7 22:36:59 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950990_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950990_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950990_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950990_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950990_trim.log
+    jobid: 34
+    wildcards: sample=SRR950990
+
+
+[Sun Feb  7 22:37:01 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950976_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950976_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950976_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950976_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950976_trim.log
+    jobid: 36
+    wildcards: sample=SRR950976
+
+
+[Sun Feb  7 22:37:02 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951005_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951005_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951005_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951005_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951005_trim.log
+    jobid: 38
+    wildcards: sample=SRR951005
+
+
+[Sun Feb  7 22:37:03 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951016_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951016_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951016_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951016_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951016_trim.log
+    jobid: 39
+    wildcards: sample=SRR951016
+
+
+[Sun Feb  7 22:37:04 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950987_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950987_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950987_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950987_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950987_trim.log
+    jobid: 40
+    wildcards: sample=SRR950987
+
+
+[Sun Feb  7 22:37:05 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951015_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951015_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951015_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951015_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951015_trim.log
+    jobid: 113
+    wildcards: sample=SRR951015
+
+
+[Sun Feb  7 22:37:06 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950997_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950997_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950997_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950997_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950997_trim.log
+    jobid: 114
+    wildcards: sample=SRR950997
+
+
+[Sun Feb  7 22:37:07 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950989_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950989_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950989_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950989_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950989_trim.log
+    jobid: 116
+    wildcards: sample=SRR950989
+
+
+[Sun Feb  7 22:37:08 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950980_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950980_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950980_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950980_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950980_trim.log
+    jobid: 117
+    wildcards: sample=SRR950980
+
+
+[Sun Feb  7 22:37:10 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951004_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951004_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951004_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951004_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951004_trim.log
+    jobid: 118
+    wildcards: sample=SRR951004
+
+
+[Sun Feb  7 22:37:11 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951012_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951012_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951012_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951012_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951012_trim.log
+    jobid: 51
+    wildcards: sample=SRR951012
+
+
+[Sun Feb  7 22:37:13 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950994_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950994_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950994_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950994_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950994_trim.log
+    jobid: 56
+    wildcards: sample=SRR950994
+
+
+[Sun Feb  7 22:37:16 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951011_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951011_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951011_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951011_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951011_trim.log
+    jobid: 53
+    wildcards: sample=SRR951011
+
+
+[Sun Feb  7 22:37:19 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950977_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950977_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950977_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950977_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950977_trim.log
+    jobid: 57
+    wildcards: sample=SRR950977
+
+
+[Sun Feb  7 22:37:21 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950982_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950982_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950982_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950982_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950982_trim.log
+    jobid: 44
+    wildcards: sample=SRR950982
+
+
+[Sun Feb  7 22:37:24 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951003_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951003_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951003_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951003_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951003_trim.log
+    jobid: 127
+    wildcards: sample=SRR951003
+
+
+[Sun Feb  7 22:37:29 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951019_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951019_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951019_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951019_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951019_trim.log
+    jobid: 61
+    wildcards: sample=SRR951019
+
+
+[Sun Feb  7 22:37:31 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951007_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951007_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951007_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951007_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951007_trim.log
+    jobid: 128
+    wildcards: sample=SRR951007
+
+
+[Sun Feb  7 22:37:36 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950984_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950984_pass_2.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950984_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950984_val_2.fq.gz
+    log: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950984_trim.log
+    jobid: 121
+    wildcards: sample=SRR950984
+
+[Sun Feb  7 23:17:20 2021]
+Finished job 27.
+1 of 133 steps (0.75%) done
+
+[Sun Feb  7 23:17:20 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950998_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950998_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998.align.log
+    jobid: 19
+    wildcards: sample=SRR950998
+    threads: 4
+
+[Sun Feb  7 23:26:35 2021]
+Finished job 91.
+2 of 133 steps (2%) done
+
+[Sun Feb  7 23:26:35 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950986_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950986_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986.align.log
+    jobid: 3
+    wildcards: sample=SRR950986
+    threads: 4
+
+[Sun Feb  7 23:33:47 2021]
+Finished job 121.
+3 of 133 steps (2%) done
+
+[Sun Feb  7 23:33:47 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950984_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950984_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984.align.log
+    jobid: 58
+    wildcards: sample=SRR950984
+    threads: 4
+
+[Sun Feb  7 23:34:43 2021]
+Finished job 13.
+4 of 133 steps (3%) done
+
+[Sun Feb  7 23:34:43 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950996_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950996_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996.align.log
+    jobid: 1
+    wildcards: sample=SRR950996
+    threads: 4
+
+[Sun Feb  7 23:36:28 2021]
+Finished job 100.
+5 of 133 steps (4%) done
+
+[Sun Feb  7 23:36:28 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951001_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951001_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/SRR951001_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/SRR951001_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/SRR951001.align.log
+    jobid: 111
+    wildcards: sample=SRR951001
+    threads: 4
+
+[Sun Feb  7 23:40:17 2021]
+Finished job 25.
+6 of 133 steps (5%) done
+[Sun Feb  7 23:44:15 2021]
+Finished job 16.
+7 of 133 steps (5%) done
+[Sun Feb  7 23:44:24 2021]
+Finished job 94.
+8 of 133 steps (6%) done
+
+[Sun Feb  7 23:44:24 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951008_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951008_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/SRR951008_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/SRR951008_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/SRR951008.align.log
+    jobid: 82
+    wildcards: sample=SRR951008
+    threads: 4
+
+[Sun Feb  7 23:51:30 2021]
+Finished job 128.
+9 of 133 steps (7%) done
+[Sun Feb  7 23:54:56 2021]
+Finished job 19.
+10 of 133 steps (8%) done
+
+[Sun Feb  7 23:54:56 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000.align.log
+    jobid: 8
+    wildcards: sample=SRR951000
+    threads: 4
+
+
+[Sun Feb  7 23:54:56 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.cytosine_context_summary.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998.meth_call.log
+    jobid: 102
+    wildcards: sample=SRR950998
+
+[Sun Feb  7 23:55:11 2021]
+Finished job 38.
+11 of 133 steps (8%) done
+[Mon Feb  8 00:10:58 2021]
+Finished job 113.
+12 of 133 steps (9%) done
+[Mon Feb  8 00:11:21 2021]
+Finished job 51.
+13 of 133 steps (10%) done
+[Mon Feb  8 00:12:12 2021]
+Finished job 46.
+14 of 133 steps (11%) done
+
+[Mon Feb  8 00:12:12 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951015_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951015_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/SRR951015_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/SRR951015_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/SRR951015.align.log
+    jobid: 101
+    wildcards: sample=SRR951015
+    threads: 4
+
+[Mon Feb  8 00:13:05 2021]
+Finished job 116.
+15 of 133 steps (11%) done
+[Mon Feb  8 00:16:22 2021]
+Finished job 3.
+16 of 133 steps (12%) done
+
+[Mon Feb  8 00:16:22 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950999_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950999_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/SRR950999_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/SRR950999_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/SRR950999.align.log
+    jobid: 86
+    wildcards: sample=SRR950999
+    threads: 4
+
+
+[Mon Feb  8 00:16:22 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.cytosine_context_summary.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986.meth_call.log
+    jobid: 112
+    wildcards: sample=SRR950986
+
+[Mon Feb  8 00:21:16 2021]
+Finished job 36.
+17 of 133 steps (13%) done
+[Mon Feb  8 00:22:41 2021]
+Finished job 58.
+18 of 133 steps (14%) done
+
+[Mon Feb  8 00:22:41 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.cytosine_context_summary.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984.meth_call.log
+    jobid: 92
+    wildcards: sample=SRR950984
+
+
+[Mon Feb  8 00:22:41 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950976_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950976_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/SRR950976_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/SRR950976_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/SRR950976.align.log
+    jobid: 47
+    wildcards: sample=SRR950976
+    threads: 4
+
+[Mon Feb  8 00:23:34 2021]
+Finished job 67.
+19 of 133 steps (14%) done
+[Mon Feb  8 00:29:30 2021]
+Finished job 1.
+20 of 133 steps (15%) done
+
+[Mon Feb  8 00:29:31 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.cytosine_context_summary.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996.meth_call.log
+    jobid: 119
+    wildcards: sample=SRR950996
+
+
+[Mon Feb  8 00:29:31 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951012_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951012_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/SRR951012_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/SRR951012_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/SRR951012.align.log
+    jobid: 60
+    wildcards: sample=SRR951012
+    threads: 4
+
+[Mon Feb  8 00:29:57 2021]
+Finished job 9.
+21 of 133 steps (16%) done
+[Mon Feb  8 00:37:02 2021]
+Finished job 40.
+22 of 133 steps (17%) done
+[Mon Feb  8 00:37:35 2021]
+Finished job 114.
+23 of 133 steps (17%) done
+[Mon Feb  8 00:38:15 2021]
+Finished job 93.
+24 of 133 steps (18%) done
+
+[Mon Feb  8 00:38:15 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950997_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950997_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/SRR950997_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/SRR950997_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/SRR950997.align.log
+    jobid: 106
+    wildcards: sample=SRR950997
+    threads: 4
+
+[Mon Feb  8 00:41:05 2021]
+Finished job 111.
+25 of 133 steps (19%) done
+
+[Mon Feb  8 00:41:05 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950985_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950985_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/SRR950985_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/SRR950985_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/SRR950985.align.log
+    jobid: 85
+    wildcards: sample=SRR950985
+    threads: 4
+
+[Mon Feb  8 00:46:44 2021]
+Finished job 74.
+26 of 133 steps (20%) done
+
+[Mon Feb  8 00:46:45 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/SRR951001_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.cytosine_context_summary.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001.meth_call.log
+    jobid: 6
+    wildcards: sample=SRR951001
+
+[Mon Feb  8 01:03:29 2021]
+Finished job 61.
+27 of 133 steps (20%) done
+[Mon Feb  8 01:05:40 2021]
+Finished job 131.
+28 of 133 steps (21%) done
+[Mon Feb  8 01:06:27 2021]
+Finished job 117.
+29 of 133 steps (22%) done
+[Mon Feb  8 01:12:27 2021]
+Finished job 127.
+30 of 133 steps (23%) done
+
+[Mon Feb  8 01:12:27 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951003_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951003_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/SRR951003_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/SRR951003_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/SRR951003.align.log
+    jobid: 50
+    wildcards: sample=SRR951003
+    threads: 4
+
+[Mon Feb  8 01:16:21 2021]
+Finished job 82.
+31 of 133 steps (23%) done
+
+[Mon Feb  8 01:16:21 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951006_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951006_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/SRR951006_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/SRR951006_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/SRR951006.align.log
+    jobid: 96
+    wildcards: sample=SRR951006
+    threads: 4
+
+[Mon Feb  8 01:17:41 2021]
+Finished job 39.
+32 of 133 steps (24%) done
+
+[Mon Feb  8 01:17:42 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/SRR951008_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.cytosine_context_summary.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008.meth_call.log
+    jobid: 66
+    wildcards: sample=SRR951008
+
+[Mon Feb  8 01:25:44 2021]
+Finished job 34.
+33 of 133 steps (25%) done
+[Mon Feb  8 01:29:12 2021]
+Finished job 118.
+34 of 133 steps (26%) done
+[Mon Feb  8 01:29:18 2021]
+Finished job 76.
+35 of 133 steps (26%) done
+[Mon Feb  8 01:29:28 2021]
+Finished job 130.
+36 of 133 steps (27%) done
+
+[Mon Feb  8 01:29:28 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951004_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951004_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/SRR951004_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/SRR951004_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/SRR951004.align.log
+    jobid: 105
+    wildcards: sample=SRR951004
+    threads: 4
+
+[Mon Feb  8 01:31:35 2021]
+Finished job 103.
+37 of 133 steps (28%) done
+[Mon Feb  8 01:33:40 2021]
+Finished job 98.
+38 of 133 steps (29%) done
+[Mon Feb  8 01:34:20 2021]
+Finished job 80.
+39 of 133 steps (29%) done
+[Mon Feb  8 01:34:54 2021]
+Finished job 28.
+40 of 133 steps (30%) done
+
+[Mon Feb  8 01:34:54 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951018_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951018_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/SRR951018_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/SRR951018_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/SRR951018.align.log
+    jobid: 79
+    wildcards: sample=SRR951018
+    threads: 4
+
+[Mon Feb  8 01:35:08 2021]
+Finished job 57.
+41 of 133 steps (31%) done
+[Mon Feb  8 01:35:28 2021]
+Finished job 77.
+42 of 133 steps (32%) done
+[Mon Feb  8 01:35:45 2021]
+Finished job 4.
+43 of 133 steps (32%) done
+[Mon Feb  8 01:39:08 2021]
+Finished job 53.
+44 of 133 steps (33%) done
+
+[Mon Feb  8 01:39:08 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951011_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951011_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/SRR951011_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/SRR951011_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/SRR951011.align.log
+    jobid: 65
+    wildcards: sample=SRR951011
+    threads: 4
+
+[Mon Feb  8 01:40:26 2021]
+Finished job 56.
+45 of 133 steps (34%) done
+[Mon Feb  8 01:40:47 2021]
+Finished job 23.
+46 of 133 steps (35%) done
+[Mon Feb  8 01:41:56 2021]
+Finished job 11.
+47 of 133 steps (35%) done
+[Mon Feb  8 01:43:14 2021]
+Finished job 8.
+48 of 133 steps (36%) done
+
+[Mon Feb  8 01:43:14 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.cytosine_context_summary.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000.meth_call.log
+    jobid: 109
+    wildcards: sample=SRR951000
+
+
+[Mon Feb  8 01:43:15 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950994_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950994_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/SRR950994_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/SRR950994_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/SRR950994.align.log
+    jobid: 126
+    wildcards: sample=SRR950994
+    threads: 4
+
+[Mon Feb  8 01:45:03 2021]
+Finished job 88.
+49 of 133 steps (37%) done
+[Mon Feb  8 01:50:22 2021]
+Finished job 21.
+50 of 133 steps (38%) done
+
+[Mon Feb  8 01:50:22 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951017_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951017_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/SRR951017_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/SRR951017_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/SRR951017.align.log
+    jobid: 5
+    wildcards: sample=SRR951017
+    threads: 4
+
+[Mon Feb  8 01:56:44 2021]
+Finished job 44.
+51 of 133 steps (38%) done
+[Mon Feb  8 02:42:35 2021]
+Finished job 101.
+52 of 133 steps (39%) done
+
+[Mon Feb  8 02:42:35 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/SRR951015_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.cytosine_context_summary.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015.meth_call.log
+    jobid: 18
+    wildcards: sample=SRR951015
+
+
+[Mon Feb  8 02:42:36 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950982_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950982_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/SRR950982_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/SRR950982_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/SRR950982.align.log
+    jobid: 49
+    wildcards: sample=SRR950982
+    threads: 4
+
+[Mon Feb  8 02:56:17 2021]
+Finished job 86.
+53 of 133 steps (40%) done
+
+[Mon Feb  8 02:56:17 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950995_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950995_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/SRR950995_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/SRR950995_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/SRR950995.align.log
+    jobid: 97
+    wildcards: sample=SRR950995
+    threads: 4
+
+[Mon Feb  8 02:57:33 2021]
+Finished job 60.
+54 of 133 steps (41%) done
+
+[Mon Feb  8 02:57:33 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950979_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950979_val_1.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/SRR950979_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/SRR950979_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/SRR950979.align.log
+    jobid: 2
+    wildcards: sample=SRR950979
+    threads: 4
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 96 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.cytosine_context_summary.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.CX_report.txt.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 96 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.cytosine_context_summary.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.CX_report.txt.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 96 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.cytosine_context_summary.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.CX_report.txt.gz
+[Mon Feb  8 04:18:36 2021]
+Finished job 106.
+55 of 133 steps (41%) done
+[Mon Feb  8 04:22:08 2021]
+Finished job 85.
+56 of 133 steps (42%) done
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 96 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.cytosine_context_summary.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.CX_report.txt.gz
+[Mon Feb  8 04:26:19 2021]
+Finished job 47.
+57 of 133 steps (43%) done
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 96 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.cytosine_context_summary.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.CX_report.txt.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 96 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.cytosine_context_summary.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.CX_report.txt.gz
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 96 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.cytosine_context_summary.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.CX_report.txt.gz
+[Mon Feb  8 06:14:28 2021]
+Finished job 96.
+58 of 133 steps (44%) done
+[Mon Feb  8 06:30:45 2021]
+Finished job 50.
+59 of 133 steps (44%) done
+[Mon Feb  8 06:31:33 2021]
+Finished job 105.
+60 of 133 steps (45%) done
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 96 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.cytosine_context_summary.txt.gz
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Removing output files of failed job methylation_extract since they might be corrupted:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.CX_report.txt.gz
+[Mon Feb  8 06:59:58 2021]
+Finished job 126.
+61 of 133 steps (46%) done
+[Mon Feb  8 07:10:32 2021]
+Finished job 65.
+62 of 133 steps (47%) done
+[Mon Feb  8 07:38:52 2021]
+Finished job 2.
+63 of 133 steps (47%) done
+[Mon Feb  8 07:50:41 2021]
+Finished job 79.
+64 of 133 steps (48%) done
+[Mon Feb  8 08:07:30 2021]
+Finished job 97.
+65 of 133 steps (49%) done
+[Mon Feb  8 08:08:15 2021]
+Finished job 5.
+66 of 133 steps (50%) done
+[Mon Feb  8 08:51:26 2021]
+Finished job 49.
+67 of 133 steps (50%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/phook2/code/rrbs/.snakemake/log/2021-02-07T223640.618883.snakemake.log

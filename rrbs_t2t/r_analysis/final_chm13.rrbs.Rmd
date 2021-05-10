@@ -1,0 +1,101 @@
+---
+title: "210331_chm13_wt.rrbs"
+author: "Winston Timp"
+date: "4/6/21"
+output: html_document
+---
+
+Look at RRBS data combined with CHM13 T2T nanopore methylation. Other code that may be of interest is listed below. This can also be found in the README of the RRBS section of the T2T GitHub.
+
+# SRA meta data downloaded here ("Summary" and "RunInfo" files): 
+https://www.ncbi.nlm.nih.gov/sra?term=SRP028804
+
+# Scripts to grab list of SRR files to download:
+gse49828_files.R
+
+# Scripts used to download the data:
+fastq-dump --outdir . --gzip --split-3 $(<GSE49828_srr_list.txt)
+
+# Scripts used to analyze data with Bismark:
+rrbs_data_parse.smk
+snakemake_config.yml
+
+# Scripts used to manually re-call methylation with Bismark in order to combine technical replicates:
+methylation_processing.sh
+
+# Converting Nanopolish output to something that looks like Bismark .cov file output:
+cat methylation_frequency_50kb_split.tsv | tail -n +2 | awk 'BEGIN{FS="\t";OFS="\t"}{print $1,$2+1,$3+1,$7,$6,$5}' > all_readlengths/chm13_rrbs_meth.cov
+
+Setting up the analysis
+```{r, setup}
+#Load libraries needed
+library(tidyverse)
+library(bsseq)
+library(GenomicRanges)
+library(BSgenome.t2t.v1.0.release)
+#library(patchwork)
+library(BiocParallel)
+#library(pals)
+library(foreach)
+library(ape)
+library(ggdendro)
+
+# Important directories
+input.dir="/kyber/Data/NGS/projects/rrbs_chm13/bismark_output/processed_meth_calls"
+out_dir <- "/home/phook2/code/pwh_projects/chm13_rrbs/rrbs_t2t/r_analysis/r_output"
+```
+
+Trimming non-reference CG methylation (from Paul)
+```{r, cpg_loci}
+t2t.cpg.loci <- findLoci(pattern = "CG",
+  subject = BSgenome.t2t.v1.0.release::BSgenome.t2t.v1.0.release, 
+  strand = "+")
+```
+
+Loading methylation data and metadata
+```{r, load_data}
+# Loading meta data
+meta <- read_tsv("/mithril/Data/NGS/projects/rrbs_chm13/processed_sra_meta.tsv",col_names = TRUE) %>%
+  add_row(tissue="chm13", runs= "Nanopore") %>%
+  column_to_rownames("tissue")
+
+# Find all the .cov.gz output files from Bismark
+files <- dir(path=input.dir,pattern="*.cov.gz")
+
+# Load all the RRBS methylation data plus CHM13 Nanopolish data
+bis <- read.bismark(c(paste0(input.dir, "/" ,files), "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/methylation_calls/all_readlengths/chm13_rrbs_meth.cov"),
+                    colData=meta,
+                    loci = t2t.cpg.loci,
+                    strandCollapse = TRUE,
+                    rmZeroCov = FALSE)
+```
+
+Ok - let's plot coverage. We want to see how coverage thresholds work.
+```{r coveragetidy}
+cov=as_tibble(getCoverage(bis)) %>%
+  mutate(index=row_number())
+
+filt.cov=cov[(rowSums(getCoverage(bis) >= 1) >= 30),]
+just.one=as.tibble(filt.cov[,1])
+ggplot(just.one, aes(x=`1st-PB1`))+geom_density()+xlim(0,50)+geom_vline(xintercept=1)
+```
+
+Filter data so we only look at CpGs with >=1 read in ~90% of samples (30/32)
+```{r}
+filt.bis=bis[(rowSums(getCoverage(bis) >= 1) >= 30),]
+```
+
+Grab methylation and filter out NAs while we are at it 
+```{r}
+set.seed(24)
+meth=na.omit(as.data.frame(getMeth(filt.bis,type="raw",what = "perBase")))
+```
+
+Calculate Euclidean distance between samples, cluster with hclust, and plot the dendrogram
+```{r}
+meth.dist=dist(t(meth))
+hc=hclust(meth.dist, "ward.D")
+
+dendro <- ggdendrogram(hc)
+ggsave(file.path(out_dir,"210428_dendro_gg.pdf"),plot = dendro)
+```

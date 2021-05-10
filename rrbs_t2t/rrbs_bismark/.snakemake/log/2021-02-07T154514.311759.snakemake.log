@@ -1,0 +1,35 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 60
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	methylation_extract
+	2
+
+[Sun Feb  7 15:45:14 2021]
+rule methylation_extract:
+    input: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000_bismark_bt2_pe.bam, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.CX_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.cytosine_context_summary.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.meth_call.log
+    jobid: 2
+    wildcards: sample=SRR951000
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 93 of /home/phook2/code/rrbs/rrbs_data_parse.smk:
+Job completed successfully, but some output files are missing. Missing files after 5 seconds:
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000_splitting_report.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.M-bias.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.spaces_removed.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.bedGraph.gz
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.bismark.cov.gz
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.CX_report.txt
+/kyber/Data/NGS/projects/rrbs_chm13/bsseq/CpGcalls/SRR951000.cytosine_context_summary.txt
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/phook2/code/rrbs/.snakemake/log/2021-02-07T154514.311759.snakemake.log

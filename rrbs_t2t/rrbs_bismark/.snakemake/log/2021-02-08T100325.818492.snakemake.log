@@ -1,0 +1,873 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 60
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	25	bismark_align_pe
+	44	methylation_extract
+	70
+
+[Mon Feb  8 10:03:26 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/SRR951011_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/CpG_context_SRR951011_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/Non_CpG_context_SRR951011_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/CpG_context_SRR951011_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/Non_CpG_context_SRR951011_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011.meth_call.log
+    jobid: 3
+    wildcards: sample=SRR951011
+
+
+[Mon Feb  8 10:03:26 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951009_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951009_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/SRR951009_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/SRR951009_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/SRR951009.align.log
+    jobid: 27
+    wildcards: sample=SRR951009
+    threads: 4
+
+
+[Mon Feb  8 10:03:26 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/SRR950994_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/CpG_context_SRR950994_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/Non_CpG_context_SRR950994_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/CpG_context_SRR950994_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/Non_CpG_context_SRR950994_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994.meth_call.log
+    jobid: 68
+    wildcards: sample=SRR950994
+
+
+[Mon Feb  8 10:03:26 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/SRR950982_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/CpG_context_SRR950982_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/Non_CpG_context_SRR950982_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/CpG_context_SRR950982_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/Non_CpG_context_SRR950982_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982.meth_call.log
+    jobid: 71
+    wildcards: sample=SRR950982
+
+
+[Mon Feb  8 10:03:26 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/SRR950995_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/CpG_context_SRR950995_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/Non_CpG_context_SRR950995_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/CpG_context_SRR950995_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/Non_CpG_context_SRR950995_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995.meth_call.log
+    jobid: 83
+    wildcards: sample=SRR950995
+
+
+[Mon Feb  8 10:03:26 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/SRR950979_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/CpG_context_SRR950979_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/Non_CpG_context_SRR950979_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/CpG_context_SRR950979_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/Non_CpG_context_SRR950979_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979.meth_call.log
+    jobid: 84
+    wildcards: sample=SRR950979
+
+
+[Mon Feb  8 10:03:26 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951019_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951019_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/SRR951019_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/SRR951019_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/SRR951019.align.log
+    jobid: 107
+    wildcards: sample=SRR951019
+    threads: 4
+
+
+[Mon Feb  8 10:03:26 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/SRR950976_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/CpG_context_SRR950976_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/Non_CpG_context_SRR950976_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/CpG_context_SRR950976_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/Non_CpG_context_SRR950976_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976.meth_call.log
+    jobid: 90
+    wildcards: sample=SRR950976
+
+
+[Mon Feb  8 10:03:26 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951016_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951016_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/SRR951016_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/SRR951016_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/SRR951016.align.log
+    jobid: 93
+    wildcards: sample=SRR951016
+    threads: 4
+
+
+[Mon Feb  8 10:03:26 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950990_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950990_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/SRR950990_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/SRR950990_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/SRR950990.align.log
+    jobid: 99
+    wildcards: sample=SRR950990
+    threads: 4
+
+
+[Mon Feb  8 10:03:27 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/SRR951003_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/CpG_context_SRR951003_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/Non_CpG_context_SRR951003_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/CpG_context_SRR951003_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/Non_CpG_context_SRR951003_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003.meth_call.log
+    jobid: 36
+    wildcards: sample=SRR951003
+
+
+[Mon Feb  8 10:03:27 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/SRR951004_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/CpG_context_SRR951004_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/Non_CpG_context_SRR951004_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/CpG_context_SRR951004_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/Non_CpG_context_SRR951004_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004.meth_call.log
+    jobid: 38
+    wildcards: sample=SRR951004
+
+
+[Mon Feb  8 10:03:27 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/SRR951018_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/CpG_context_SRR951018_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/Non_CpG_context_SRR951018_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/CpG_context_SRR951018_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/Non_CpG_context_SRR951018_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018.meth_call.log
+    jobid: 40
+    wildcards: sample=SRR951018
+
+
+[Mon Feb  8 10:03:27 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950977_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950977_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/SRR950977_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/SRR950977_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/SRR950977.align.log
+    jobid: 43
+    wildcards: sample=SRR950977
+    threads: 4
+
+
+[Mon Feb  8 10:03:27 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/SRR951017_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/CpG_context_SRR951017_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/Non_CpG_context_SRR951017_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/CpG_context_SRR951017_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/Non_CpG_context_SRR951017_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017.meth_call.log
+    jobid: 44
+    wildcards: sample=SRR951017
+
+
+[Mon Feb  8 10:03:27 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950981_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950981_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/SRR950981_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/SRR950981_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/SRR950981.align.log
+    jobid: 110
+    wildcards: sample=SRR950981
+    threads: 4
+
+
+[Mon Feb  8 10:03:27 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/SRR951006_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/CpG_context_SRR951006_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/Non_CpG_context_SRR951006_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/CpG_context_SRR951006_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/Non_CpG_context_SRR951006_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006.meth_call.log
+    jobid: 111
+    wildcards: sample=SRR951006
+
+
+[Mon Feb  8 10:03:27 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950991_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950991_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/SRR950991_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/SRR950991_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/SRR950991.align.log
+    jobid: 47
+    wildcards: sample=SRR950991
+    threads: 4
+
+
+[Mon Feb  8 10:03:27 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951010_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951010_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/SRR951010_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/SRR951010_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/SRR951010.align.log
+    jobid: 117
+    wildcards: sample=SRR951010
+    threads: 4
+
+
+[Mon Feb  8 10:03:27 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950983_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950983_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/SRR950983_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/SRR950983_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/SRR950983.align.log
+    jobid: 126
+    wildcards: sample=SRR950983
+    threads: 4
+
+
+[Mon Feb  8 10:03:28 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950992_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950992_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/SRR950992_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/SRR950992_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/SRR950992.align.log
+    jobid: 52
+    wildcards: sample=SRR950992
+    threads: 4
+
+
+[Mon Feb  8 10:03:28 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950993_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950993_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/SRR950993_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/SRR950993_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/SRR950993.align.log
+    jobid: 127
+    wildcards: sample=SRR950993
+    threads: 4
+
+
+[Mon Feb  8 10:03:28 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950978_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950978_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/SRR950978_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/SRR950978_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/SRR950978.align.log
+    jobid: 58
+    wildcards: sample=SRR950978
+    threads: 4
+
+
+[Mon Feb  8 10:03:28 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/SRR950997_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/CpG_context_SRR950997_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/Non_CpG_context_SRR950997_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/CpG_context_SRR950997_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/Non_CpG_context_SRR950997_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997.meth_call.log
+    jobid: 59
+    wildcards: sample=SRR950997
+
+[Mon Feb  8 15:30:01 2021]
+Finished job 107.
+1 of 70 steps (1%) done
+
+[Mon Feb  8 15:30:01 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/SRR951015_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015.meth_call.log
+    jobid: 12
+    wildcards: sample=SRR951015
+
+
+[Mon Feb  8 15:30:02 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/SRR950999_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/CpG_context_SRR950999_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/Non_CpG_context_SRR950999_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/CpG_context_SRR950999_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/Non_CpG_context_SRR950999_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999.meth_call.log
+    jobid: 32
+    wildcards: sample=SRR950999
+
+
+[Mon Feb  8 15:30:04 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/SRR950985_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/CpG_context_SRR950985_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/Non_CpG_context_SRR950985_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/CpG_context_SRR950985_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/Non_CpG_context_SRR950985_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985.meth_call.log
+    jobid: 103
+    wildcards: sample=SRR950985
+
+
+[Mon Feb  8 15:30:05 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/SRR951019_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/CpG_context_SRR951019_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/Non_CpG_context_SRR951019_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/CpG_context_SRR951019_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/Non_CpG_context_SRR951019_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019.meth_call.log
+    jobid: 132
+    wildcards: sample=SRR951019
+
+[Mon Feb  8 15:55:27 2021]
+Finished job 59.
+2 of 70 steps (3%) done
+
+[Mon Feb  8 15:55:27 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/SRR951008_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008.meth_call.log
+    jobid: 94
+    wildcards: sample=SRR951008
+
+[Mon Feb  8 16:03:17 2021]
+Finished job 90.
+3 of 70 steps (4%) done
+
+[Mon Feb  8 16:03:17 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/SRR951012_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/CpG_context_SRR951012_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/Non_CpG_context_SRR951012_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/CpG_context_SRR951012_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/Non_CpG_context_SRR951012_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012.meth_call.log
+    jobid: 80
+    wildcards: sample=SRR951012
+
+[Mon Feb  8 16:03:38 2021]
+Finished job 99.
+4 of 70 steps (6%) done
+
+[Mon Feb  8 16:03:38 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/SRR950990_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/CpG_context_SRR950990_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/Non_CpG_context_SRR950990_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/CpG_context_SRR950990_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/Non_CpG_context_SRR950990_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990.meth_call.log
+    jobid: 77
+    wildcards: sample=SRR950990
+
+
+[Mon Feb  8 16:03:40 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/SRR951001_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001.meth_call.log
+    jobid: 112
+    wildcards: sample=SRR951001
+
+
+[Mon Feb  8 16:03:41 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000.meth_call.log
+    jobid: 35
+    wildcards: sample=SRR951000
+
+[Mon Feb  8 16:13:02 2021]
+Finished job 127.
+5 of 70 steps (7%) done
+
+[Mon Feb  8 16:13:02 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/SRR950993_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/CpG_context_SRR950993_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/Non_CpG_context_SRR950993_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/CpG_context_SRR950993_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/Non_CpG_context_SRR950993_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993.meth_call.log
+    jobid: 96
+    wildcards: sample=SRR950993
+
+
+[Mon Feb  8 16:13:03 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950980_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950980_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/SRR950980_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/SRR950980_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/SRR950980.align.log
+    jobid: 37
+    wildcards: sample=SRR950980
+    threads: 4
+
+[Mon Feb  8 16:21:45 2021]
+Finished job 126.
+6 of 70 steps (9%) done
+
+[Mon Feb  8 16:21:45 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/SRR950983_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/CpG_context_SRR950983_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/Non_CpG_context_SRR950983_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/CpG_context_SRR950983_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/Non_CpG_context_SRR950983_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983.meth_call.log
+    jobid: 24
+    wildcards: sample=SRR950983
+
+[Mon Feb  8 16:24:22 2021]
+Finished job 27.
+7 of 70 steps (10%) done
+
+[Mon Feb  8 16:24:22 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951002_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951002_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/SRR951002_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/SRR951002_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/SRR951002.align.log
+    jobid: 1
+    wildcards: sample=SRR951002
+    threads: 4
+
+
+[Mon Feb  8 16:24:23 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/SRR951009_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/CpG_context_SRR951009_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/Non_CpG_context_SRR951009_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/CpG_context_SRR951009_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/Non_CpG_context_SRR951009_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009.meth_call.log
+    jobid: 113
+    wildcards: sample=SRR951009
+
+[Mon Feb  8 16:24:52 2021]
+Finished job 117.
+8 of 70 steps (11%) done
+
+[Mon Feb  8 16:24:52 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950988_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950988_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/SRR950988_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/SRR950988_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/SRR950988.align.log
+    jobid: 66
+    wildcards: sample=SRR950988
+    threads: 4
+
+
+[Mon Feb  8 16:24:53 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/SRR951010_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/CpG_context_SRR951010_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/Non_CpG_context_SRR951010_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/CpG_context_SRR951010_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/Non_CpG_context_SRR951010_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010.meth_call.log
+    jobid: 91
+    wildcards: sample=SRR951010
+
+[Mon Feb  8 16:29:45 2021]
+Finished job 52.
+9 of 70 steps (13%) done
+
+[Mon Feb  8 16:29:45 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/SRR950992_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/CpG_context_SRR950992_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/Non_CpG_context_SRR950992_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/CpG_context_SRR950992_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/Non_CpG_context_SRR950992_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992.meth_call.log
+    jobid: 26
+    wildcards: sample=SRR950992
+
+
+[Mon Feb  8 16:29:47 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950987_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950987_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/SRR950987_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/SRR950987_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/SRR950987.align.log
+    jobid: 29
+    wildcards: sample=SRR950987
+    threads: 4
+
+[Mon Feb  8 16:31:37 2021]
+Finished job 93.
+10 of 70 steps (14%) done
+
+[Mon Feb  8 16:31:37 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/SRR951016_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/CpG_context_SRR951016_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/Non_CpG_context_SRR951016_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/CpG_context_SRR951016_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/Non_CpG_context_SRR951016_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016.meth_call.log
+    jobid: 124
+    wildcards: sample=SRR951016
+
+[Mon Feb  8 16:32:28 2021]
+Finished job 43.
+11 of 70 steps (16%) done
+
+[Mon Feb  8 16:32:28 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/SRR950977_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/CpG_context_SRR950977_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/Non_CpG_context_SRR950977_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/CpG_context_SRR950977_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/Non_CpG_context_SRR950977_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977.meth_call.log
+    jobid: 4
+    wildcards: sample=SRR950977
+
+
+[Mon Feb  8 16:32:29 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950989_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950989_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/SRR950989_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/SRR950989_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/SRR950989.align.log
+    jobid: 23
+    wildcards: sample=SRR950989
+    threads: 4
+
+[Mon Feb  8 16:37:39 2021]
+Finished job 47.
+12 of 70 steps (17%) done
+
+[Mon Feb  8 16:37:40 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/SRR950991_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/CpG_context_SRR950991_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/Non_CpG_context_SRR950991_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/CpG_context_SRR950991_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/Non_CpG_context_SRR950991_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991.meth_call.log
+    jobid: 5
+    wildcards: sample=SRR950991
+
+
+[Mon Feb  8 16:37:41 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951014_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951014_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/SRR951014_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/SRR951014_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/SRR951014.align.log
+    jobid: 73
+    wildcards: sample=SRR951014
+    threads: 4
+
+[Mon Feb  8 16:49:02 2021]
+Finished job 58.
+13 of 70 steps (19%) done
+
+[Mon Feb  8 16:49:03 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/SRR950978_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/CpG_context_SRR950978_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/Non_CpG_context_SRR950978_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/CpG_context_SRR950978_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/Non_CpG_context_SRR950978_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978.meth_call.log
+    jobid: 19
+    wildcards: sample=SRR950978
+
+
+[Mon Feb  8 16:49:04 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951005_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951005_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/SRR951005_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/SRR951005_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/SRR951005.align.log
+    jobid: 131
+    wildcards: sample=SRR951005
+    threads: 4
+
+[Mon Feb  8 17:09:21 2021]
+Finished job 110.
+14 of 70 steps (20%) done
+
+[Mon Feb  8 17:09:21 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/SRR950981_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/CpG_context_SRR950981_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/Non_CpG_context_SRR950981_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/CpG_context_SRR950981_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/Non_CpG_context_SRR950981_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981.meth_call.log
+    jobid: 65
+    wildcards: sample=SRR950981
+
+[Mon Feb  8 17:42:14 2021]
+Finished job 68.
+15 of 70 steps (21%) done
+
+[Mon Feb  8 17:42:14 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951007_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951007_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/SRR951007_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/SRR951007_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/SRR951007.align.log
+    jobid: 75
+    wildcards: sample=SRR951007
+    threads: 4
+
+[Mon Feb  8 18:18:36 2021]
+Finished job 83.
+16 of 70 steps (23%) done
+[Mon Feb  8 18:34:55 2021]
+Finished job 131.
+17 of 70 steps (24%) done
+
+[Mon Feb  8 18:34:55 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/SRR951005_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/CpG_context_SRR951005_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/Non_CpG_context_SRR951005_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/CpG_context_SRR951005_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/Non_CpG_context_SRR951005_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005.meth_call.log
+    jobid: 85
+    wildcards: sample=SRR951005
+
+
+[Mon Feb  8 18:34:57 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950996_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950996_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996.align.log
+    jobid: 97
+    wildcards: sample=SRR950996
+    threads: 4
+
+[Mon Feb  8 18:48:37 2021]
+Finished job 84.
+18 of 70 steps (26%) done
+[Mon Feb  8 18:52:56 2021]
+Finished job 73.
+19 of 70 steps (27%) done
+
+[Mon Feb  8 18:52:56 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/SRR951014_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/CpG_context_SRR951014_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/Non_CpG_context_SRR951014_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/CpG_context_SRR951014_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/Non_CpG_context_SRR951014_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014.meth_call.log
+    jobid: 98
+    wildcards: sample=SRR951014
+
+
+[Mon Feb  8 18:52:57 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951013_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951013_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/SRR951013_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/SRR951013_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/SRR951013.align.log
+    jobid: 120
+    wildcards: sample=SRR951013
+    threads: 4
+
+[Mon Feb  8 18:53:06 2021]
+Finished job 29.
+20 of 70 steps (29%) done
+
+[Mon Feb  8 18:53:06 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/SRR950987_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/CpG_context_SRR950987_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/Non_CpG_context_SRR950987_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/CpG_context_SRR950987_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/Non_CpG_context_SRR950987_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987.meth_call.log
+    jobid: 53
+    wildcards: sample=SRR950987
+
+[Mon Feb  8 18:58:21 2021]
+Finished job 66.
+21 of 70 steps (30%) done
+
+[Mon Feb  8 18:58:21 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950986_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950986_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986.align.log
+    jobid: 74
+    wildcards: sample=SRR950986
+    threads: 4
+
+
+[Mon Feb  8 18:58:23 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/SRR950988_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/CpG_context_SRR950988_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/Non_CpG_context_SRR950988_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/CpG_context_SRR950988_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/Non_CpG_context_SRR950988_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988.meth_call.log
+    jobid: 109
+    wildcards: sample=SRR950988
+
+[Mon Feb  8 19:08:35 2021]
+Finished job 36.
+22 of 70 steps (31%) done
+[Mon Feb  8 19:16:16 2021]
+Finished job 23.
+23 of 70 steps (33%) done
+
+[Mon Feb  8 19:16:16 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950998_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950998_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998.align.log
+    jobid: 108
+    wildcards: sample=SRR950998
+    threads: 4
+
+
+[Mon Feb  8 19:16:17 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/SRR950989_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/CpG_context_SRR950989_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/Non_CpG_context_SRR950989_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/CpG_context_SRR950989_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/Non_CpG_context_SRR950989_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989.meth_call.log
+    jobid: 60
+    wildcards: sample=SRR950989
+
+[Mon Feb  8 19:17:05 2021]
+Finished job 1.
+24 of 70 steps (34%) done
+
+[Mon Feb  8 19:17:05 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/SRR951002_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/CpG_context_SRR951002_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/Non_CpG_context_SRR951002_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/CpG_context_SRR951002_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/Non_CpG_context_SRR951002_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002.meth_call.log
+    jobid: 42
+    wildcards: sample=SRR951002
+
+
+[Mon Feb  8 19:17:06 2021]
+rule bismark_align_pe:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950984_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950984_val_2.fq.gz, /home/phook2/code/rrbs/chm13
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984_bismark_bt2_PE_report.txt
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984.align.log
+    jobid: 57
+    wildcards: sample=SRR950984
+    threads: 4
+
+[Mon Feb  8 19:21:12 2021]
+Finished job 75.
+25 of 70 steps (36%) done
+
+[Mon Feb  8 19:21:12 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/SRR951007_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/CpG_context_SRR951007_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/Non_CpG_context_SRR951007_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/CpG_context_SRR951007_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/Non_CpG_context_SRR951007_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007.meth_call.log
+    jobid: 100
+    wildcards: sample=SRR951007
+
+[Mon Feb  8 19:39:28 2021]
+Finished job 111.
+26 of 70 steps (37%) done
+[Mon Feb  8 20:07:28 2021]
+Finished job 40.
+27 of 70 steps (39%) done
+[Mon Feb  8 20:11:11 2021]
+Finished job 97.
+28 of 70 steps (40%) done
+
+[Mon Feb  8 20:11:11 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996.meth_call.log
+    jobid: 21
+    wildcards: sample=SRR950996
+
+[Mon Feb  8 20:16:52 2021]
+Finished job 38.
+29 of 70 steps (41%) done
+[Mon Feb  8 20:16:59 2021]
+Finished job 74.
+30 of 70 steps (43%) done
+
+[Mon Feb  8 20:16:59 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986.meth_call.log
+    jobid: 101
+    wildcards: sample=SRR950986
+
+[Mon Feb  8 20:22:16 2021]
+Finished job 120.
+31 of 70 steps (44%) done
+
+[Mon Feb  8 20:22:16 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/SRR951013_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/CpG_context_SRR951013_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/Non_CpG_context_SRR951013_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/CpG_context_SRR951013_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/Non_CpG_context_SRR951013_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013.meth_call.log
+    jobid: 92
+    wildcards: sample=SRR951013
+
+[Mon Feb  8 20:22:29 2021]
+Finished job 3.
+32 of 70 steps (46%) done
+[Mon Feb  8 20:22:48 2021]
+Finished job 37.
+33 of 70 steps (47%) done
+
+[Mon Feb  8 20:22:48 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/SRR950980_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/CpG_context_SRR950980_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/Non_CpG_context_SRR950980_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/CpG_context_SRR950980_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/Non_CpG_context_SRR950980_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980.meth_call.log
+    jobid: 95
+    wildcards: sample=SRR950980
+
+[Mon Feb  8 20:26:02 2021]
+Finished job 57.
+34 of 70 steps (49%) done
+
+[Mon Feb  8 20:26:02 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984.meth_call.log
+    jobid: 50
+    wildcards: sample=SRR950984
+
+[Mon Feb  8 20:35:05 2021]
+Finished job 108.
+35 of 70 steps (50%) done
+
+[Mon Feb  8 20:35:05 2021]
+rule methylation_extract:
+    input: /home/phook2/code/rrbs/chm13, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998_bismark_bt2_pe.bam
+    output: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.CX_report.txt.gz
+    log: /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998.meth_call.log
+    jobid: 63
+    wildcards: sample=SRR950998
+
+[Mon Feb  8 20:40:05 2021]
+Finished job 112.
+36 of 70 steps (51%) done
+[Mon Feb  8 20:43:30 2021]
+Finished job 12.
+37 of 70 steps (53%) done
+[Mon Feb  8 21:21:03 2021]
+Finished job 35.
+38 of 70 steps (54%) done
+[Mon Feb  8 21:23:28 2021]
+Finished job 32.
+39 of 70 steps (56%) done
+[Mon Feb  8 21:27:54 2021]
+Finished job 80.
+40 of 70 steps (57%) done
+[Mon Feb  8 21:41:33 2021]
+Finished job 94.
+41 of 70 steps (59%) done
+[Mon Feb  8 21:52:49 2021]
+Finished job 132.
+42 of 70 steps (60%) done
+[Mon Feb  8 22:05:24 2021]
+Finished job 103.
+43 of 70 steps (61%) done
+[Mon Feb  8 22:13:28 2021]
+Finished job 71.
+44 of 70 steps (63%) done
+[Mon Feb  8 22:55:33 2021]
+Finished job 44.
+45 of 70 steps (64%) done
+[Mon Feb  8 22:55:56 2021]
+Finished job 50.
+46 of 70 steps (66%) done
+[Mon Feb  8 22:57:18 2021]
+Finished job 21.
+47 of 70 steps (67%) done
+[Mon Feb  8 23:04:58 2021]
+Finished job 92.
+48 of 70 steps (69%) done
+[Mon Feb  8 23:11:09 2021]
+Finished job 101.
+49 of 70 steps (70%) done
+[Mon Feb  8 23:17:07 2021]
+Finished job 63.
+50 of 70 steps (71%) done
+[Mon Feb  8 23:42:28 2021]
+Finished job 98.
+51 of 70 steps (73%) done
+[Mon Feb  8 23:53:58 2021]
+Finished job 85.
+52 of 70 steps (74%) done
+[Tue Feb  9 00:02:53 2021]
+Finished job 60.
+53 of 70 steps (76%) done
+[Tue Feb  9 00:14:55 2021]
+Finished job 96.
+54 of 70 steps (77%) done
+[Tue Feb  9 00:24:16 2021]
+Finished job 53.
+55 of 70 steps (79%) done
+[Tue Feb  9 00:24:47 2021]
+Finished job 124.
+56 of 70 steps (80%) done
+[Tue Feb  9 00:27:52 2021]
+Finished job 100.
+57 of 70 steps (81%) done
+[Tue Feb  9 00:28:39 2021]
+Finished job 109.
+58 of 70 steps (83%) done
+[Tue Feb  9 00:51:18 2021]
+Finished job 77.
+59 of 70 steps (84%) done
+[Tue Feb  9 01:03:33 2021]
+Finished job 65.
+60 of 70 steps (86%) done
+[Tue Feb  9 01:05:07 2021]
+Finished job 19.
+61 of 70 steps (87%) done
+[Tue Feb  9 01:06:00 2021]
+Finished job 4.
+62 of 70 steps (89%) done
+[Tue Feb  9 01:12:46 2021]
+Finished job 26.
+63 of 70 steps (90%) done
+[Tue Feb  9 01:19:13 2021]
+Finished job 42.
+64 of 70 steps (91%) done
+[Tue Feb  9 01:23:31 2021]
+Finished job 91.
+65 of 70 steps (93%) done
+[Tue Feb  9 01:23:49 2021]
+Finished job 24.
+66 of 70 steps (94%) done
+[Tue Feb  9 01:26:39 2021]
+Finished job 5.
+67 of 70 steps (96%) done
+[Tue Feb  9 01:27:06 2021]
+Finished job 95.
+68 of 70 steps (97%) done
+[Tue Feb  9 01:29:38 2021]
+Finished job 113.
+69 of 70 steps (99%) done
+
+[Tue Feb  9 01:29:38 2021]
+localrule all:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951001_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950976_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950977_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950978_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950979_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950980_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950981_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950982_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950983_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950984_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950985_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950986_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950987_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950988_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950989_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950990_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950991_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950992_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950993_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950994_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950995_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950996_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950997_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950998_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950999_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951002_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951003_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951004_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951005_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951006_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951007_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951008_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951009_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951010_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951011_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951012_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951013_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951014_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951015_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951016_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951017_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951018_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951019_pass_1.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951001_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950976_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950977_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950978_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950979_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950980_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950981_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950982_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950983_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950984_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950985_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950986_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950987_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950988_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950989_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950990_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950991_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950992_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950993_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950994_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950995_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950996_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950997_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950998_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR950999_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951002_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951003_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951004_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951005_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951006_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951007_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951008_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951009_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951010_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951011_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951012_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951013_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951014_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951015_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951016_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951017_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951018_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951019_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951001_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950976_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950977_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950978_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950979_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950980_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950981_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950982_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950983_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950984_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950985_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950986_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950987_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950988_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950989_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950990_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950991_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950992_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950993_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950994_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950995_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950996_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950997_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950998_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950999_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951002_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951003_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951004_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951005_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951006_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951007_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951008_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951009_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951010_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951011_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951012_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951013_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951014_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951015_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951016_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951017_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951018_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951019_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951001_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950976_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950977_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950978_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950979_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950980_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950981_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950982_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950983_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950984_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950985_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950986_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950987_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950988_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950989_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950990_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950991_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950992_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950993_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950994_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950995_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950996_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950997_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950998_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR950999_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951002_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951003_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951004_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951005_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951006_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951007_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951008_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951009_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951010_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951011_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951012_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951013_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951014_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951015_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951016_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951017_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951018_val_2.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951019_val_2.fq.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/SRR951001_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/SRR950976_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/SRR950977_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/SRR950978_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/SRR950979_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/SRR950980_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/SRR950981_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/SRR950982_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/SRR950983_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/SRR950985_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/SRR950987_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/SRR950988_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/SRR950989_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/SRR950990_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/SRR950991_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/SRR950992_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/SRR950993_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/SRR950994_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/SRR950995_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/SRR950997_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/SRR950999_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/SRR951002_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/SRR951003_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/SRR951004_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/SRR951005_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/SRR951006_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/SRR951007_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/SRR951008_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/SRR951009_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/SRR951010_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/SRR951011_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/SRR951012_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/SRR951013_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/SRR951014_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/SRR951015_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/SRR951016_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/SRR951017_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/SRR951018_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/SRR951019_bismark_bt2_pe.bam, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/SRR951000_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/SRR951001_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/SRR950976_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/SRR950977_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/SRR950978_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/SRR950979_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/SRR950980_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/SRR950981_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/SRR950982_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/SRR950983_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/SRR950984_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/SRR950985_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/SRR950986_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/SRR950987_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/SRR950988_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/SRR950989_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/SRR950990_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/SRR950991_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/SRR950992_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/SRR950993_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/SRR950994_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/SRR950995_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/SRR950996_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/SRR950997_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/SRR950998_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/SRR950999_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/SRR951002_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/SRR951003_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/SRR951004_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/SRR951005_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/SRR951006_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/SRR951007_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/SRR951008_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/SRR951009_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/SRR951010_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/SRR951011_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/SRR951012_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/SRR951013_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/SRR951014_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/SRR951015_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/SRR951016_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/SRR951017_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/SRR951018_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/SRR951019_bismark_bt2_PE_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/CpG_context_SRR950976_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/CpG_context_SRR950977_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/CpG_context_SRR950978_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/CpG_context_SRR950979_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/CpG_context_SRR950980_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/CpG_context_SRR950981_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/CpG_context_SRR950982_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/CpG_context_SRR950983_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/CpG_context_SRR950985_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/CpG_context_SRR950987_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/CpG_context_SRR950988_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/CpG_context_SRR950989_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/CpG_context_SRR950990_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/CpG_context_SRR950991_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/CpG_context_SRR950992_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/CpG_context_SRR950993_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/CpG_context_SRR950994_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/CpG_context_SRR950995_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/CpG_context_SRR950997_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/CpG_context_SRR950999_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/CpG_context_SRR951002_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/CpG_context_SRR951003_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/CpG_context_SRR951004_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/CpG_context_SRR951005_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/CpG_context_SRR951006_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/CpG_context_SRR951007_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/CpG_context_SRR951009_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/CpG_context_SRR951010_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/CpG_context_SRR951011_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/CpG_context_SRR951012_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/CpG_context_SRR951013_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/CpG_context_SRR951014_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/CpG_context_SRR951016_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/CpG_context_SRR951017_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/CpG_context_SRR951018_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/CpG_context_SRR951019_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/Non_CpG_context_SRR950976_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/Non_CpG_context_SRR950977_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/Non_CpG_context_SRR950978_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/Non_CpG_context_SRR950979_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/Non_CpG_context_SRR950980_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/Non_CpG_context_SRR950981_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/Non_CpG_context_SRR950982_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/Non_CpG_context_SRR950983_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/Non_CpG_context_SRR950985_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/Non_CpG_context_SRR950987_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/Non_CpG_context_SRR950988_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/Non_CpG_context_SRR950989_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/Non_CpG_context_SRR950990_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/Non_CpG_context_SRR950991_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/Non_CpG_context_SRR950992_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/Non_CpG_context_SRR950993_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/Non_CpG_context_SRR950994_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/Non_CpG_context_SRR950995_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/Non_CpG_context_SRR950997_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/Non_CpG_context_SRR950999_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/Non_CpG_context_SRR951002_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/Non_CpG_context_SRR951003_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/Non_CpG_context_SRR951004_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/Non_CpG_context_SRR951005_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/Non_CpG_context_SRR951006_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/Non_CpG_context_SRR951007_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/Non_CpG_context_SRR951009_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/Non_CpG_context_SRR951010_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/Non_CpG_context_SRR951011_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/Non_CpG_context_SRR951012_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/Non_CpG_context_SRR951013_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/Non_CpG_context_SRR951014_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/Non_CpG_context_SRR951016_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/Non_CpG_context_SRR951017_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/Non_CpG_context_SRR951018_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/Non_CpG_context_SRR951019_bismark_bt2_pe.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe_splitting_report.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.M-bias.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/CpG_context_SRR950976_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/CpG_context_SRR950977_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/CpG_context_SRR950978_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/CpG_context_SRR950979_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/CpG_context_SRR950980_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/CpG_context_SRR950981_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/CpG_context_SRR950982_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/CpG_context_SRR950983_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/CpG_context_SRR950985_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/CpG_context_SRR950987_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/CpG_context_SRR950988_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/CpG_context_SRR950989_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/CpG_context_SRR950990_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/CpG_context_SRR950991_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/CpG_context_SRR950992_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/CpG_context_SRR950993_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/CpG_context_SRR950994_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/CpG_context_SRR950995_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/CpG_context_SRR950997_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/CpG_context_SRR950999_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/CpG_context_SRR951002_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/CpG_context_SRR951003_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/CpG_context_SRR951004_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/CpG_context_SRR951005_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/CpG_context_SRR951006_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/CpG_context_SRR951007_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/CpG_context_SRR951009_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/CpG_context_SRR951010_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/CpG_context_SRR951011_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/CpG_context_SRR951012_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/CpG_context_SRR951013_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/CpG_context_SRR951014_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/CpG_context_SRR951016_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/CpG_context_SRR951017_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/CpG_context_SRR951018_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/CpG_context_SRR951019_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/Non_CpG_context_SRR951000_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/Non_CpG_context_SRR951001_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/Non_CpG_context_SRR950976_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/Non_CpG_context_SRR950977_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/Non_CpG_context_SRR950978_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/Non_CpG_context_SRR950979_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/Non_CpG_context_SRR950980_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/Non_CpG_context_SRR950981_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/Non_CpG_context_SRR950982_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/Non_CpG_context_SRR950983_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/Non_CpG_context_SRR950984_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/Non_CpG_context_SRR950985_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/Non_CpG_context_SRR950986_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/Non_CpG_context_SRR950987_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/Non_CpG_context_SRR950988_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/Non_CpG_context_SRR950989_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/Non_CpG_context_SRR950990_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/Non_CpG_context_SRR950991_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/Non_CpG_context_SRR950992_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/Non_CpG_context_SRR950993_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/Non_CpG_context_SRR950994_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/Non_CpG_context_SRR950995_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/Non_CpG_context_SRR950996_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/Non_CpG_context_SRR950997_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/Non_CpG_context_SRR950998_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/Non_CpG_context_SRR950999_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/Non_CpG_context_SRR951002_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/Non_CpG_context_SRR951003_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/Non_CpG_context_SRR951004_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/Non_CpG_context_SRR951005_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/Non_CpG_context_SRR951006_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/Non_CpG_context_SRR951007_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/Non_CpG_context_SRR951008_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/Non_CpG_context_SRR951009_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/Non_CpG_context_SRR951010_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/Non_CpG_context_SRR951011_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/Non_CpG_context_SRR951012_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/Non_CpG_context_SRR951013_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/Non_CpG_context_SRR951014_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/Non_CpG_context_SRR951015_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/Non_CpG_context_SRR951016_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/Non_CpG_context_SRR951017_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/Non_CpG_context_SRR951018_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/Non_CpG_context_SRR951019_bismark_bt2_pe.txt.gz.spaces_removed.txt, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.bedGraph.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.bismark.cov.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951000/CpGcalls/SRR951000_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951001/CpGcalls/SRR951001_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950976/CpGcalls/SRR950976_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950977/CpGcalls/SRR950977_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950978/CpGcalls/SRR950978_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950979/CpGcalls/SRR950979_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950980/CpGcalls/SRR950980_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950981/CpGcalls/SRR950981_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950982/CpGcalls/SRR950982_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950983/CpGcalls/SRR950983_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950984/CpGcalls/SRR950984_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950985/CpGcalls/SRR950985_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950986/CpGcalls/SRR950986_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950987/CpGcalls/SRR950987_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950988/CpGcalls/SRR950988_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950989/CpGcalls/SRR950989_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950990/CpGcalls/SRR950990_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950991/CpGcalls/SRR950991_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950992/CpGcalls/SRR950992_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950993/CpGcalls/SRR950993_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950994/CpGcalls/SRR950994_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950995/CpGcalls/SRR950995_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950996/CpGcalls/SRR950996_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950997/CpGcalls/SRR950997_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950998/CpGcalls/SRR950998_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR950999/CpGcalls/SRR950999_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951002/CpGcalls/SRR951002_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951003/CpGcalls/SRR951003_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951004/CpGcalls/SRR951004_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951005/CpGcalls/SRR951005_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951006/CpGcalls/SRR951006_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951007/CpGcalls/SRR951007_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951008/CpGcalls/SRR951008_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951009/CpGcalls/SRR951009_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951010/CpGcalls/SRR951010_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951011/CpGcalls/SRR951011_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951012/CpGcalls/SRR951012_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951013/CpGcalls/SRR951013_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951014/CpGcalls/SRR951014_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951015/CpGcalls/SRR951015_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951016/CpGcalls/SRR951016_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951017/CpGcalls/SRR951017_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951018/CpGcalls/SRR951018_bismark_bt2_pe.CX_report.txt.gz, /kyber/Data/NGS/projects/rrbs_chm13/bsseq/SRR951019/CpGcalls/SRR951019_bismark_bt2_pe.CX_report.txt.gz
+    jobid: 0
+
+[Tue Feb  9 01:29:38 2021]
+Finished job 0.
+70 of 70 steps (100%) done
+Complete log: /home/phook2/code/rrbs/.snakemake/log/2021-02-08T100325.818492.snakemake.log

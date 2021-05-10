@@ -1,0 +1,29 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 60
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	bismark_align_pe
+	1	trim_adaptors
+	3
+
+[Sat Feb  6 18:52:33 2021]
+rule trim_adaptors:
+    input: /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_2.fastq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_1.fastq.gz
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_2.fq.gz
+    jobid: 1
+    wildcards: sample=SRR951000
+
+Terminating processes on user request, this might take some time.
+[Sat Feb  6 18:54:57 2021]
+Error in rule trim_adaptors:
+    jobid: 1
+    output: /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_1.fq.gz, /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed/SRR951000_val_2.fq.gz
+    shell:
+        [ -e /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed ]||mkdir -p /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed && trim_galore 	  --paired 	  --rrbs 	  --basename SRR951000 	  --gzip   	  -o /mithril/Data/NGS/projects/rrbs_chm13/fastq/trimmed 	  /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_1.fastq.gz /mithril/Data/NGS/projects/rrbs_chm13/fastq/SRR951000_pass_2.fastq.gz
+   
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Complete log: /home/phook2/code/rrbs/.snakemake/log/2021-02-06T185233.169416.snakemake.log
