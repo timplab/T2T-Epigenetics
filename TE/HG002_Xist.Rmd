@@ -1,0 +1,145 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+library(knitr)
+library(tidyverse)
+library(bsseq)
+library(Biostrings)
+library(ggplot2)
+library(png)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+options(knitr.duplicate.label = 'allow')
+source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
+library("ggsci")
+source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+library(mclust)
+library(Repitools)
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/allele_specific_meth/xist"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+x <- read_tsv("/mithril/Data/T2T_Data/hg002-chrX_RM-polish_withLength.bed", col_names = c("chr", "start", "end", "name", "len", "direction", "rep_fam", "rep_class", "perc_div"))
+```
+
+```{r}
+chr="chrX"
+hg002_meth <- read_csv(paste0(dat, "/HG002/nanonome/methylation_calls/pooled/HG002_nanonome_chrX_CpGmethylation_ByCall.csv")) %>%
+  ungroup() %>%
+  group_by(start) %>%
+  summarise(num_meth = sum(mcall == 1), num_unmeth = sum(mcall == 0)) %>%
+  ungroup()  %>%
+  mutate(freq=(num_meth/(num_meth+num_unmeth))) %>%
+  mutate(chr = "chrX", start = start, end = start, freq=freq) 
+
+```
+
+```{r bis, echo=F}
+# each side of gene (Tsix-6639, Xist+2423)
+rstart=70351934-6639
+rend=70412484+2423
+
+xist_meth <- hg002_meth %>% filter(start > rstart) %>%
+  filter(end < rend) %>%
+  mutate(smooth = rollmean(freq, 5, fill = NA))
+
+meth <- ggplot(xist_meth, aes(x = (start/1e6), y= smooth))+geom_line(size =1) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 12)+ylim(0,1)+xlim(rstart/1e6,rend/1e6)+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+
+```
+
+```{r}
+
+cgcalls <- read_csv(paste0(dat, "/HG002/nanonome/methylation_calls/pooled/HG002_nanonome_chrX_CpGmethylation_ByCall.csv"))
+
+reg = cgcalls %>%
+  dplyr::filter(start >= rstart) %>%
+  dplyr::filter(end <= rend)
+  
+
+cpg_runs <-getRuns(reg, maxGap = 150)
+ 
+
+cpg_runs.ordered <- order_reads(cpg_runs)
+  
+ cpg_runs <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+#ids <- order(sapply(seq_along(gcruns.list),function(i){length(unique(gcruns.list$qname))}))
+
+
+bis <- reg %>% 
+  group_by(chrom, start) %>%
+  summarise(meth_freq = mean(mcall), cov = n()) 
+
+meth <- ggplot(bis, aes(x = (start/1e6), y= meth_freq))+geom_smooth(size =1, se = F, method = "loess", span = .1)+ylim(0,1)+ theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.title.y=element_blank(), axis.title.x=element_blank(), panel.spacing = unit(2, "lines"))#+coord_cartesian(xlim=(c(37595000,37600000)))
+
+reps <- x %>%
+  filter(start > rstart) %>%
+  filter(end < rend)
+L1.plot <- ggplot(reps, aes(xmin = start, xmax = end, ymin=0, ymax=.1,fill = rep_class))+geom_rect()+ theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))+coord_cartesian(xlim=c(rstart, rend))+theme(legend.position = "bottom")
+
+
+g <- ggplot(cpg_runs,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax)) + geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80") + 
+    geom_rect(aes(fill = m))  +
+#    geom_vline(xintercept = 127638255, linetype == "dashed") +
+    scale_fill_manual(name = "State", values = meth_pal) + theme(axis.text.y = element_blank(),  legend.position= "bottom",axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))+geom_vline(xintercept = c(70380382,70412484), linetype = "dotted")+geom_vline(xintercept = c(70351934,70388962), linetype = "dotted")
+
+top_row <- plot_grid(meth,g, L1.plot,align="v", ncol=1,rel_heights = c(1/4,1/2, 1/4))
+top_row
+
+ggsave(
+  paste0(dat, "/TE/HG002_Xist2_0.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 10,
+)
+```
+
+```{r}
+
+reps.gr <- reps %>%
+  mutate(ID=row_number(), repstart=start, repend=end) %>%
+  GRanges()
+keepi <- findOverlaps(GRanges(xist_meth),reps.gr)
+freq.matched <- GRanges(xist_meth)[queryHits(keepi)]
+
+mcols(freq.matched) <- cbind.data.frame(
+    mcols(freq.matched),
+    mcols(reps.gr[subjectHits(keepi)]))
+
+rm_meth <- as.data.frame(freq.matched) %>%
+  group_by(ID, repstart, repend, rep_class) %>%
+#  mutate(start = min(start), end = max(end)) %>%
+  summarize(meth = mean(freq)) 
+
+meth2 <- ggplot(rm_meth, aes(xmin = repstart, xmax=repend,ymin=0, ymax = meth, fill = rep_class))+geom_rect(stat = "identity")+ylim(0,1)+theme(legend.position = "bottom")
+print(meth2)
+
+
+write.table(rm_meth,file="/mithril/Data/T2T_Data/HG002_Xist_TEmeth.tsv", quote=F, row.names = F, sep="\t")
+
+top_row <- plot_grid(g,meth2,align="v", ncol=1,rel_heights = c(1/2, 1/4))
+top_row
+
+ggsave(
+  paste0("/mithril/Data/T2T_Data/HG002_Xist2_1.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 10,
+)
+```
+

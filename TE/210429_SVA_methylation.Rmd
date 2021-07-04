@@ -1,0 +1,266 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r load_libs}
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+library(bsseq)
+```
+
+We want to look at methylation differences between different types of TEs -- will start with the L1 LINEs 
+
+Load the bed files savannah made with metadata about subtype and "HOT" or not
+"HOT" refers to if the L1 is active 
+
+```{r load_dat}
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+reps <- read_tsv(paste0(dat, "/TE/beds/SVA-Retroposon_chm13v1_polish-033121_HOT-syn-CEN-subTELO-cenSAT-CBmotif-avgMeth_V3.bed"), col_names = c("chrom", "start", "end", "length", "query", "strand", "rep_type", "rep_class_rep_family", "position_begin", "in_end", "repeat_left", "SW", "perc_div", "perc_del", "perc_ins", "HOT", "no_syn", "CEN", "subtelo", "cenSAT", "CENPB_pJalpha", "average_methylation_frequency")) %>%
+  mutate(direction=case_when(strand == "+" ~"+", 
+                          strand == "C" ~ "-", 
+                          TRUE ~ "*")) %>%
+  select(-c(strand)) %>%
+  mutate(ID=row_number())
+
+chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
+  mutate(called_sites_unmethylated = called_sites - called_sites_methylated)
+
+```
+
+```{r cpg_sites}
+flankn <- 100
+bodylen <- 2
+
+#t2t.cpg.loci <- findLoci(pattern = "CG",
+#                         subject = BSgenome.t2t.v1.0.release::BSgenome.t2t.v1.0.release, 
+#                         strand = "+")
+#length(t2t.cpg.loci)
+#
+#saveRDS(t2t.cpg.loci, paste0(dat, "/annotations/BSgenome.t2t.v1.0.release_CpGSites.rds"))
+
+t2t.cpg.loci <- readRDS(paste0(dat, "/annotations/BSgenome.t2t.v1.0.release_CpGSites.rds"))
+
+l1_regions <- reps %>%
+  mutate(start = start - flankn, end = end + flankn) %>%
+  GRanges()
+
+starts <- as.data.frame(reps) %>%
+  select(chrom, start, end, ID) %>%
+  rename(start="rep_start", end="rep_end")
+
+ovl <- FindOvls(t2t.cpg.loci, l1_regions)  %>%
+  merge(starts, by= "ID")
+#
+#
+cpg.dist <- ovl %>%
+  dplyr::mutate(dist = ifelse(direction == "+",start - rep_start, rep_end - start),
+    dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < length,
+        bodylen * dist / length,
+        bodylen + (dist - length)/flankn)), 
+    dist = round(dist,2)
+    )
+
+saveRDS(cpg.dist, paste0(dat, "/TE/SVA_chm13v1_polish-033121_CpG_dist100bp.rds"))
+
+#cpg.dist <- readRDS(paste0(dat, "/TE/L1-LINE_chm13v1_polish-033121_CpG_dist.rds"))
+
+ovl.labs.cg <- cpg.dist %>%
+  group_by(rep_type) %>%
+  mutate(total=n()) %>%
+  ungroup() %>%
+  group_by(rep_type,dist) %>%
+  mutate(position_begin=as.numeric(position_begin)) %>%
+  summarise(med = sum(width), cg=med/total,total=total) %>%
+  distinct()
+  
+q <- ggplot(ovl.labs.cg, aes(x=dist,y=1, fill=cg))+geom_tile()+facet_wrap(~rep_type, ncol=1)+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))
+
+```
+
+
+```{r}
+
+l1_regions <- reps %>%
+  mutate(start = start - flankn, end = end + flankn) %>%
+  GRanges()
+
+ovl <- findOverlaps(GRanges(chm13_meth), l1_regions)
+genes.ovl <- as.data.frame(reps)[subjectHits(ovl),] %>%
+  dplyr::mutate(genewidth = end - start) %>%
+  dplyr::rename(gene_start = start, gene_end = end) 
+
+chm13.ovl <- as.data.frame(GRanges(chm13_meth)[queryHits(ovl),]) %>%
+  bind_cols(genes.ovl) %>%
+  dplyr::rename(seqnames = 1) %>%
+  dplyr::mutate(dist = ifelse(direction == "+",start - gene_start, gene_end - start),
+    dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < genewidth,
+        bodylen * dist / genewidth,
+        bodylen + (dist - genewidth)/flankn)), 
+    dist = round(dist,3)
+    )
+
+n_windows=200
+chm13.ovl$cut = cut(chm13.ovl$dist, breaks=n_windows)
+
+chm13.ovl.labs <- chm13.ovl %>%
+  group_by(cut,rep_type) %>%
+ # mutate(methylated_frequency = num_meth/(num_meth+num_unmeth)) %>%
+  summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(rep_type) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 10, NA))
+
+p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth, color=rep_type, fill=rep_type), alpha=.5)+
+#  geom_smooth(method = "loess", span = 0.12,se = F)+
+#  geom_smooth(se=T)+lims( y = c(0,1)) +
+  geom_ribbon(aes(ymin=bot, ymax=top), alpha=0.2, size=0)+
+  geom_line(aes(y=med_smooth), alpha=.5, size=1) +
+  geom_vline(xintercept = 0) +
+  geom_vline(xintercept = bodylen)+
+  labs( x = "Genomic Position", y = "Aggregated Methylation Frequency") +
+theme(legend.background = element_rect(color = "black")) +
+  theme_classic()+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))
+p
+
+plot1 <- plot_grid(p,q, align = "v", ncol=1)
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/","SVA_A-F_100bp.pdf"),
+  plot = plot1,
+  scale = 1,
+  width = 15,
+  height = 10,
+)
+```
+
+```{r}
+library(ggpubr)
+ovl <- FindOvls(t2t.cpg.loci, GRanges(reps)) %>%
+  mutate(average_methylation_frequency=as.numeric(average_methylation_frequency)) %>%
+  group_by(ID) %>%
+  summarise(num_cpg=n()/length, rep_type=rep_type,average_methylation_frequency=average_methylation_frequency) %>%
+  distinct()
+
+my_comparisons <- list( c("SVA_A", "SVA_B"), c("SVA_A", "SVA_C"), c("SVA_A", "SVA_D"), c("SVA_A", "SVA_E"), c("SVA_A", "SVA_F"),  c("SVA_B", "SVA_C"), c("SVA_B", "SVA_D"),  c("SVA_B", "SVA_F"),  c("SVA_B", "SVA_F"),  c("SVA_C", "SVA_D"),  c("SVA_C", "SVA_E"), c("SVA_C", "SVA_F"), c("SVA_D", "SVA_E"),  c("SVA_D", "SVA_F"),  c("SVA_E", "SVA_F"))
+ggplot(ovl, aes(x=rep_type, y=num_cpg, fill=rep_type))+geom_boxplot()+ stat_compare_means(comparisons = my_comparisons)
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/","SVA_A-F_CpG_KWtest.pdf"),
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+
+ggplot(ovl, aes(x=rep_type, y=average_methylation_frequency, fill=rep_type))+geom_boxplot()+ stat_compare_means(comparisons = my_comparisons)
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/","SVA_A-F_averagemethylation_KWtest.pdf"),
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+```
+
+```{r}
+
+n_windows=800
+chm13.ovl$cut = cut(chm13.ovl$dist, breaks=n_windows)
+
+chm13.ovl.labs <- chm13.ovl %>%
+  filter(rep_type %in% c("SVA_E", "SVA_F")) %>%
+  group_by(cut,HOT) %>%
+ # mutate(methylated_frequency = num_meth/(num_meth+num_unmeth)) %>%
+  summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency), rep_type=rep_type) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(HOT,rep_type) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 2, NA))
+
+p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth, color=HOT, fill=HOT), alpha=.5)+
+#  geom_smooth(method = "loess", span = 0.12,se = F)+
+#  geom_smooth(se=T)+lims( y = c(0,1)) +
+  geom_ribbon(aes(ymin=bot, ymax=top), alpha=0.2, size=0)+
+  geom_line(aes(y=med_smooth), alpha=.5, size=1) +
+  geom_vline(xintercept = 0) +
+  geom_vline(xintercept = bodylen)+
+  labs( x = "Genomic Position", y = "Aggregated Methylation Frequency") +
+theme(legend.background = element_rect(color = "black")) +
+  theme_classic()+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))+facet_wrap(~rep_type, ncol=1)
+p
+
+
+
+ovl.labs.cg <- cpg.dist %>%
+  filter(rep_type %in% c("SVA_E", "SVA_F")) %>%
+  group_by(HOT,rep_type) %>%
+  mutate(total=n()) %>%
+  ungroup() %>%
+  group_by(HOT,dist,rep_type) %>%
+  mutate(position_begin=as.numeric(position_begin)) %>%
+  summarise(med = sum(width), cg=med/total,total=total) %>%
+  distinct()
+  
+q <- ggplot(ovl.labs.cg, aes(x=dist,y=1, fill=cg))+geom_tile()+facet_wrap(~HOT+rep_type, ncol=1)+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))
+
+plot1 <- plot_grid(p,q, align = "v", ncol=1)
+
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/","SVA_A-F_hot_not_100bp.pdf"),
+  plot = plot1,
+  scale = 1,
+  width = 15,
+  height = 10,
+)
+```
+
+
+```{r}
+
+aluy <- reps %>%
+  filter(rep_type %in% c("SVA_E", "SVA_F"))
+ovl <- FindOvls(t2t.cpg.loci, GRanges(aluy)) %>%
+  mutate(average_methylation_frequency=as.numeric(average_methylation_frequency)) %>%
+  group_by(ID,HOT,rep_type) %>%
+  summarise(num_cpg=n()/length, rep_type=rep_type,average_methylation_frequency=average_methylation_frequency) %>%
+  distinct()
+
+
+ggplot(ovl, aes(x=rep_type, y=num_cpg, fill=HOT))+geom_boxplot()+ stat_compare_means(method = "kruskal.test")
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/","SVA_A-F_hotvsnot_CpG_KWtest.pdf"),
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+
+ggplot(ovl, aes(x=rep_type, y=average_methylation_frequency, fill=HOT))+geom_boxplot()+ stat_compare_means(method = "kruskal.test")
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/","SVA_A-F_average_methylation_frequency_KWtest.pdf"),
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+```
+
+

@@ -1,0 +1,190 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r load_libs}
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+library(bsseq)
+library(zoo)
+```
+
+We want to look at methylation differences between different types of TEs -- will start with the L1 LINEs 
+
+Load the bed files savannah made with metadata about subtype and "HOT" or not
+"HOT" refers to if the L1 is active 
+
+```{r load_dat}
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+reps1 <- read_tsv(paste0(dat, "/TE/beds/L1-LINE_chm13v1_polish-033121_HOT-syn-CEN-subTELO-cenSAT-CBmotif-avgMeth_V3.bed"), col_names = c("chr", "start", "end", "length", "query", "strand", "rep_type", "rep_class_rep_family", "position_begin", "in_end", "repeat_left", "SW", "perc_div", "perc_del", "perc_ins", "HOT", "no_syn", "CEN", "subtelo", "cenSAT", "CENPB_pJalpha", "average_methylation_frequency")) %>%
+  mutate(direction=case_when(strand == "+" ~"+", 
+                          strand == "C" ~ "-", 
+                          TRUE ~ "*")) %>%
+  mutate(name = ifelse(grepl("L1M", rep_type), "L1M", rep_type)) %>%
+  mutate(name = ifelse(grepl("L1P", name), "L1P", name)) %>%
+  mutate(name = ifelse(grepl("L1H", name), "L1H", name)) %>%
+  select(-c(strand)) %>%
+  filter(name %in% c("L1H")) %>%
+  select(c("chr", "start", "end", "rep_type", "direction", "name"))
+
+reps2 <- read_tsv("/mithril/Data/T2T_Data/L1Monly_LINE_chm13v1_polish-033121_minuschrM_modified4bedtools_withLength_short.out", col_names=c("chr", "start", "end", "len", "strand", "rep_type", "div")) %>%
+  mutate(direction=case_when(strand == "+" ~"+", 
+                          strand == "C" ~ "-", 
+                          TRUE ~ "*")) %>%
+  mutate(name="L1M-only") %>%
+  select(c("chr", "start", "end", "rep_type", "direction", "name")) 
+
+reps3 <- read_tsv("/mithril/Data/T2T_Data/L1PA2-3_L1P1_LINE_chm13v1_polish-033121_minuschrM_modified4bedtools_withLength_short.out", col_names=c("chr", "start", "end", "len", "strand", "rep_type", "div")) %>%
+  mutate(direction=case_when(strand == "+" ~"+", 
+                          strand == "C" ~ "-", 
+                          TRUE ~ "*")) %>%
+  mutate(name="L1PA2-3") %>%
+  select(c("chr", "start", "end", "rep_type", "direction", "name")) 
+
+reps4 <- read_tsv("/mithril/Data/T2T_Data/L1PA4-17_L1P2-4_L1PREC2_LINE_chm13v1_polish-033121_minuschrM_modified4bedtools_withLength_short.out", col_names=c("chr", "start", "end", "len", "strand", "rep_type", "div")) %>%
+  mutate(direction=case_when(strand == "+" ~"+", 
+                          strand == "C" ~ "-", 
+                          TRUE ~ "*")) %>%
+  mutate(name="L1PA4-17") %>%
+  select(c("chr", "start", "end", "rep_type", "direction", "name")) 
+
+reps5 <- read_tsv("/mithril/Data/T2T_Data/L1PB1-4_L1PBa_L1PBb_L1P5_L1P_L1PB_LINE_chm13v1_polish-033121_minuschrM_modified4bedtools_withLength_short.out", col_names=c("chr", "start", "end", "len", "strand", "rep_type", "div")) %>%
+  mutate(direction=case_when(strand == "+" ~"+", 
+                          strand == "C" ~ "-", 
+                          TRUE ~ "*")) %>%
+  mutate(name="L1B1-4") %>%
+  select(c("chr", "start", "end", "rep_type", "direction", "name")) 
+
+reps <- rbind(reps1, reps2, reps3, reps4, reps5) %>%
+  mutate(ID=row_number()) %>% 
+  mutate(len=end-start)
+chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
+  mutate(called_sites_unmethylated = called_sites - called_sites_methylated)
+
+```
+
+
+
+
+```{r}
+flankn <- 1000
+bodylen <- 6
+
+l1_regions <- reps %>%
+  mutate(start = start - flankn, end = end + flankn) %>%
+  GRanges()
+
+ovl <- findOverlaps(GRanges(chm13_meth), l1_regions)
+genes.ovl <- as.data.frame(reps)[subjectHits(ovl),] %>%
+  dplyr::mutate(genewidth = end - start) %>%
+  dplyr::rename(gene_start = start, gene_end = end) 
+
+chm13.ovl <- as.data.frame(GRanges(chm13_meth)[queryHits(ovl),]) %>%
+  bind_cols(genes.ovl) %>%
+  dplyr::rename(seqnames = 1) %>%
+  dplyr::mutate(dist = ifelse(direction == "+",start - gene_start, gene_end - start),
+    dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < genewidth,
+        bodylen * dist / genewidth,
+        bodylen + (dist - genewidth)/flankn)), 
+    dist = round(dist,3)
+    )
+```
+
+```{r}
+library(ggpubr)
+
+t2t.cpg.loci <- findLoci(pattern = "CG",
+                         subject = BSgenome.t2t.v1.0.release::BSgenome.t2t.v1.0.release, 
+                         strand = "+")
+length(t2t.cpg.loci)
+
+ovl <- FindOvls(t2t.cpg.loci, GRanges(reps)) %>%
+ # mutate(average_methylation_frequency=as.numeric(average_methylation_frequency)) %>%
+  group_by(ID) %>%
+  summarise(num_cpg=(n()/len), name=name) %>%
+  distinct()
+
+my_comparisons <- list( c("L1H", "L1M-only"), c("L1H", "L1PA2-3"), c("L1H", "L1PA4-17"), c("L1H", "L1B1-4"), c("L1M-only","L1PA2-3"), c("L1M-only", "L1B1-4"), c("L1PA2-3","L1PA4-17"), c("L1PA2-3", "L1B1-4"), c("L1PA4-17","L1B1-4"))
+ggplot(ovl, aes(x=name, y=num_cpg, fill=name))+geom_boxplot()+ stat_compare_means(comparisons = my_comparisons)
+
+ggsave(
+  "/mithril/Data/T2T_Data/L1_CpG_210619.pdf",
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+
+ovl2 <- FindOvls(GRanges(chm13_meth), GRanges(reps)) %>%
+ # mutate(average_methylation_frequency=as.numeric(average_methylation_frequency)) %>%
+  group_by(ID) %>%
+  summarise(mean_meth = mean(methylated_frequency), name=name) %>%
+  distinct()
+
+ggplot(ovl2, aes(x=name, y=mean_meth, fill=name))+geom_boxplot()+ stat_compare_means(comparisons = my_comparisons)
+
+ggsave(
+  "/mithril/Data/T2T_Data/L1_Methylation_210619.pdf",
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+```
+```{r}
+
+reps <- read_tsv(paste0(dat, "/TE/beds/L1-LINE_chm13v1_polish-033121_HOT-syn-CEN-subTELO-cenSAT-CBmotif-avgMeth_V3.bed"), col_names = c("chr", "start", "end", "length", "query", "strand", "rep_type", "rep_class_rep_family", "position_begin", "in_end", "repeat_left", "SW", "perc_div", "perc_del", "perc_ins", "HOT", "no_syn", "CEN", "subtelo", "cenSAT", "CENPB_pJalpha", "average_methylation_frequency")) %>%
+  mutate(direction=case_when(strand == "+" ~"+", 
+                          strand == "C" ~ "-", 
+                          TRUE ~ "*")) %>%
+  mutate(name = ifelse(grepl("L1M", rep_type), "L1M", rep_type)) %>%
+  mutate(name = ifelse(grepl("L1P", name), "L1P", name)) %>%
+  mutate(name = ifelse(grepl("L1H", name), "L1H", name)) %>%
+  select(-c(strand)) %>%
+  filter(name %in% c("L1H")) %>%
+  mutate(ID=row_number()) %>%
+  mutate(len=end-start)
+
+ovl <- FindOvls(t2t.cpg.loci, GRanges(reps)) %>%
+ # mutate(average_methylation_frequency=as.numeric(average_methylation_frequency)) %>%
+  group_by(ID) %>%
+  summarise(num_cpg=(n()/len), HOT=HOT) %>%
+  distinct()
+
+my_comparisons <- list( c("HOT", "."))
+
+ggplot(ovl, aes(x=HOT, y=num_cpg, fill=HOT))+geom_boxplot()+ stat_compare_means(comparisons = my_comparisons)
+
+ggsave(
+  "/mithril/Data/T2T_Data/L1_CpG_hotvsnot_210619.pdf",
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+
+ovl2 <- FindOvls(GRanges(chm13_meth), GRanges(reps)) %>%
+ # mutate(average_methylation_frequency=as.numeric(average_methylation_frequency)) %>%
+  group_by(ID) %>%
+  summarise(mean_meth = mean(methylated_frequency), HOT=HOT) %>%
+  distinct()
+
+ggplot(ovl2, aes(x=HOT, y=mean_meth, fill=HOT))+geom_boxplot()+ stat_compare_means(comparisons = my_comparisons)
+
+ggsave(
+  "/mithril/Data/T2T_Data/L1_Methylationhotvsnot_210619.pdf",
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+
+```
+
+

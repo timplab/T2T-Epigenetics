@@ -1,0 +1,156 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r load_libs}
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+```
+
+We want to look at methylation differences between different types of TEs -- will start with the L1 LINEs 
+
+Load the bed files savannah made with metadata about subtype and "HOT" or not
+"HOT" refers to if the L1 is active 
+
+```{r load_dat}
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+reps <- read_tsv(paste0(dat, "/TE/beds/L1-LINE_chm13v1_polish-033121_HOT-syn-CEN-subTELO-cenSAT-CBmotif-avgMeth_V2.bed"), col_names = c("chrom", "start", "end", "length", "query", "strand", "rep_type", "rep_class_rep_family", "position_begin", "in_end", "repeat_left", "SW", "perc_div", "perc_del", "perc_ins", "HOT", "no_syn", "CEN", "subtelo", "cenSAT", "CENPB_pJalpha", "average_methylation_frequency")) %>%
+  mutate(direction=case_when(strand == "+" ~"+", 
+                          strand == "C" ~ "-", 
+                          TRUE ~ "*")) %>%
+  mutate(name = ifelse(grepl("L1M", rep_type), "L1M", rep_type)) %>%
+  mutate(name = ifelse(grepl("L1P", name), "L1P", name)) %>%
+  mutate(name = ifelse(grepl("L1H", name), "L1H", name)) %>%
+  select(-c(strand)) %>%
+  filter(name %in% c("L1M", "L1P", "L1H")) %>%
+  mutate(centro=case_when(CEN == "." ~ "no", 
+                          TRUE ~ "yes"))
+
+chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
+  mutate(called_sites_unmethylated = called_sites - called_sites_methylated)
+
+```
+```{r}
+
+flankn <- 500
+bodylen <- 12
+
+l1_regions <- reps %>%
+  mutate(start = start - flankn, end = end + flankn) %>%
+  GRanges()
+
+ovl <- findOverlaps(GRanges(chm13_meth), l1_regions)
+genes.ovl <- as.data.frame(reps)[subjectHits(ovl),] %>%
+  dplyr::mutate(genewidth = end - start) %>%
+  dplyr::rename(gene_start = start, gene_end = end) 
+
+chm13.ovl <- as.data.frame(GRanges(chm13_meth)[queryHits(ovl),]) %>%
+  bind_cols(genes.ovl) %>%
+  dplyr::rename(seqnames = 1) %>%
+  dplyr::mutate(dist = ifelse(direction == "+",start - gene_start, gene_end - start),
+    dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < genewidth,
+        bodylen * dist / genewidth,
+        bodylen + (dist - genewidth)/flankn)), 
+    dist = round(dist,3)
+    )
+
+n_windows=200
+chm13.ovl$cut = cut(chm13.ovl$dist, breaks=n_windows)
+
+chm13.ovl.labs <- chm13.ovl %>%
+  group_by(cut,name, centro) %>%
+ # mutate(methylated_frequency = num_meth/(num_meth+num_unmeth)) %>%
+  summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(name, centro) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 10, NA))
+
+p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth, color=centro, fill=centro), alpha=.5)+
+#  geom_smooth(method = "loess", span = 0.12,se = F)+
+#  geom_smooth(se=T)+lims( y = c(0,1)) +
+  geom_ribbon(aes(ymin=bot, ymax=top), alpha=0.2, size=0)+
+  geom_line(aes(y=med_smooth), alpha=.5, size=1) +
+  geom_vline(xintercept = 0) +
+  geom_vline(xintercept = bodylen)+
+  labs( x = "Genomic Position", y = "Aggregated Methylation Frequency") +
+theme(legend.background = element_rect(color = "black")) +
+  theme_classic()+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))+facet_wrap(~name, ncol=1)
+p
+
+```
+
+```{r}
+n_windows=200
+chm13.ovl$cut = cut(chm13.ovl$dist, breaks=n_windows)
+
+chm13.ovl.labs <- chm13.ovl %>%
+  filter(name == "L1H") %>%
+  group_by(cut, HOT,centro) %>%
+ # mutate(methylated_frequency = num_meth/(num_meth+num_unmeth)) %>%
+  summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(HOT,centro) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 10, NA))
+
+p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth, color=centro, fill=centro), alpha=.5)+
+#  geom_smooth(method = "loess", span = 0.12,se = F)+
+#  geom_smooth(se=T)+lims( y = c(0,1)) +
+  geom_ribbon(aes(ymin=bot, ymax=top), alpha=0.2, size=0)+
+  geom_line(aes(y=med_smooth), alpha=.5, size=1) +
+  geom_vline(xintercept = 0) +
+  geom_vline(xintercept = bodylen)+
+  labs( x = "Genomic Position", y = "Aggregated Methylation Frequency") +
+theme(legend.background = element_rect(color = "black")) +
+  theme_classic()+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))+facet_wrap(~HOT, ncol=1)
+p
+
+```
+```{r}
+n_windows=500
+chm13.ovl$cut = cut(chm13.ovl$dist, breaks=n_windows)
+
+chm13.ovl.labs <- chm13.ovl %>%
+  group_by(cut,perc_div,name) %>%
+#  mutate(methylated_frequency = num_meth/(num_meth+num_unmeth)) %>%
+  summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(perc_div,name) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 4, NA)) %>%
+  arrange(perc_div) 
+
+chm13.ovl.labs$group_id <- chm13.ovl.labs %>%
+  group_by(name)%>% 
+  group_indices(perc_div) 
+
+plot <- ggplot(chm13.ovl.labs,aes(x=min,y=perc_div,fill=med_smooth))+ geom_tile()+scale_fill_gradientn(colours = rev(rainbow(5)), limits=c(0,1))+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb"))) +geom_vline(xintercept = 0) +
+  geom_vline(xintercept = bodylen)+theme(legend.position = "left", legend.direction="vertical")+facet_wrap(~name, scales="free", ncol=1)
+plot
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/","L1_heatmaps_PercDiv.pdf"),
+  plot = plot,
+  scale = 1,
+  width = 15,
+  height = 10,
+)
+
+```
+
