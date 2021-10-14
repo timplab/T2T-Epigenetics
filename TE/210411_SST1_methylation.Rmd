@@ -9,6 +9,7 @@ source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
 source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
 library(tidyverse)
 library(cowplot)
+library(zoo)
 library(BSgenome.t2t.v1.0.release)
 ```
 
@@ -23,7 +24,7 @@ reps <- read_tsv(paste0(dat, "/TE/beds/SST1_chm13v1_polish-033121_syn-CEN-subTEL
   mutate(direction=case_when(strand == "+" ~"+", 
                           strand == "C" ~ "-", 
                           TRUE ~ "*")) %>%
-  select(-c(strand))
+  dplyr::select(-c(strand))
 
 chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
   mutate(called_sites_unmethylated = called_sites - called_sites_methylated)
@@ -44,7 +45,8 @@ ovl <- findOverlaps(GRanges(chm13_meth), l1_regions)
 
 genes.ovl <- as.data.frame(reps)[subjectHits(ovl),] %>%
   dplyr::mutate(genewidth = end - start) %>%
-  dplyr::rename(gene_start = start, gene_end = end) 
+  dplyr::rename(gene_start = start, gene_end = end) %>%
+  mutate(direction="+")
 
 chm13.ovl <- as.data.frame(GRanges(chm13_meth)[queryHits(ovl),]) %>%
   bind_cols(genes.ovl) %>%
@@ -70,12 +72,12 @@ chm13.ovl.labs <- chm13.ovl %>%
   ungroup() %>%
  # group_by(name, centro) %>%
   arrange(min) %>%
-  mutate(med_smooth = rollmean(med, 10, NA))
+  mutate(med_smooth = rollmean(med, 10, NA), top_smooth = rollmean(top, 10, NA), bot_smooth = rollmean(bot, 10, NA))
 
 p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth), alpha=.5)+
 #  geom_smooth(method = "loess", span = 0.12,se = F)+
 #  geom_smooth(se=T)+lims( y = c(0,1)) +
-  geom_ribbon(aes(ymin=bot, ymax=top), alpha=0.2, size=0)+
+  geom_ribbon(aes(ymin=bot_smooth, ymax=top_smooth), alpha=0.2, size=0)+
   geom_line(aes(y=med_smooth), alpha=.5, size=1) +
   geom_vline(xintercept = 0) +
   geom_vline(xintercept = bodylen)+
