@@ -86,4 +86,7 @@ censatColors =c("TE" = "#E87C71",
                 "L1" = "#ffbf00", 
                 "TAR"= "#0080ff",
                 "ACRO"="#9400D4",
-                "Alu"="#9A8AC3")
+                "Alu"="#9A8AC3", 
+                "DHOR"="gray", 
+                 "subtelo-TAR"="aquamarine", 
+                "centro-TAR"="cadetblue1")
