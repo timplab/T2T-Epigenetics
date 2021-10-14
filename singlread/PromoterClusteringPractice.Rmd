@@ -1,0 +1,69 @@
+---
+title: "load_methyl_bed"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+# loads libs 
+
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+library(GenomicRanges)
+library(knitr)
+library(Biostrings)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+library(mclust)
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/allele_specific_meth/xist"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+```
+
+```{r bis, echo=F}
+
+# First look for CGI overlapping promoter - then take CGI coords- make region =CGI, take coords from end of CGI to gene end make region = GB
+
+reads <- tabix_mbed(paste0(dat, "/censat/xist.mbed"),extcol = "motif",by = "read") 
+#chrX:72,284,393-72,286,249
+chr="chrX"
+rstart=72286070 #CGI start
+rend=72286070-1000 #CGI end
+geneend=72253968 # gene end
+
+regs <- data.frame(chr=c("chrX","chrX"), start=c(72285070,72253968), end=c(72286070,72285070),
+                 strand=c("-","-"), reg=c("CGI","GB"), gene_id=c("xist","xist")) %>%
+  GRanges()
+  
+size_sel <- reads %>%
+  dplyr::mutate(rlen = end-start) %>%
+  filter(rlen >= 50000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall) %>%
+  GRanges()
+
+ovls <- FindOvls(regs,cgcalls) 
+
+combined <- ovls %>%
+  group_by(reg,gene_id,qname) %>%
+  summarise(methylation=mean(mcall)) %>%
+  spread(reg,methylation) %>%
+  na.omit()
+
+ggplot(combined,aes(x=CGI,y=GB))+geom_point()+ylim(0,1)+ylim(0,1)
+```
+
+
+

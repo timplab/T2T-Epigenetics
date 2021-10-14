@@ -1,0 +1,125 @@
+---
+title: "load_methyl_bed"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+# loads libs 
+
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+library(GenomicRanges)
+library(knitr)
+library(Biostrings)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+library(mclust)
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+```
+
+```{r bis, echo=F}
+
+protein_coding <- read_tsv(paste0(dat,"/gene_expression/dictionary.tsv")) %>%
+  filter(gene_biotype == "protein_coding")
+
+reads <- tabix_mbed(paste0(dat, "/revision_analysis/promoter_clustering/chrX.chm13_v1_tss.CGI_intersectionsMethylBed.bed"),extcol = "motif",by = "read") 
+
+regs.all <- read_delim(paste0(dat, "/revision_analysis/promoter_clustering/RNAseq/CHM13.combined.v4.protein_coding.tss_RNAseq-cgi.bed"), col_names=c("chr","start","end","strand","name","gene_start","gene_end", "cov", "fpkm", "tpm", "cgi_chr","cgi_start","cgi_end"),delim="\t")  %>%
+  filter(name %in% protein_coding$gene_id) %>%
+  mutate(quantile=case_when(fpkm == 0 ~ "no_expression", 
+                            fpkm > 0 & fpkm < 15 ~ "medium",
+                            fpkm >=15 ~ "high")) %>%
+  filter(chr=="chrX") 
+
+
+regs.cgi <- regs.all  %>%
+  mutate(region="cgi") 
+
+regs.gb <- regs.all  %>%
+  mutate(start=ifelse(strand=="+", cgi_end,gene_end))%>%
+  mutate(end=ifelse(strand=="+", gene_end,cgi_end)) %>%
+  mutate(len=end-start) %>%
+  filter(chr=="chrX") %>%
+  filter(len > 100) %>%
+  select(-c(len))  %>%
+  mutate(region="gb")
+
+
+regs <- rbind(regs.gb,regs.cgi) %>%
+  distinct() %>%
+ # mutate(start=ifelse(strand=="+", gene_start,gene_end))%>%
+#  mutate(end=ifelse(strand=="+", gene_end,gene_start)) %>%
+  GRanges()
+
+
+size_sel <- reads %>%
+  dplyr::mutate(rlen = end-start) %>%
+  filter(rlen >= 5000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall) %>%
+  GRanges()
+
+ovls <- FindOvls(regs,cgcalls) 
+
+combined <- ovls %>%
+  group_by(region,name,qname,fpkm,quantile) %>%
+  summarise(methylation=mean(mcall)) %>%
+  spread(region,methylation) %>%
+  na.omit()
+
+write.table(combined, "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/RNAseq/CGI_GeneBody_SingleRead_methylationRNAseq.tsv",
+          quote=F,
+          row.names=F,
+          sep="\t")
+
+
+```
+
+
+```{r}
+
+clustered_reads <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/ClusteredReads_chrX_proteinCoding.tsv")
+acot9 <- clustered_reads %>%
+  dplyr::filter(name=="ACOT9") %>%
+  select(c(group,qname))
+
+cgcalls.sub <- as.data.frame(cgcalls) %>%
+  filter(qname %in% acot9$qname)
+
+cpg_runs <-getRuns(cgcalls.sub, maxGap = 150)
+all_runs <- merge(cpg_runs,clustered_reads, by = "qname" )
+
+cpg_runs.ordered <- order_reads_facet(all_runs)
+
+
+
+cpg_runs_plot <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+  
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+
+#TSIX chrX:72225528-72262547
+g <- ggplot(cpg_runs_plot,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax))+ geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80")+ 
+    geom_rect(aes(fill = m)) +scale_fill_manual(name = "State", values = meth_pal)+theme_classic()+facet_wrap(~group,nrow=1)+theme(legend.position = "bottom")+ theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))+coord_cartesian(xlim=c(23326885, 23284668))#+geom_vline(xintercept = c(72253968,72286070), linetype = "dotted")#+geom_vline(xintercept = c(72225528,72262547), linetype = "dotted")+coord_cartesian(xlim=c(23284668, 23350090))
+g
+
+```
+
+

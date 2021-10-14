@@ -1,0 +1,91 @@
+---
+title: "load_methyl_bed"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+# loads libs 
+
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+library(GenomicRanges)
+library(knitr)
+library(Biostrings)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+library(mclust)
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+```
+
+```{r bis, echo=F}
+
+# First look for CGI overlapping promoter - then take CGI coords- make region =CGI, take coords from end of CGI to gene end make region = GB
+exp <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/gene_analysis/transcripts.and.meth.bed") %>%
+  select(c(gene,n_transctripts)) %>%
+  dplyr::rename("name"=gene)
+
+reads <- tabix_mbed(paste0(dat, "/revision_analysis/promoter_clustering/mitchell_merged_bed/chm13_v1_tss.CGI_ntranscripts_intersections.bed"),extcol = "motif",by = "read") 
+
+regs.all <- read_delim(paste0(dat, "/revision_analysis/promoter_clustering/chm13_v1_tss.CGI_intersections.bed"), col_names=c("chr","start","end","score","strand","name","gene_start","gene_end","cgi_chr","cgi_start","cgi_end"),delim="\t")  %>%
+  filter(chr=="chrX") 
+
+regs.cgi <- regs.all  %>%
+  mutate(region="cgi") 
+
+regs.gb <- regs.all  %>%
+  mutate(start=ifelse(strand=="+", cgi_end,gene_end))%>%
+  mutate(end=ifelse(strand=="+", gene_end,cgi_end)) %>%
+  mutate(len=end-start) %>%
+  filter(chr=="chrX") %>%
+  filter(len > 100) %>%
+  select(-c(len))  %>%
+  mutate(region="gb")
+
+
+regs <- rbind(regs.gb,regs.cgi) %>%
+  distinct() %>%
+ # mutate(start=ifelse(strand=="+", gene_start,gene_end))%>%
+#  mutate(end=ifelse(strand=="+", gene_end,gene_start)) %>%
+  GRanges()
+
+
+size_sel <- reads %>%
+  dplyr::mutate(rlen = end-start) %>%
+  filter(rlen >= 5000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall) %>%
+  GRanges()
+
+ovls <- FindOvls(regs,cgcalls) 
+
+combined <- ovls %>%
+  group_by(region,name,qname) %>%
+  summarise(methylation=mean(mcall)) %>%
+  spread(region,methylation) %>%
+  na.omit()
+
+write.table(combined, "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/mitchell_merged_bed/CGI_GeneBody_SingleRead_methylationn_transcripts.tsv",
+          quote=F,
+          row.names=F,
+          sep="\t")
+
+
+```
+
+
+
