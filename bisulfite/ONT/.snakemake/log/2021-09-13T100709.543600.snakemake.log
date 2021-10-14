@@ -1,0 +1,39 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                       count    min threads    max threads
+----------------------  -------  -------------  -------------
+all                           1              1              1
+bismark_align_pe              1              1              1
+bismark_prepare_genome        1              1              1
+methylation_extract           1              1              1
+total                         4              1              1
+
+Select jobs to execute...
+
+[Mon Sep 13 10:07:10 2021]
+rule bismark_prepare_genome:
+    input: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/reference
+    output: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/Bisulfite_Genome
+    log: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsgenomeprep.log
+    jobid: 2
+    resources: tmpdir=/tmp
+
+[Mon Sep 13 12:07:06 2021]
+Finished job 2.
+1 of 4 steps (25%) done
+Select jobs to execute...
+
+[Mon Sep 13 12:07:06 2021]
+rule bismark_align_pe:
+    input: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/004_0111_001_R1_val_1.fq.gz, /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/004_0111_001_R2_val_2.fq.gz, /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/Bisulfite_Genome, /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/reference
+    output: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/bismark/004_0111_001_.R1_bismark_bt2_pe.bam
+    log: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bismark/004_0111_001_.align.log
+    jobid: 1
+    wildcards: sample=004_0111_001_
+    resources: tmpdir=/tmp
+
+Terminating processes on user request, this might take some time.
+Cancelling snakemake on user request.

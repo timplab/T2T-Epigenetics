@@ -1,0 +1,28 @@
+
+
+Parameters used to extract methylation information:
+Bismark Extractor Version: v0.22.2
+Bismark result file: single-end (SAM format)
+Output specified: strand-specific (default)
+
+
+Processed 0 lines in total
+Total number of methylation call strings processed: 0
+
+Final Cytosine Methylation Report
+=================================
+Total number of C's analysed:	0
+
+Total methylated C's in CpG context:	0
+Total methylated C's in CHG context:	0
+Total methylated C's in CHH context:	0
+
+Total C to T conversions in CpG context:	0
+Total C to T conversions in CHG context:	0
+Total C to T conversions in CHH context:	0
+
+Can't determine percentage of methylated Cs in CpG context if value was 0
+Can't determine percentage of methylated Cs in CHG context if value was 0
+Can't determine percentage of methylated Cs in CHH context if value was 0
+
+

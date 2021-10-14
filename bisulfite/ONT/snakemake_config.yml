@@ -1,0 +1,4 @@
+workdir: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite # path to save the analysis outputs
+codedir: /home/gmoney/T2T-Epigenetics/bisulfite/ONT  # path to this dir
+reference: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/reference # path to reference genome
+threads: 60 # available cores

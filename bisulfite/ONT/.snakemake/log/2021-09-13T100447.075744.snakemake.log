@@ -1,0 +1,37 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                       count    min threads    max threads
+----------------------  -------  -------------  -------------
+all                           1              1              1
+bismark_align_pe              1              1              1
+bismark_prepare_genome        1              1              1
+methylation_extract           1              1              1
+total                         4              1              1
+
+Select jobs to execute...
+
+[Mon Sep 13 10:04:47 2021]
+rule bismark_prepare_genome:
+    input: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/reference
+    output: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/Bisulfite_Genome
+    log: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsgenomeprep.log
+    jobid: 2
+    resources: tmpdir=/tmp
+
+[Mon Sep 13 10:04:47 2021]
+Error in rule bismark_prepare_genome:
+    jobid: 2
+    output: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/Bisulfite_Genome
+    log: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsgenomeprep.log (check log file(s) for error message)
+    shell:
+        
+  	/home/roham/software/bismark/Bismark-0.22.2/bismark_genome_preparation --verbose /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/reference &> /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsgenomeprep.log && touch /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/Bisulfite_Genome
+     
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/gmoney/T2T-Epigenetics/bisulfite/ONT/.snakemake/log/2021-09-13T100447.075744.snakemake.log

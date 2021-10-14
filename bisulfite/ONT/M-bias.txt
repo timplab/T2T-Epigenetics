@@ -1,0 +1,12 @@
+CpG context
+===========
+position	count methylated	count unmethylated	% methylation	coverage
+
+CHG context
+===========
+position	count methylated	count unmethylated	% methylation	coverage
+
+CHH context
+===========
+position	count methylated	count unmethylated	% methylation	coverage
+

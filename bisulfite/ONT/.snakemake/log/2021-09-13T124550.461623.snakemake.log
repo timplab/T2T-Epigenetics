@@ -1,0 +1,52 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 65
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count    min threads    max threads
+-------------------  -------  -------------  -------------
+all                        1              1              1
+bismark_align_pe           1             60             60
+methylation_extract        1              1              1
+total                      3              1             60
+
+Select jobs to execute...
+
+[Mon Sep 13 12:45:51 2021]
+rule bismark_align_pe:
+    input: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/004_0111_001_R1_val_1.fq.gz, /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/004_0111_001_R2_val_2.fq.gz, /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/Bisulfite_Genome, /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/reference
+    output: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/bismark/004_0111_001_.R1_bismark_bt2_pe.bam
+    log: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bismark/004_0111_001_.align.log
+    jobid: 1
+    wildcards: sample=004_0111_001_
+    threads: 60
+    resources: tmpdir=/tmp
+
+[Thu Sep 30 23:28:55 2021]
+Finished job 1.
+1 of 3 steps (33%) done
+Select jobs to execute...
+
+[Thu Sep 30 23:28:55 2021]
+rule methylation_extract:
+    input: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/bismark/004_0111_001_.R1_bismark_bt2_pe.bam, /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/reference
+    output: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/CpGcalls/004_0111_001_
+    jobid: 3
+    wildcards: sample=004_0111_001_
+    resources: tmpdir=/tmp
+
+[Thu Sep 30 23:29:00 2021]
+Error in rule methylation_extract:
+    jobid: 3
+    output: /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/CpGcalls/004_0111_001_
+    shell:
+        [ -e /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/CpGcalls/004_0111_001_ ]||mkdir -p /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/CpGcalls/004_0111_001_ && /home/roham/software/bismark/Bismark-0.22.2/bismark_methylation_extractor -s /
+   --comprehensive --merge_non_CpG 	   -o /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/CpGcalls/004_0111_001_ 	   --bedGraph 	   --remove_spaces 	   --CX --cytosine_report 	   --genome_folder /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/reference 	   /uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/bismark/004_0111_001_.R1_bismark_bt2_pe.bam
+   
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job methylation_extract since they might be corrupted:
+/uru/Data/old_atium/Data/Nanopore/projects/ONT_HG002_bisulfite/bsseq/CpGcalls/004_0111_001_
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/gmoney/T2T-Epigenetics/bisulfite/ONT/.snakemake/log/2021-09-13T124550.461623.snakemake.log
