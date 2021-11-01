@@ -7,7 +7,6 @@ source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
 source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
 library(tidyverse)
 library(cowplot)
-library(BSgenome.t2t.v1.0.release)
 library(GenomicRanges)
 library(zoo)
 # load meth 
