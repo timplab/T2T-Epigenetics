@@ -22,7 +22,7 @@ library(Repitools)
 options(knitr.duplicate.label = 'allow')
 source("/home/isac/Code/ilee/plot/ilee_plot_utils.R")
 library("ggsci")
-source("/home/isac/Code/nanopore-methylation-utilities/methylation_R_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
 ```
 
 ```{r mbed}
@@ -197,7 +197,7 @@ cgcalls <- read_csv(paste0(dat, "/pooled/HG002_nanonome_chrX_CpGmethylation_ByCa
 cgcalls.gr <-  cgcalls %>%
   ungroup() %>%
   group_by(start) %>%
-  summarise(num_meth = sum(mcall == 1), num_unmeth = sum(mcall == 0)) %>%
+  summarise(num_meth = sum(mcall == 1), num_unmeth = sum(mcall == 0), num=n()) %>%
   mutate(chr = "chrX", start = start, end = start) %>%
   GRanges()
 
@@ -208,31 +208,31 @@ chrx.gr <- GRanges(seqinfo(BSgenome.HG002.chrX))
 blocks <- genomeBlocks(BSgenome.HG002.chrX, chrs = seqnames(BSgenome.HG002.chrX), width = 15000)
 score1 <- coverage(cgcalls.gr, weight="num_meth")
 score2 <- coverage(cgcalls.gr, weight="num_unmeth")
+score3 <- coverage(cgcalls.gr, weight="num")
 
 binned_meth <- binnedSum(blocks, numvar = score1, "num_meth") %>%
   as.data.frame()
 binned_unmeth <-binnedSum(blocks, numvar = score2, "num_unmeth")%>%
   as.data.frame()
+binned_cov <- binnedMean(blocks, numvar = score3, "num") %>%
+    as.data.frame()
 
 meth_bins <- merge(binned_meth, binned_unmeth, by = c("start", "end", "seqnames", "width", "strand")) %>%
+  merge(binned_cov,by = c("start", "end", "seqnames", "width", "strand")) %>%
   group_by(start, end) %>%
   mutate(sites = num_meth+num_unmeth) %>%
   mutate(freq = num_meth/sites) %>%
+  mutate(cov=num/sites) %>%
   na.omit()
-
-blocks <- genomeBlocks(BSgenome.HG002.chrX, chrs = seqnames(BSgenome.HG002.chrX), width = 15000)
-score1 <- coverage(cgcalls.gr, weight="num_meth")
-score2 <- coverage(cgcalls.gr, weight="num_unmeth")
-
-binned_meth <- binnedSum(blocks, numvar = score1, "num_meth") %>%
-  as.data.frame()
-binned_unmeth <-binnedSum(blocks, numvar = score2, "num_unmeth")%>%
-  as.data.frame()
 
 
 CA_plot <- ggplot(cut, aes(x = (start/1e6), y= coverage, color = condition, alpha=.5)) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 25)+geom_line(size =1)+xlim(53,63)+ scale_color_manual(values=c("red", "black"))+theme(legend.position = "none")
 
 meth_CG <- ggplot(meth_bins, aes(x = (start/1e6), y= freq)) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 25)+ylim(0,1)+geom_line(size =1)+xlim(53,63)
+
+cov.calls <- as.data.frame(cgcalls.gr) %>%
+  filter(start >53000000) %>%
+  filter(end < 63000000)
 
 rm_sub <- reps %>%
   filter(X2 >53000000) %>%
@@ -246,6 +246,21 @@ top_row
 
 ggsave(
   paste0(figs, "/NanonomeCpG_GpC_pooled_cenx_profileCENPA.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 10
+)
+
+cov <- ggplot(cov.calls, aes(x = start/1e6, y= num))+geom_bar(stat = "identity", size=1, color="gray") + labs(y="Coverage")+theme_classic(base_size = 10)+xlim(53,63)+theme(axis.title.x=element_blank(),axis.text.x=element_blank(), axis.ticks.x=element_blank(),axis.line.x = element_blank())+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+  
+gc_cov <- ggplot(gc_bins, aes(x = start/1e6, y= sites))+geom_bar(stat = "identity", size=1, color="black") + labs(y="Coverage")+theme_classic(base_size = 10)+xlim(53,63)+theme(axis.title.x=element_blank(),axis.text.x=element_blank(), axis.ticks.x=element_blank(),axis.line.x = element_blank())+theme(plot.margin = unit(c(0, 0, 0, 0), "cm"))
+  
+top_row <- plot_grid(cov,gc_cov,rep_leg, ncol =1,align = "v",rel_heights = c(1/2, 1/2, 1/10))
+top_row
+
+ggsave(
+  paste0(figs, "/NanonomeCpG_GpC_SupplementCov.pdf"),
   plot = top_row,
   scale = 1,
   width = 10,

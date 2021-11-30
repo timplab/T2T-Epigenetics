@@ -19,21 +19,51 @@ dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002/nanono
 ```
 
 ```{r}
-runs <- readRDS(paste0(dat, "/pooled/HG002_nanonome_chrX_GpC_runsUnsmoothed.rds"))
+runs <- readRDS(paste0(dat, "/pooled/HG002_nanonome_chrX_GpC_runsUnsmoothed.rds")) %>%
+  mutate(seqnames="chrX") %>%
+  dplyr::rename("runlen"=width) %>%
+  GRanges()
+
+
+hg002_X <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002/annotations/t2t_cenAnnotation.hg002_X.v1.bed", col_names = F) %>%
+  mutate(name = ifelse(grepl("HSat1", X4), "HSAT1", X4)) %>%
+  mutate(name = ifelse(grepl("HSat2", X4), "HSAT2", name)) %>%
+  mutate(name = ifelse(grepl("HSat3", X4), "HSAT3", name)) %>%
+  mutate(name = ifelse(grepl("HSat4", X4), "HSAT4", name)) %>%
+  mutate(name = ifelse(grepl("HSat5", X4), "HSAT5", name)) %>%
+  mutate(name = ifelse(grepl("HSat6", X4), "HSAT6", name)) %>%
+  mutate(name = ifelse(grepl("ct", X4), "CT", name)) %>%
+  mutate(name = ifelse(grepl("bsat", X4), "BSAT", name)) %>%
+  mutate(name = ifelse(grepl("hor", X4), "HOR", name)) %>%
+  mutate(name = ifelse(grepl("mon", X4), "MON", name)) %>%
+  mutate(name = ifelse(grepl("Alu", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("SATR", X4), "SATR", name)) %>%
+  mutate(name = ifelse(grepl("ACRO", X4), "ACRO", name)) %>%
+  mutate(name = ifelse(grepl("GSATII", X4), "GSAT", name)) %>%
+  mutate(name = ifelse(grepl("TAR", X4), "TAR", name)) %>%
+  mutate(name = ifelse(grepl("TE", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("MER", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("MST", X4), "MST", name)) %>%
+  mutate(name = ifelse(grepl("CER", X4), "CER", name)) %>%
+  mutate(name = ifelse(grepl("L1", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("SST", X4), "SST", name)) %>%
+  mutate(name = ifelse(grepl("LSAU", X4), "LSAU", name)) %>%
+  mutate(name = ifelse(grepl("GSAT", X4), "GSAT", name)) %>%
+  mutate(name = ifelse(grepl("MSAT", X4), "MSAT", name)) %>%
+  mutate(name = ifelse(grepl("novel", X4), "novel", name)) %>%
+  mutate(name = ifelse(grepl("HERV", X4), "TE", name)) %>%
+  mutate(name = ifelse(grepl("LT", X4), "TE", name)) %>%
+  dplyr::select(c(X1, X2, X3, name)) %>%
+  dplyr::rename("chr" =1, "start" = 2 ,"end" =3) %>%
+  GRanges()
+
 ```
 
 ```{r}
-regions <- runs %>%
-  filter(start > 53000000) %>%
-  filter(end < 63000000) %>%
-  mutate(reg=case_when(start > 55500894 & end < 55510540 ~ "HSAT4", 
-                       start > 55922986 & end < 58746125 ~ "ALPHA",
-                       start > 55675593 & end < 55715005 ~ "GSAT", 
-                       TRUE ~ "NON-SAT")) %>%
-  filter(reg != "NON-SAT") %>%
-  filter(color == "Inaccessible")
+regions <- FindOvls(hg002_X, runs) %>%
+  filter(color == "Inaccessible") 
 
-g <- ggplot(regions,aes( x=width, color=reg))+geom_density(adjust=1.5)+xlim(0,800)+theme_classic(base_size = 25)+labs(x= "Inaccessible Run Length")
+g <- ggplot(regions,aes(x=runlen, color=name))+geom_density(adjust=1.5)+xlim(0,800)+theme_classic(base_size = 25)+labs(x= "Inaccessible Run Length")+scale_color_manual(values=censatColors)
 
 ggsave(
   paste0(figs, "/HG002_CENX_nucleosomeDensity.pdf"),
@@ -43,25 +73,45 @@ ggsave(
   height = 5
 )
 ```
-
 ```{r}
-regions <- runs %>%
-  filter(start > 53000000) %>%
-  filter(end < 63000000) %>%
-  mutate(reg=case_when(start > 55500894 & end < 55510540 ~ "HSAT4", 
-                       start > 55922986 & end < 58746125 ~ "ALPHA",
-                       start > 55675593 & end < 55715005 ~ "GSAT", 
-                       TRUE ~ "NON-SAT")) %>%
-  filter(reg != "NON-SAT") %>%
-  filter(color == "Inaccessible")
+#chrX:57,329,993-57,341,238
+#chrX:57,356,508-57,366,175
+#chrX:57,431,994-57,442,579
+#chrX:57,493,997-57,521,586
+#chrX:57,535,525-57,551,753
+#chrX:57,557,325-57,578,620
+#HOR chrX 55941025-59053403 
 
-g <- ggplot(regions,aes( x=width, color=reg))+geom_density(adjust=1.5)+xlim(0,800)+theme_classic(base_size = 25)+labs(x= "Inaccessible Run Length")
+cdrs <- data.frame(seqnames="chrX", start=c(57329993, 
+                                                  57356508,
+                                                  57431994,
+                                                  57493997,
+                                                  57535525,
+                                                  57557325), 
+                      end=c(57341238,
+                            57366175,
+                            57442579,
+                            57521586,
+                            57551753,
+                            57578620)) %>%
+  GRanges()
 
-ggsave(
-  paste0(figs, "/HG002_CENX_nucleosomeDensity.pdf"),
-  plot = g,
-  scale = 1,
-  width = 7,
-  height = 5
-)
+
+cdr_runs <- FindOvls(cdrs,runs) %>%
+  mutate(reg="cdr") %>%
+  filter(color=="Inaccessible")
+
+non_cdr_runs <- as.data.frame(runs[!(runs %over% cdrs)]) %>%
+  mutate(reg="noncdr") %>%
+  filter(start > 55941025) %>%
+  filter(end < 59053403) %>%
+  filter(color=="Inaccessible") %>%
+  sample_n(9733)
+
+all.runs <- rbind(cdr_runs,non_cdr_runs)
+ 
+g <- ggplot(all.runs,aes(x=runlen, color=reg))+theme_classic(base_size = 25)+labs(x= "Inaccessible Run Length")+geom_density(adjust=.95)+xlim(0,1000)
+g
+
 ```
+
