@@ -1,0 +1,198 @@
+---
+title: "Composite Element Methylation TELOclusters"
+author: "Ariel"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  html_notebook: default
+mainfont: DejaVu Sans
+titlefont: DejaVu Sans
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE,  message=FALSE)
+
+# these are my personal utils -- find them in the utils dir of the T2T-Epigenetics git repo
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(zoo)
+library(bsseq)
+# BSgenome package for T2T genome -- find on globus and install
+library(BSgenome.t2t.v1.0.release)
+
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/gene_analysis/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+```
+
+```{r loadData, include=F}
+
+#chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
+#  GRanges()
+
+chm13_cg <- read_tsv(paste0(dat,"/revision_analysis/HG002_pooled/HG002_CpG_methylationFrequency_pooled.tsv")) %>%
+  GRanges()
+
+chm13_meth <- read_tsv(paste0(dat, "/HG002/nanonome/methylation_calls/whole_genome/chm13_hg002_reference_pooled/HG002_nanonome_GpCmethylationFrequency_20kb.tsv")) %>%
+  GRanges()
+#NBPF8 start chr1:120428485
+
+regs <- read_tsv(paste0(dat, "/revision_analysis/gene_analysis/NBPF.transcripts.meth.and.cutandrun_CGIstarts.bed"),col_names = c("chr", "start", "end", "name","strand", "n_transcripts","called_sites", "num","meth","cutnrunmax")) %>%
+  mutate(direction=strand) %>%
+  mutate(group=case_when(n_transcripts < 3 ~ "off", 
+                         TRUE ~ "on")) %>%
+  dplyr::select(c(chr,name,start,end,n_transcripts,cutnrunmax,direction)) %>%
+  group_by(name) %>%
+  mutate(start=min(start), end=max(end),n_transcripts=max(n_transcripts),cutnrunmax=max(cutnrunmax)) %>%
+  ungroup() %>%
+  filter(name %in% c("NBPF25P", "NBPF17P", "NBPF10", "NBPF12","NBPF19", "NBPF1","NBPF15", "NBPF20", "NBPF26", "NBPF25P", "NBPF8", "NBPF8","NBPF11","NBPF9"))%>%
+  distinct() %>%
+  mutate(ID=row_number()) %>%
+  mutate(group=case_when(name %in% c("NBPF25P","NBPF17P","NBPF19") ~ "oldest", 
+                         name %in% c("NBPF11","NBPF12","NBPF9","NBPF10","NBPF26") ~ 'middle', 
+                         TRUE ~ "youngest"))
+
+
+```
+
+```{r 5kb, echo=F}
+genes=c( "NBPF17P","NBPF19","NBPF25P","NBPF9","NBPF10","NBPF12", "NBPF11", "NBPF15","NBPF20","NBPF26", "NBPF8", "NBPF1")
+
+# size of flanking region
+flankn <- 2000
+# size of repeat relative to flanking region
+bodylen <- 5
+
+# add flanks
+l1_regions <- regs %>%
+  mutate(start = start - flankn, end = end + flankn) %>%
+  GRanges()
+
+# add methylation data
+ovlgc <- findOverlaps(chm13_meth, l1_regions)
+genes.ovlgc <- as.data.frame(regs)[subjectHits(ovlgc),] %>%
+  dplyr::mutate(genewidth = end - start) %>%
+  dplyr::rename(gene_start = start, gene_end = end) 
+
+# calculate distance from start and end, depending on strand 
+chm13.ovlgc <- as.data.frame(chm13_meth[queryHits(ovlgc),]) %>%
+  bind_cols(genes.ovlgc) %>%
+  dplyr::rename(seqnames = 1) %>%
+  mutate(dist = ifelse(direction=="+", start - gene_start, gene_end-start)) %>%
+  mutate(dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < genewidth,
+        bodylen * dist / genewidth,
+        bodylen + (dist - genewidth)/flankn)), 
+    dist = round(dist,2)
+    )
+
+
+
+# bin data to make plot pretty
+n_windows=500
+chm13.ovlgc$cut = cut(chm13.ovlgc$dist, breaks=n_windows)
+
+chm13.ovl.labs.gc <- chm13.ovlgc %>%
+  group_by(cut,group,name) %>%
+  summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(group,name) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 10, NA),top_smooth = rollmean(top, 10, NA),bot_smooth = rollmean(bot, 10, NA))
+
+#chm13.ovl.labs.gc$name <- ordered(chm13.ovl.labs.gc$name, levels = genes)
+
+
+
+
+# add methylation data
+ovlcg <- findOverlaps(chm13_cg, l1_regions)
+genes.ovlcg <- as.data.frame(regs)[subjectHits(ovlcg),] %>%
+  dplyr::mutate(genewidth = end - start) %>%
+  dplyr::rename(gene_start = start, gene_end = end) 
+
+# calculate distance from start and end, depending on strand 
+chm13.ovlcg <- as.data.frame(chm13_cg[queryHits(ovlcg),]) %>%
+  bind_cols(genes.ovlcg) %>%
+  dplyr::rename(seqnames = 1) %>%
+  mutate(dist = ifelse(direction=="+", start - gene_start, gene_end-start)) %>%
+  mutate(dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < genewidth,
+        bodylen * dist / genewidth,
+        bodylen + (dist - genewidth)/flankn)), 
+    dist = round(dist,2)
+    )
+
+
+
+# bin data to make plot pretty
+n_windows=500
+chm13.ovlcg$cut = cut(chm13.ovlcg$dist, breaks=n_windows)
+
+chm13.ovl.labs.cg <- chm13.ovlcg %>%
+  group_by(cut,group,name) %>%
+  summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(group,name) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 15, NA),top_smooth = rollmean(top, 10, NA),bot_smooth = rollmean(bot, 10, NA))
+
+
+chm13.ovl.labs.cg <- chm13.ovl.labs.cg %>%
+  mutate(motif="CG")
+
+chm13.ovl.labs.gc <- chm13.ovl.labs.gc %>%
+  mutate(motif="GC")
+
+chm13.ovl.labs <- rbind(chm13.ovl.labs.cg,chm13.ovl.labs.gc)
+chm13.ovl.labs$name <- ordered(chm13.ovl.labs$name, levels = genes)
+
+# plot -- include annotation for number of repeats in each group
+p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth, color=motif), alpha=.5)+
+  geom_line()+
+  #geom_smooth(se=F,span=.1,method="loess") +
+  geom_vline(xintercept = 0) +
+  geom_vline(xintercept = bodylen)+
+ # geom_point(alpha=.5)+
+  labs( x = "Genomic Position", y = "Aggregated Methylation Frequency") +
+  theme_classic()+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))+coord_cartesian(y=c(0,1))+facet_wrap(~name,ncol=3)
+
+
+#+
+#  scale_y_continuous(sec.axis = sec_axis(trans = ~ . * #(max_stones / max_revenue),
+#                                         name = 'number of #stones'),
+#                     labels = dollar) +
+#  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+#        axis.text.y = element_text(color = "#4B92DB"),
+#        axis.text.y.right = element_text(color = "red"),
+#        legend.position="bottom") +
+#  ylab('revenue')
+#
+p
+
+ggsave(
+  paste0(figs,"/HG002_NBPF_GpCCpGmethylation_with_age.pdf"),
+  plot = p,
+  scale = 1,
+  width = 15,
+  height = 9,
+)
+```
+
+
+
+
+
+
+
+
+
