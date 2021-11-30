@@ -1,0 +1,46 @@
+#!/home/roham/miniconda3/bin/snakemake --snakefile
+import os
+"""
+This Snakemake pipeline takes a directory of fastqs as input and for each sample:
+    * Runs minimap2
+    * Stringtie2 on the alignment and generates gtf and abundance file
+    * merges the transcripts from stringti2 
+    * Runs the second round of stringti2 using the merged transcripts as reference and -e parameter
+"""
+###-------input paths/files (I should use a config file before commit) -------###
+gtf = "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002/annotations/CHM13.combined.v4.HG002v0.9.HG38Y.gff3"
+base_out_path = "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/gene_expression" # the base directory of outputs, alignment and stringtie2 directories will be created inside this directory
+short_bam_path = "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/gene_expression/bam/"
+###--------------###
+###------- Extract sample names from fsatq directory -------###
+
+SAMPLESSHORT = [f.split(".")[0] for f in os.listdir(short_bam_path) if f.endswith('SRR13086640.bam')]
+print(str(len(SAMPLESSHORT)) + " short samples will be processed!")
+
+# print(str(SAMPLES))
+# ###--------------###
+# ###------- Pipeline Rules -------#####
+rule all:
+    input:
+        expand( base_out_path + "/stringtie2/{sample2}/{sample2}_ST2.gtf", sample2=SAMPLESSHORT)
+
+rule stringtie_short_1st:
+    input:
+    #	expand( base_out_path + "stringtie2/stringtie2_2nd/{sample}/{sample}_ST2_2nd.gtf", sample=SAMPLESSHORT)
+        bam = short_bam_path + "{sample2}.bam",
+    output:
+        base_out_path + "/stringtie2/{sample2}/{sample2}_ST2.gtf",
+
+    params:
+        DIR = base_out_path + "/stringtie2/{sample2}",
+        file = "{sample2}_ST2.gtf",
+	abun = "{sample2}_abun.txt"
+
+
+    threads: 10
+    message: """First stringtie run..."""
+    shell:"""
+        /home/roham/software/stringtie/stringtie {input.bam} -G {gtf} --conservative -o {params.DIR}/{params.file} -p 60 -B -e -A {params.DIR}/{params.abun} -v 
+    """
+
+###--------------###
