@@ -39,14 +39,17 @@ censat <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assemb
 desert <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/annotations/chm13_v1_MarkerDeserts.bed") %>%
   dplyr::rename(chrom=`#chrom`, start=chromStart, end=chromEnd) %>%
   GRanges()
+sample_cns <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/gene_analysis/NBPF.transcripts.meth.and.cutandrunMerged.bed",col_names = c("chr", "start", "end", "gene_id", "score")) %>%
+  mutate(ID = row_number()) %>% 
+  GRanges()
 
-chrom=c("chr1", "chr5","chr6","chr15","chr16","chr17","chr19")
+#chrom=c("chr1", "chr5","chr6","chr15","chr16","chr17","chr19")
 
 colors <- brewer.pal(n = 8, name = "Set1")
 win=5000
 chrs=seqlevels(BSgenome.t2t.v1.0.release)
-pdf(paste0(figs, "/allPeaks.pdf"), width = 10, height = 8)
-kp <- plotKaryotype(BSgenome.t2t.v1.0.release,chromosomes=chrom)
+postscript(paste0(figs, "/allPeaks_chr1.eps"), width = 10, height = 8)
+kp <- plotKaryotype(BSgenome.t2t.v1.0.release,chromosomes="chr1",plot.type=2)
 kpAddBaseNumbers(kp)
 
 kp <- kpPlotDensity(kp, novel.genes,data.panel="ideogram", window.size= win,col="red")
@@ -57,4 +60,6 @@ kp <- kpPlotDensity(kp, data=sample_1,col="#8844FF",window.size= win, r0=0, r1=1
 max.density <- kp$latest.plot$computed.values$max.density
 kpAxis(kp, ymin=0, ymax=max.density, numticks = 2,r0=0, r1=1)
 kpRect(kp, data= censat, y0=0, y1=1, chromosomes=chrom,col= "black", data.panel="ideogram", border=NA)
+kpPlotRegions(kp, synteny,data.panel=2, r0=.1, r1=.2)
+kpPlotMarkers(kp, data=sample_cns,data.panel=1,r0=.1, r1=1,labels=sample_cns$gene_id,text.orientation = "horizontal",label.dist = 0.01, max.iter = 1000)
 dev.off()

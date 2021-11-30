@@ -50,8 +50,8 @@ desert <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assemb
 colors <- brewer.pal(n = 8, name = "Set1")
 win=10000
 seqlevels(BSgenome.t2t.v1)
-pdf(paste0(figs, "/chr22_H3K9me3.pdf"), width = 5, height = 10)
-kp <- plotKaryotype(BSgenome.t2t.v1,chromosomes=c("chr22"),plot.type=2)
+pdf(paste0(figs, "/ACRO_H3K9me3.pdf"), width = 5, height = 20)
+kp <- plotKaryotype(BSgenome.t2t.v1,chromosomes=c("chr13","chr14","chr15", "chr21", "chr22"),plot.type=2)
 kpAddBaseNumbers(kp)
 #cn_col <- ifelse(sample_cns$cn>2, "red", "blue")
 kpPlotDensity(kp, data=sample_1, data.panel=1, col="#8844FF", window.size= win, r0=0, r1=0.1)
@@ -63,7 +63,7 @@ kpPlotDensity(kp, data=sample_6, data.panel=1, col="#AA66FF", window.size= win, 
 #kpPlotDensity(kp, annoData,data.panel=1, window.size= win, r0=.6, r1=.7)
 kpPlotRegions(kp, synteny,data.panel=1, r0=.8, r1=.9)
 #kpPlotRegions(kp, encode_black.gr,data.panel=1, r0=.9, r1=1)
-kpRect(kp, desert,data.panel=1, y0=1, y1=1.5,r0=1, r1=1.1, col="black")
+#kpRect(kp, desert,data.panel=1, y0=1, y1=1.5,r0=1, r1=1.1, col="black")
 kpRect(kp, data= censat, y0=0, y1=1, col= colors, data.panel="ideogram", border=NA)
 dev.off()
 
