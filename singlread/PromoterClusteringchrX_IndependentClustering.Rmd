@@ -1,0 +1,395 @@
+---
+title: "load_methyl_bed"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+# loads libs 
+
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+library(GenomicRanges)
+library(knitr)
+library(Biostrings)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+library(mclust)
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+
+```
+
+```{r bis, echo=F}
+
+protein_coding <- read_tsv(paste0(dat,"/revision_analysis/promoter_clustering/mitchell_merged_bed/protein_coding_names.txt"),col_names="gene")
+
+reads <- tabix_mbed(paste0(dat, "/revision_analysis/promoter_clustering/chrX/chrX.chm13_v1_tss.CGI_intersectionsMethylBed.bed"),extcol = "motif",by = "read") 
+
+regs.all <- read_delim(paste0(dat, "/revision_analysis/promoter_clustering/mitchell_merged_bed/chm13_v1_tss.CGI_ntranscripts_intersections.bed"), col_names=c("chr","start","end","strand","name","gene_start","gene_end", "transcripts", "cgi_chr","cgi_start","cgi_end"),delim="\t")  %>%
+  filter(name %in% protein_coding$gene) %>%
+  mutate(quantile=case_when(transcripts == 0 ~ "no_expression", 
+                            transcripts > 0 & transcripts < 113 ~ "medium",
+                            transcripts >=100 ~ "high")) %>%
+  filter(chr=="chrX") 
+
+regs.cgi <- regs.all  %>%
+  mutate(region="cgi") 
+
+regs.gb <- regs.all  %>%
+  mutate(start=ifelse(strand=="+", cgi_end,gene_end))%>%
+  mutate(end=ifelse(strand=="+", gene_end,cgi_end)) %>%
+  mutate(len=end-start) %>%
+  filter(chr=="chrX") %>%
+  filter(len > 100) %>%
+  select(-c(len))  %>%
+  mutate(region="gb")
+
+
+regs <- rbind(regs.gb,regs.cgi) %>%
+  distinct() %>%
+ # mutate(start=ifelse(strand=="+", gene_start,gene_end))%>%
+#  mutate(end=ifelse(strand=="+", gene_end,gene_start)) %>%
+  GRanges()
+
+
+size_sel <- reads %>%
+  dplyr::mutate(rlen = end-start) %>%
+  filter(rlen >= 5000) %>%
+  mutate(motif = "CG")
+
+cgcalls <- mbedByCall(size_sel) %>%
+  drop_na(mcall) 
+
+smoothCalls <- function(calls,reg=NULL,bandwidth = 40){
+  calls <- calls %>%
+    mutate(mcall = ifelse(abs(score)>1,sign(score),score)) # ceiling based on log-lik ratio - this uses log-lik ratio when call is not obvious
+  if (is.null(reg)) {
+    xpoints <- seq(min(calls$start),max(calls$start))
+  } else {
+    reg <- as_tibble(reg)
+    xpoints <- seq(reg$start,reg$end)
+  }
+  ks <- ksmooth(calls$start,calls$mcall,bandwidth = 80,kernel = "normal",x.points = xpoints)
+  tibble(
+    start = ks$x,
+    mcall_smooth = ks$y, 
+    mcall = case_when(
+      mcall_smooth > 0 ~ 1,
+      mcall_smooth < 0 ~ 0,
+      TRUE ~ -1)) 
+}
+
+
+group_names <- group_keys(as.data.frame(cgcalls))$qname
+calls.list <- calls.reg %>% 
+group_split(keep = T)
+
+names(calls.list) <- group_names
+smooth.list <- lapply(calls.list,smoothCalls)
+calls.smooth <- bind_rows(smooth.list,.id = "qname")
+smooth <- smoothCalls(as.data.frame(cgcalls))
+
+cgcalls <- as.data.frame(cgcalls) %>%
+  mutate(cg_position=start) %>%
+  GRanges()
+
+
+ovls <- FindOvls(regs,smooth_cg) 
+
+combined <- ovls %>%
+  group_by(name) %>%
+  mutate(n=n()) %>%
+  filter(n > 10) %>%
+  group_by(region,name,qname,transcripts,quantile) %>%
+  summarise(methylation=mean(llr_smooth)) %>%
+  spread(region,methylation) %>%
+  select(-c(gb)) %>%
+  ungroup() %>%
+  #filter(quantile != "no_expression") %>%
+  na.omit()
+
+write.table(combined, "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/chrX/CGI_GeneBody_SingleRead_methylationKernelSmooth.tsv",
+          quote=F,
+          row.names=F,
+          sep="\t")
+
+
+```
+
+
+
+```{r}
+
+clustered_reads <- data.frame()
+gene_list=unique(combined$name)
+for (gene in gene_list){
+  df.cgi <- combined %>%
+    ungroup() %>%
+    filter(name == gene) %>%
+    select(c(name,qname,cgi)) %>%
+    unite(newname,name,qname, sep=":") 
+  
+  Q95 <- quantile(X, .99)
+  Q5 <- quantile(X, .01)
+  
+  if (is.na(Q95)) {
+    df.cgi <- df.cgi}else{
+      df.cgi <- df.cgi %>% filter(cgi < Q95)
+  }
+  if (is.na(Q5)) {
+    df.cgi <- df.cgi}else{
+      df.cgi <- df.cgi %>% filter(cgi > Q5)
+    }
+  class <- df.cgi$newname
+  X <- df.cgi$cgi
+  if (length(X) < 10) next
+  model1 <- Mclust(X,G=2)
+  if (is.null(model1)) next
+  df.cgi$group <- model1$classification
+  df.cgi$uncertainty_cgi <- model1$uncertainty
+  clustered_reads <- rbind(clustered_reads, df.cgi) 
+  print(gene)
+  print(length(X))
+}
+
+
+#ggplot(df.cgi, aes(cgi, fill=as.factor(group)))+geom_histogram()
+clustered_reads <- clustered_reads %>%
+  separate(newname, c("name", "qname"), ":")
+
+write.table(clustered_reads, "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/ClusteredReads_chrX_proteinCodingPerGeneClustering.tsv",
+            quote=F,
+            row.names=F,
+            sep="\t")
+
+stat.sum <- clustered_reads %>%
+  ungroup() %>%
+  group_by(group) %>%
+  summarise(sum=n())
+
+stat <- clustered_reads %>%
+  group_by(name) %>%
+  mutate(total=n()) %>%
+  ungroup() %>%
+  group_by(name,group,total) %>%
+  summarise(sum=n()) %>%
+  mutate(frac=sum/total) %>%
+  distinct()
+
+known_escapers <- read_csv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/chrX/XCI_2014_paper.csv", col_names = c('name', 'escape')) %>%
+  filter(escape %in% c("escape from XCI in 27 tissues","subject to XCI in 27 tissues"))
+
+escape <- merge(stat,known_escapers, by="name")
+```
+
+```{r}
+
+regs <- regs.all %>%
+  mutate(start=ifelse(strand=='+', gene_start,gene_end), end=ifelse(strand=='+', gene_end,gene_start)) %>%
+  merge(known_escapers, by="name") %>%
+  #mutate(escape=ifelse(name %in% known_escapers$gene, "yes","no")) %>%
+  filter(transcripts > 2)
+
+clustered_reads.sep <- clustered_reads %>%
+  #mutate(escape=ifelse(name %in% known_escapers$gene, "yes","no")) %>%
+  merge(known_escapers, by="name") %>%
+  #separate(newname1, c("name","qname"),":") %>%
+  select(qname,group,escape,name) %>%
+  dplyr::rename("readname"=qname)
+  
+
+all.reads <- merge(reads, clustered_reads.sep,by="readname")
+all.read.group1 <- all.reads %>%
+  filter(group == 1) %>%
+  select(-c(group))
+
+all.read.group2 <- all.reads %>%
+  filter(group == 2) %>%
+  select(-c(group))
+
+group1.cg <- mbedByCall(all.read.group1) %>%
+  drop_na(mcall)
+group1.freq <- group1.cg %>%
+  mutate(end=start) %>%
+  group_by(chrom,start,end) %>%
+  summarise(methylated_frequency=mean(mcall)) %>%
+  GRanges()
+
+group2.cg <- mbedByCall(all.read.group2) %>%
+  drop_na(mcall)
+group2.freq <- group2.cg %>%
+  mutate(end=start) %>%
+  group_by(chrom,start,end) %>%
+  summarise(methylated_frequency=mean(mcall)) %>%
+  GRanges()
+
+flankn=1000
+bodylen <- 4
+# add methylation data
+l1_regions <- regs %>%
+  mutate(start = start - flankn, end = end + flankn) %>%
+  GRanges()
+
+
+
+ovl <- findOverlaps(group1.freq, GRanges(l1_regions))
+genes.ovl <- as.data.frame(regs)[subjectHits(ovl),] %>%
+  dplyr::mutate(genewidth = end - start) %>%
+  dplyr::rename(reg_start = start, reg_end = end) %>%
+  mutate("Direction"=strand)
+
+# calculate distance from start and end, depending on strand 
+chm13.ovl.group1 <- as.data.frame(group1.freq[queryHits(ovl),]) %>%
+  bind_cols(genes.ovl) %>%
+  dplyr::rename(seqnames = 1) %>%
+  mutate(dist = ifelse(Direction=="+", start - reg_start, reg_end-start)) %>%
+  mutate(dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < genewidth,
+        bodylen * dist / genewidth,
+        bodylen + (dist - genewidth)/flankn)), 
+    dist = round(dist,2)
+    ) %>%
+  mutate(group = "group1")
+
+
+
+
+ovl <- findOverlaps(group2.freq, GRanges(l1_regions))
+genes.ovl <- as.data.frame(regs)[subjectHits(ovl),] %>%
+  dplyr::mutate(genewidth = end - start) %>%
+  dplyr::rename(reg_start = start, reg_end = end) %>%
+  mutate("Direction"=strand)
+
+# calculate distance from start and end, depending on strand 
+chm13.ovl.group2 <- as.data.frame(group2.freq[queryHits(ovl),]) %>%
+  bind_cols(genes.ovl) %>%
+  dplyr::rename(seqnames = 1) %>%
+  mutate(dist = ifelse(Direction=="+", start - reg_start, reg_end-start)) %>%
+  mutate(dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < genewidth,
+        bodylen * dist / genewidth,
+        bodylen + (dist - genewidth)/flankn)), 
+    dist = round(dist,2)
+    ) %>%
+  mutate(group = "group2")
+
+chm13.ovl <- rbind(chm13.ovl.group1,chm13.ovl.group2) 
+
+write.table(chm13.ovl, "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/ClusteredMethylationFrequency_chrX_proteinCoding_withUncertainty.tsv",
+            quote=F,
+            row.names=F,
+            sep="\t")
+
+# bin data to make plot pretty
+n_windows=5000
+chm13.ovl$cut = cut(chm13.ovl$dist, breaks=n_windows)
+
+chm13.ovl.labs <- chm13.ovl %>%
+  group_by(cut,group,escape) %>%
+  summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(group,escape) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 20, NA),top_smooth = rollmean(top, 10, NA),bot_smooth = rollmean(bot, 10, NA))
+
+# plot -- include annotation for number of repeats in each group
+p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth, color=group, fill=group), alpha=.5)+
+ # geom_ribbon(aes(ymin=bot_smooth, ymax=top_smooth), alpha=0.2, size=0)+
+  geom_line(aes(y=med_smooth), alpha=.5, size=1) +
+  geom_vline(xintercept = 0) +
+  geom_vline(xintercept = bodylen)+
+ # geom_point(alpha=.5)+
+  labs( x = "Genomic Position", y = "Aggregated Methylation Frequency") +
+  theme_classic()+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))+theme(legend.position = 'none')+facet_wrap(~escape)+ylim(0,1)
+p
+
+
+group1_reads <- all.read.group1 %>%
+  select(c(readname,escape,name)) %>%
+  mutate(group="group1")
+group2_reads <- all.read.group2 %>%
+  select(c(readname,escape,name)) %>%
+  mutate(group="group2")
+
+stat.reads <- rbind(group1_reads,group2_reads) %>%
+  group_by(escape,name,group) %>%
+  filter(name %in% regs$name) %>%
+  summarise(n=n()) %>%
+  group_by(name) %>%
+  mutate(total=sum(n)) %>%
+  mutate(frac=n/total) %>%
+  filter(group == "group2") %>%
+  arrange(frac) %>%
+  ungroup() %>%
+  mutate(order=row_number())
+
+ggplot(stat.reads, aes(x=order,y=frac,color=escape))+geom_point(alpha=.5,size=5)+ylim(0,1)
+
+ggplot(stat.reads, aes(x=frac, fill=escape))+geom_density(alpha=.5)
+
+stat.all <- rbind(group1_reads,group2_reads) %>%
+  filter(name %in% regs$name) %>%
+  group_by(group,escape) %>%
+  summarise(per_group=n()) %>%
+  ungroup() %>%
+  group_by(escape) %>%
+  mutate(total=sum(per_group)) %>%
+  mutate(frac=per_group/total) %>%
+  ungroup() %>%
+  filter(group=="group2") %>%
+  group_by(escape) %>%
+  summarize(mean=mean(frac))
+    
+
+
+```
+
+```{r}
+gene="AR"
+acot9 <- clustered_reads %>%
+  dplyr::filter(name==gene) %>%
+  select(c(group,qname))
+
+cgcalls.sub <- as.data.frame(cgcalls) %>%
+  filter(qname %in% acot9$qname)
+
+cpg_runs <-getRuns(cgcalls.sub, maxGap = 150)
+all_runs <- merge(cpg_runs,clustered_reads, by = "qname" )
+
+cpg_runs.ordered <- order_reads_facet(all_runs)
+
+
+
+cpg_runs_plot <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG")
+  
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+
+coords <- as.data.frame(regs) %>%
+  filter(name == gene)  %>%
+  mutate(start=ifelse(strand=="+", cgi_start,cgi_end))%>%
+  mutate(end=gene_end)
+
+#TSIX chrX:72225528-72262547
+g <- ggplot(cpg_runs_plot,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax))+ geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80")+ 
+    geom_rect(aes(fill = m)) +scale_fill_manual(name = "State", values = meth_pal)+theme_classic()+facet_wrap(~group,ncol=1)+theme(legend.position = "bottom")+ theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))+coord_cartesian(xlim=c(coords$start[1], coords$end[1]))+geom_vline(xintercept = c(coords$cgi_start[1],coords$cgi_end[1]), linetype = "dotted")#+geom_vline(xintercept = c(72225528,72262547), linetype = "dotted")+coord_cartesian(xlim=c(23284668, 23350090))
+g
+
+
+```

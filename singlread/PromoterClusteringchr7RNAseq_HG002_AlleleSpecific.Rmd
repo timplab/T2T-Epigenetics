@@ -1,0 +1,408 @@
+---
+title: "load_methyl_bed"
+author: "G$"
+date: "9/3/2020"
+output: pdf_document
+---
+
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+# loads libs 
+
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+library(GenomicRanges)
+library(knitr)
+library(Biostrings)
+library(cowplot)
+options(scipen=999)
+library(zoo)
+library(mclust)
+```
+
+```{r mbed}
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/RNAseq/chr7_HG002/figures"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+out="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/promoter_clustering/RNAseq/chr7_HG002"
+base="HG002_chr7_RNAseq"
+```
+
+```{r}
+# find single TSS genes 
+
+tss <- read_delim("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/gene_analysis/CHM13.combined.v4.TSSonly.bed", col_names=c("chr", "start", "end","strand", "gene_name", "gene_biotype"), delim="  ") %>%
+  separate(gene_name, c("gene_name", "transcript"), "-") %>%
+  group_by(gene_name) %>%
+  #filter(max(end)-min(start) < 1000) %>%
+  select(c(gene_name)) %>%
+  distinct()
+
+
+
+protein_coding <- read_tsv(paste0(dat,"/gene_expression/dictionary.tsv")) %>%
+  filter(gene_biotype == "protein_coding") #%>%
+  #filter(gene_name %in% tss$gene_name)
+
+
+hap1.for <- read_tsv(paste0(dat,"/HG002/nanonome/methylation_calls/phasing/whole_genome/PositiveStrand_Hap1IDs.txt"), col_names = "qname") %>%
+  mutate(hap="hap1",strand="+") %>%
+  distinct()
+
+hap1.rev <- read_tsv(paste0(dat,"/HG002/nanonome/methylation_calls/phasing/whole_genome/NegativeStrand_Hap1IDs.txt"), col_names = "qname") %>%
+  mutate(hap="hap1",strand="-") %>%
+  distinct()
+
+hap2.for <- read_tsv(paste0(dat,"/HG002/nanonome/methylation_calls/phasing/whole_genome/PositiveStrand_Hap2IDs.txt"), col_names = "qname") %>%
+  mutate(hap="hap2",strand="+") %>%
+  distinct()
+
+hap2.rev <- read_tsv(paste0(dat,"/HG002/nanonome/methylation_calls/phasing/whole_genome/NegativeStrand_Hap2IDs.txt"), col_names = "qname") %>%
+  mutate(hap="hap2", strand="-") %>%
+  distinct()
+
+IDs=rbind(hap1.for,hap1.rev,hap2.rev,hap2.for)
+```
+
+```{r}
+reads <- tabix_mbed(paste0(dat, "/revision_analysis/promoter_clustering/RNAseq/chr7_HG002/CHM13.combined.v4.protein_coding.tss_RNAseq-cgi_chr7_nanonomeMethylBed.bed"),extcol = "motif",by = "read") 
+
+cgcalls <- mbedByCall(reads) %>%
+  drop_na(mcall) %>%
+  mutate(cg_position=start) %>%
+  GRanges()
+```
+
+
+```{r bis, echo=F}
+
+regs.all <- read_delim(paste0(dat, "/revision_analysis/promoter_clustering/RNAseq/HG002/HG002.combined.v4.protein_coding.tss_RNAseq-cgi.bed"), col_names=c("chr","start","end","strand","name","gene_start","gene_end", "cov", "fpkm", "tpm", "cgi_chr","cgi_start","cgi_end"),delim="\t")  %>%
+  filter(name %in% protein_coding$gene_id) %>%
+ # mutate(quantile=ntile(fpkm,4)) %>%
+  mutate(quantile=case_when(fpkm < 1 ~ "off", 
+                            fpkm >= 1 ~ "on")) %>%
+  filter(chr=="chr7") 
+
+
+regs.cgi <- regs.all  %>%
+  mutate(region="cgi") 
+
+regs.gb <- regs.all  %>%
+  mutate(start=ifelse(strand=="+", cgi_end,gene_end))%>%
+  mutate(end=ifelse(strand=="+", gene_end,cgi_end)) %>%
+  mutate(len=end-start) %>%
+  filter(chr=="chr7") %>%
+  filter(len > 100) %>%
+  select(-c(len))  %>%
+  mutate(region="gb")
+
+
+regs <- rbind(regs.gb,regs.cgi) %>%
+  distinct() %>%
+ # mutate(start=ifelse(strand=="+", gene_start,gene_end))%>%
+#  mutate(end=ifelse(strand=="+", gene_end,gene_start)) %>%
+  GRanges()
+
+ovls <- FindOvls(regs,cgcalls) 
+
+combined <- ovls %>%
+  group_by(qname) %>%
+  mutate(read_start=min(cg_position), read_end=max(cg_position)) %>%
+  filter(read_start - start < 500) %>%
+  filter(end - read_end < 500) %>%
+  group_by(region,name,qname,fpkm,quantile) %>%
+  summarise(methylation=mean(mcall)) %>%
+  spread(region,methylation) %>%
+  na.omit()
+
+combined <- merge(combined,IDs,by="qname" )
+strand.stuff <- combined %>%
+  group_by(name,hap,strand) %>%
+  summarise(meancgi=mean(cgi)) %>%
+  spread(strand,meancgi) %>%
+  na.omit() %>%
+  mutate(dif=`-` - `+`) %>%
+  filter(dif < .1) %>%
+  ungroup() %>%
+  select(c(name)) %>%
+  distinct()
+  
+combined <- combined %>%
+  filter(name %in% strand.stuff$name) %>%
+  na.omit()
+
+
+
+#ggplot(strand.stuff,aes(x=dif))+geom_histogram()
+#combined <- rbind(combined.hap1,combined.hap2)
+#write.table(combined, 
+#            paste0(out,"/", base, "SingleReadquantiles_singleTSS.tsv"),
+#          quote=F,
+#          row.names=F,
+#          sep="\t")
+#
+#
+```
+
+```{r}
+
+df.cgi <- combined %>%
+  select(c(name,qname,cgi,hap,gb,fpkm,quantile)) %>%
+  unite(newname,name,qname, sep=":") 
+
+class <- df.cgi$newname
+X <-  df.cgi$cgi
+model1 <- Mclust(X,G=2)
+summary(model1)
+
+df.cgi$group <- model1$classification
+df.cgi$uncertainty_cgi <- model1$uncertainty
+
+
+clustered_reads <- df.cgi%>%
+  separate(newname, into=c("name","qname"),":") %>%
+  mutate(group=case_when(group == 1 ~ "low_cgi",
+                        group ==2  ~ "high_cgi")) %>%
+  mutate(group=ifelse( uncertainty_cgi > 0.2, "uncertain", group))
+
+ggplot(clustered_reads, aes(x=cgi,fill=group))+geom_histogram(bins=100)
+ggplot(clustered_reads, aes(x=uncertainty_cgi))+geom_histogram(bins=100)
+
+clustered_reads$quantile = combined$quantile 
+
+
+stat.sum <- clustered_reads %>%
+  ungroup() %>%
+  group_by(group) %>%
+  summarise(sum=n(),median_fpkm=median(fpkm),mean_gb=mean(gb),mean_cgi=mean(cgi)) 
+
+id <- clustered_reads %>%
+  select(c(name,quantile,fpkm)) %>%
+  distinct()
+
+clustered_reads <- clustered_reads %>%
+  filter(!grepl("uncertain",group))
+
+stat <- clustered_reads %>%
+  group_by(name,hap) %>%
+  mutate(total=n()) %>%
+  group_by(name,group,quantile,total,fpkm,hap) %>%
+  summarise(sum=n()) %>%
+  ungroup() %>%
+  select(c(name,group,total,sum,hap)) %>%
+  filter(sum > 5) %>%
+  group_by(name,hap) %>%
+  mutate(total= sum(sum)) %>%
+  ungroup() %>%
+  complete(name,group,fill=list(sum=0)) %>%
+  mutate(sum=ifelse(sum == 1, 0, sum)) %>% 
+  mutate(frac=sum/total)
+  
+stat$total[is.na(stat$total)] <- 0
+stat$frac[is.na(stat$frac)] <- 0
+
+stat <- merge(stat,id, by="name") %>%
+  group_by(name,hap) %>%
+  mutate(total=sum(sum)) %>%
+  ungroup() %>%
+  mutate(frac=sum/total)%>%
+  unite(group, hap, "group", sep=':') 
+
+
+
+```
+
+## Plots ###
+```{r}
+
+ggplot(clustered_reads,aes(x=cgi,y=gb,color=as.factor(quantile)))+geom_point(alpha=.25)+facet_wrap(~as.factor(quantile),ncol=1)
+
+diff <- clustered_reads %>%
+  group_by(qname, quantile) %>%
+  mutate(bimodality_score = gb-cgi)
+
+
+ggplot(diff,aes(x=as.factor(quantile),y=bimodality_score,color=as.factor(quantile)))+geom_violin()+geom_violin(width=1)+geom_boxplot(width=.1,outlier.shape = NA)+theme_bw()
+
+ggplot(diff,aes(x=bimodality_score,fill=as.factor(quantile)))+geom_histogram(position = "identity", alpha=.5)+theme_bw()
+
+ggplot(stat, aes(x=as.factor(quantile),y=frac,color=as.factor(quantile)))+geom_violin(width=1)+geom_boxplot(width=.1,outlier.shape = NA)+facet_wrap(~group)+theme_bw()
+
+stat %>%
+  filter(frac > .75) %>%
+ggplot(aes(group,log2(fpkm),color=group))+geom_violin()+theme_bw()+geom_boxplot(width=.1,outlier.shape = NA)
+
+ggplot(stat,aes(x=name, y=frac, fill=group))+geom_bar(stat="identity")+facet_wrap(~as.factor(quantile), scales="free")
+```
+
+### Single Read Examples ###
+```{r}
+
+
+gene="CHM13_G0051021"
+acot9 <- clustered_reads %>%
+  dplyr::filter(name==gene) %>%
+ # merge(IDs, by="qname")
+  unite("group", group, hap,sep=":") %>%
+  select(c(group,qname))
+
+cgcalls.sub <- as.data.frame(cgcalls) %>%
+  filter(qname %in% acot9$qname)
+
+cpg_runs <-getRuns(cgcalls.sub, maxGap = 50)
+all_runs <- merge(cpg_runs,acot9, by = "qname" )
+
+cpg_runs.ordered <- order_reads_facet(all_runs)
+
+
+
+cpg_runs_plot <- cpg_runs.ordered$x %>%
+    mutate(m = ifelse(values == 1, "Methylated","Unmethylated")) %>%
+    mutate(mod = "CpG") 
+  
+pal <- pal_npg("nrc")(10)
+meth_pal <- c(pal[8],pal[4]) 
+
+coords <- as.data.frame(regs) %>%
+  filter(name == gene)  %>%
+  mutate(start=ifelse(strand=="+", cgi_start,cgi_end))%>%
+  mutate(end=gene_end)
+  
+#TSIX chrX:72225528-72262547
+g <- ggplot(cpg_runs_plot,aes(xmin = start, xmax = end, ymin = ymin, ymax = ymax))+ geom_rect(data = cpg_runs.ordered$bounds, fill = "grey80")+ 
+    geom_rect(aes(fill = m)) +scale_fill_manual(name = "State", values = meth_pal)+theme_classic()+facet_wrap(~group,ncol=1)+theme(legend.position = "bottom")+ theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), panel.spacing = unit(2, "lines"))+coord_cartesian(xlim=c(coords$start[1], coords$end[1]))+geom_vline(xintercept = c(coords$cgi_start[1],coords$cgi_end[1]), linetype = "dotted")#+geom_vline(xintercept = c(72225528,72262547), linetype = "dotted")+coord_cartesian(xlim=c(23284668, 23350090))
+g
+
+name = protein_coding %>%
+  filter(gene_id == gene)
+
+bis2 <- all_runs %>% 
+  ungroup() %>%
+  group_by(group, start) %>%
+  summarise(meth_freq = mean(values)) %>%
+  mutate(smooth = rollmean(meth_freq, 2, fill = NA)) 
+
+meth <- ggplot(bis2, aes(x = start, y= smooth,color=group))+geom_point()+geom_line(size =1) + labs(x="Genomic coordinates (Mb)", y="Methylation")+theme_classic(base_size = 25)+ylim(0,1)+coord_cartesian(xlim=c(coords$start[1], coords$end[1]))+geom_vline(xintercept = c(coords$cgi_start[1],coords$cgi_end[1]), linetype = "dotted")+theme(legend.position = "top")
+meth
+
+print(name$gene_name)
+ggsave(paste0(figs, "/", base,".", name$gene_name, ".pdf"),
+       g,
+       height = 8, 
+       width=12)
+```
+
+```{r}
+library(cowplot)
+library(ggdendro)
+
+stat3 <- stat %>%
+  group_by(name) %>%
+  arrange(fpkm) %>%
+  select(c(name,group,frac)) %>%
+  na.omit() %>%
+  group_by(name) %>%
+  spread(group,frac) %>%
+  column_to_rownames("name") 
+stat3[is.na(stat3)] <- 0
+
+stat3 <- stat3 %>% 
+  filter(`hap1:high_cgi`+`hap1:low_cgi` != 0) %>%
+  filter(`hap2:high_cgi`+`hap2:low_cgi` != 0) %>%
+  filter(`hap1:low_cgi`-`hap2:low_cgi` != 0)
+
+# clustering with hclust on row and on column
+dd.col <- as.dendrogram(hclust(dist(stat3)))
+dd.row <- as.dendrogram(hclust(dist(t(stat3))))
+
+ggdendrogram(hclust(dist(stat3)), rotate = FALSE, size = 2)
+model <- hclust(dist(stat3))
+dhc <- as.dendrogram(model)
+# Rectangular lines
+ddata <- dendro_data(dhc, type = "rectangle")
+
+clust <- data.frame(cutree(hclust(dist(stat3)),4)) %>%
+  dplyr::rename("clust"=1) %>%
+  rownames_to_column('name')
+
+# ordering based on clustering
+col.ord <- order.dendrogram(dd.col)
+row.ord <- order.dendrogram(dd.row)
+
+new_df = as.data.frame(stat3[col.ord, row.ord]) %>%
+  mutate(order=row_number()) %>%
+  rownames_to_column("name") %>%
+  select(c(name,order)) %>%
+  merge(clust, by="name")
+
+stat2.ordered <- merge(stat,new_df, by="name") %>%
+  mutate(fpkm=as.numeric(fpkm))
+stat2.ordered$name <- reorder(stat2.ordered$name, stat2.ordered$order)
+
+stat2.ordered <- stat2.ordered %>%
+  separate(group, c("hap" ,"group"), sep=":") %>%
+  na.omit()
+
+
+violin <- ggplot(stat2.ordered, aes(x=as.factor(clust), y=log2(fpkm+1)))+geom_violin(width=1,aes(color=as.factor(clust)))+geom_boxplot(width=.1,aes(color=as.factor(clust)))
+
+#ggsave(paste0(figs, "/", base,".", "ClusterViolin.pdf"),
+#       violin,
+#       height = 5, 
+#       width=7)
+#
+colfunc <- colorRampPalette(c("lightgray", "#C71585"))
+pal=colfunc(10)
+
+stat2.ordered$y=1
+tile <- ggplot(stat2.ordered, aes(x = name, y=y, fill=log2(fpkm+1))) +
+  geom_bar(stat="identity")+theme_void()+scale_fill_gradientn(colors=pal)+
+  theme(legend.position = "top")
+
+heat <- ggplot(stat2.ordered,aes(x=name, y=frac, fill=group))+geom_bar(stat="identity")+
+ # theme(axis.title.x=element_blank(),
+ #       axis.text.x=element_blank(),
+ #       axis.ticks.x=element_blank())
+  scale_fill_manual(values = c("high_cgi" = "darkred", "low_cgi" = "navy"))+facet_wrap(~hap, ncol=1)+ #theme_void()+
+  theme(legend.position = "top")
+heat
+p <- ggplot(segment(ddata)) + 
+  geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) + 
+  #coord_flip() + 
+  scale_y_reverse(expand = c(0.2, 0)) + theme_void()
+
+
+
+plot <- plot_grid(
+  tile, heat,p,
+  ncol = 1,
+  align = 'v',
+  rel_heights = c(1, 3,1)
+)
+
+#ggsave(paste0(figs, "/", base,".", "ClusteredDendrogram.pdf"),
+#       plot,
+#       height = 15, 
+#       width=15)
+```
+```{r}
+stat2.ordered <- stat2.ordered %>%
+  group_by(group) %>%
+  arrange(frac) %>%
+  mutate(order=row_number())
+
+
+stat2.ordered$name <- reorder(stat2.ordered$name, stat2.ordered$order)
+
+  
+heat <- ggplot(stat2.ordered,aes(x=name, y=frac, fill=group))+geom_bar(stat="identity")+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+scale_fill_manual(values = c("high_cgi" = "darkred", "low_cgi" = "navy"))+facet_wrap(~hap,scales="free", ncol=1)+ theme_void()+
+  theme(legend.position = "top")
+heat
+```
+
