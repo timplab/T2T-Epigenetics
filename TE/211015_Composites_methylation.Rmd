@@ -1,0 +1,187 @@
+---
+title: "Composite Element Methylation TELOclusters"
+author: "Ariel"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  html_notebook: default
+mainfont: DejaVu Sans
+titlefont: DejaVu Sans
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE,  message=FALSE)
+
+# these are my personal utils -- find them in the utils dir of the T2T-Epigenetics git repo
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(zoo)
+library(bsseq)
+library("rhmmer")
+# BSgenome package for T2T genome -- find on globus and install
+library(BSgenome.t2t.v1.0.release)
+
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/TE/revision"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+```
+
+
+```{r}
+regs <- read_tblout(paste0(dat, "/revision_analysis/satellites/d4z4/d4z4_hmmsearch.tsv")) %>%
+  separate(query_name, c("chr", "coords"), (":")) %>%
+  separate(coords, c("num", "end"), ("-")) %>%
+  rename("Orientation"=domain_accession) %>%
+  select(chr, num, end,sequence_bias,best_domain_evalue,Orientation) %>%
+  mutate(start=as.numeric(sequence_bias)+as.numeric(num), end=best_domain_evalue+as.numeric(num), len=end-start) %>%
+  select(chr, start, end, len,Orientation)%>%
+  mutate(ID=row_number())
+```
+
+```{r loadData, include=F}
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
+  GRanges()
+```
+
+```{r 5kb, echo=F}
+
+# size of flanking region
+flankn <- 100
+# size of repeat relative to flanking region
+bodylen <- 30
+
+# add flanks
+l1_regions <- regs %>%
+  mutate(start = start - flankn, end = end + flankn) %>%
+  GRanges()
+
+# add methylation data
+ovl <- findOverlaps(chm13_meth, l1_regions)
+genes.ovl <- as.data.frame(regs)[subjectHits(ovl),] %>%
+  dplyr::mutate(genewidth = end - start) %>%
+  dplyr::rename(gene_start = start, gene_end = end) 
+
+# calculate distance from start and end, depending on strand 
+chm13.ovl <- as.data.frame(chm13_meth[queryHits(ovl),]) %>%
+  bind_cols(genes.ovl) %>%
+  dplyr::rename(seqnames = 1) %>%
+  mutate(dist = ifelse(Orientation=="pos", start - gene_start, gene_end-start)) %>%
+  mutate(dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < genewidth,
+        bodylen * dist / genewidth,
+        bodylen + (dist - genewidth)/flankn)), 
+    dist = round(dist,2)
+    )
+
+# bin data to make plot pretty
+n_windows=500
+chm13.ovl$cut = cut(chm13.ovl$dist, breaks=n_windows)
+
+chm13.ovl.labs <- chm13.ovl %>%
+  group_by(cut) %>%
+  summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+#  group_by(group) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 15, NA),top_smooth = rollmean(top, 10, NA),bot_smooth = rollmean(bot, 10, NA))
+
+# plot -- include annotation for number of repeats in each group
+p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth), alpha=.5)+
+  geom_ribbon(aes(ymin=bot_smooth, ymax=top_smooth), alpha=0.2, size=0)+
+  geom_line(aes(y=med_smooth), alpha=.5, size=1) +
+  geom_vline(xintercept = 0) +
+  geom_vline(xintercept = bodylen)+
+  geom_point(alpha=.5)+
+  labs( x = "Genomic Position", y = "Aggregated Methylation Frequency") +
+  theme_classic()+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))
+#+
+#geom_text(data = chm13.ovl %>% 
+#              group_by(region) %>%
+#              dplyr::select(region,gene_start) %>%
+#              distinct() %>%
+#              summarise(n_genes=n()) %>%
+#              distinct() %>%
+#              mutate(height=case_when(region == "yes" ~ 0, 
+#                          region == "no" ~ .1, 
+#                          TRUE ~ .02)),
+#            aes(x=1,
+#                y=.85+height,
+#                label=paste("n =",comma(n_genes))
+#                ), hjust=1)+
+#theme(legend.position = "top")
+#
+
+p
+
+
+ggsave(
+  paste0(figs,"CHM13_d4z4_metaplotREV.pdf"),
+  plot = p,
+  scale = 1,
+  width = 12,
+  height = 5,
+)
+```
+
+
+
+Add a CpG density track by using bsseq to find all CpG sites in the genome and adding up CpG sites at each distance from the repeat start and end, plot as tile -- light blue = high CpG content, dark blue = low CpG content 
+
+```{r}
+
+# count CG sites from bsseq package -- takes a hot sec, save as rbs file for future use
+t2t.cpg.loci <- findLoci(pattern = "CG",
+                         subject = BSgenome.t2t.v1.0.release::BSgenome.t2t.v1.0.release, 
+                         strand = "+")
+# you should count ~32M CpGs
+length(t2t.cpg.loci)
+
+# now find overlaps between CpG sites and repeats
+l1_regions <- pos %>%
+  mutate(start = start - flankn, end = end + flankn) %>%
+  GRanges()
+
+ovl <- findOverlaps(t2t.cpg.loci, l1_regions)
+genes.ovl <- as.data.frame(pos)[subjectHits(ovl),] %>%
+  dplyr::mutate(genewidth = end - start) %>%
+  dplyr::rename(gene_start = start, gene_end = end) 
+
+chm13.ovl <- as.data.frame(t2t.cpg.loci[queryHits(ovl),]) %>%
+  bind_cols(genes.ovl) %>%
+  dplyr::rename(seqnames = 1) %>%
+  dplyr::mutate(dist = ifelse(Orientation == "pos",start - gene_start, gene_end - start),
+    dist = ifelse(dist < 0, dist/flankn,
+      ifelse(dist < genewidth,
+        bodylen * dist / genewidth,
+        bodylen + (dist - genewidth)/flankn)), 
+    dist = round(dist,2)
+    )
+
+# plot CpG density as heatmap -- the actual number doesnt mean anything, its just for visualization
+chm13.ovl.labs <- chm13.ovl %>%
+  group_by(ID) %>%
+  mutate(total=n()) %>%
+  ungroup() %>%
+  group_by(dist) %>%
+  summarise(med = sum(width), cg=med/total) %>%
+  distinct()
+  
+q <- ggplot(chm13.ovl.labs, aes(x=dist,y=1, fill=cg))+geom_tile()+scale_x_continuous(breaks= c(-1,0,bodylen,bodylen + 1), labels = c(paste0("-",flankn/1e3,"kb"),"Start","End",paste0("+",flankn/1e3,"kb")))+theme_void()+theme(legend.position = "none")
+
+# use cowplot to combine plots on the same X-axis
+plot_grid(p,q, ncol=1, align = "v",rel_heights = c(3,.5))
+```
+
+
+
+
+
+
+

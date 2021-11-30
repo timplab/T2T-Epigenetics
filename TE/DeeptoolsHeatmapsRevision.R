@@ -16,12 +16,12 @@ dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
 chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
   mutate(called_sites_unmethylated = called_sites - called_sites_methylated)
 
-type="L1HS"
+type="AluY-sub"
 # load rep file
-reps <- read_tsv(paste0(dat, "/TE/revision/new_deeptools_beds/", "SINE_HOTnot_CHM13ABpool_anti-sense_htmpSorted_3Prime.bed")) %>%
+reps <- read_tsv(paste0(dat, "/TE/revision/new_deeptools_beds/", "AluY_HOTnot_CHM13ABpool_anti-sense_htmpSorted_5ksubsamp.bed")) %>%
   dplyr::rename("chr"=`#chrom`) %>% 
   dplyr::rename("direction"=strand) %>%
-  filter(grepl("AluY",name)) %>%
+#  filter(grepl("L1HS",name)) %>%
   dplyr::select(c(chr, start, end,direction, deepTools_group)) %>%
   mutate(ID=row_number())
 # set flanks 
@@ -53,11 +53,10 @@ chm13.ovl <- as.data.frame(GRanges(chm13_meth)[queryHits(ovl),]) %>%
                 dist = plyr::round_any(dist,5)*-1)
 #  )
 
-n_windows=500
+n_windows=1000
 chm13.ovl$cut = cut(chm13.ovl$dist, breaks=n_windows)
 
 chm13.ovl.labs <- chm13.ovl %>%
-
   group_by(cut,deepTools_group) %>%
   summarise(med = median(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency),ID=ID) %>%
   mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
@@ -67,7 +66,7 @@ chm13.ovl.labs <- chm13.ovl %>%
   distinct() %>%
   group_by(deepTools_group) %>%
   arrange(min) %>%
-  mutate(med_smooth = rollmean(med, 20, NA))
+  mutate(med_smooth = rollmean(med, 2, NA))
 
 # plot frequency with loess --- if doing SINEs don't use loess unless u want to die 
 freqplot <- ggplot(chm13.ovl.labs,aes(x=min,y=med_smooth, color=deepTools_group))+theme(legend.position = "left", legend.direction="vertical",axis.title.x=element_blank())+ylim(0,1)+geom_line()#+ geom_smooth(method="loess",se=F, span=.3)
@@ -81,6 +80,14 @@ plot_grid(freqplot, plot, ncol=1, align = "v", rel_heights=c(1/3,1))
 
 ggsave(
   paste0(dat, "/figures/evol_meth/TE/",type, "_HeatmapRev.pdf"),
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 12,
+)
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/",type, "_HeatmapRev.png"),
   plot = last_plot(),
   scale = 1,
   width = 5,

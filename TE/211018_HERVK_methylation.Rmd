@@ -1,0 +1,75 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r load_libs}
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(BSgenome.t2t.v1.0.release)
+library(bsseq)
+```
+
+We want to look at methylation differences between different types of TEs -- will start with the L1 LINEs 
+
+Load the bed files savannah made with metadata about subtype and "HOT" or not
+"HOT" refers to if the L1 is active 
+
+```{r load_dat}
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+reps <- read_tsv(paste0(dat, "/TE/revision/new_deeptools_beds/HERVK_chm13v1.0_byGroup.bed")) %>%
+  mutate(ID=row_number()) %>%
+  dplyr::rename("Direction"=strand) %>%
+  GRanges()
+
+chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
+  mutate(called_sites_unmethylated = called_sites - called_sites_methylated)
+
+```
+
+```{r}
+
+
+my_comparisons <- list(c("GT_withLTR", "GT_withoutLTR"), c("GT_withLTR", "LT_complex"),c("GT_withLTR","LT_withLTR" ), c("GT_withoutLTR", "LT_complex"), c("GT_withoutLTR", "LT_withLTR"), c("GT_withoutLTR", "LT_withoutLTR"), c("LT_complex", "LT_withLTR"), c("LT_complex", "LT_withoutLTR"), c("LT_withLTR", "LT_withoutLTR"))
+
+
+t2t.cpg.loci <- readRDS(paste0(dat, "/annotations/BSgenome.t2t.v1.0.release_CpGSites.rds"))
+
+ovl.cpg <- FindOvls(GRanges(reps), t2t.cpg.loci) %>%
+  #mutate(average_methylation_frequency=as.numeric(average_methylation_frequency)) %>%
+  group_by(group,ID) %>%
+  summarise(num_cpg=n()/(end-start)) %>%
+  distinct()
+
+
+ggplot(ovl.cpg, aes(x=group, y=num_cpg, fill=group))+geom_boxplot()+ stat_compare_means(comparisons = my_comparisons, test = "kruskal.test")
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/","HERVK_hotvsnot_CpG_RevisionKStest.pdf"),
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+
+ovl.meth <- FindOvls(GRanges(chm13_meth), GRanges(reps)) %>%
+  group_by(ID, group) %>%
+  summarise(average_methylation_frequency=mean(methylated_frequency))
+
+
+
+ggplot(ovl.meth, aes(x=group, y=average_methylation_frequency, fill=group))+geom_boxplot()+stat_compare_means(comparisons = my_comparisons, test = "kruskal.test")
+
+ggsave(
+  paste0(dat, "/figures/evol_meth/TE/","HERVK_average_methylation_frequency_RevisionKStest.pdf"),
+  plot = last_plot(),
+  scale = 1,
+  width = 5,
+  height = 5,
+)
+```
+
+

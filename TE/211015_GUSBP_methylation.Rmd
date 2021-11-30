@@ -1,0 +1,181 @@
+---
+title: "Composite Element Methylation TELOclusters"
+author: "Ariel"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  html_notebook: default
+mainfont: DejaVu Sans
+titlefont: DejaVu Sans
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE,  message=FALSE)
+
+# these are my personal utils -- find them in the utils dir of the T2T-Epigenetics git repo
+source("~/T2T-Epigenetics/utils/ilee_plot_utils.R")
+source("~/T2T-Epigenetics/utils/methylation_R_utils.R")
+library(tidyverse)
+library(cowplot)
+library(zoo)
+library(bsseq)
+library("rhmmer")
+# BSgenome package for T2T genome -- find on globus and install
+library(BSgenome.t2t.v1.0.release)
+
+figs="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/TE/revision"
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+```
+
+```{r loadData, include=F}
+dat="/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly"
+chm13_meth <- read_tsv(paste0(dat, "/methylation_calls/methylation_frequency_50kb_split.tsv")) %>%
+  GRanges()
+
+hg002_meth <- read_tsv(paste0(dat, "/revision_analysis/HG002_pooled/HG002_CpG_methylationFrequency_pooled.tsv")) %>%
+ # mutate(called_sites_unmethylated=called_sites-called_sites_methylated) %>%
+  GRanges()
+```
+
+```{r}
+#chr14:261225-633292
+type="WALU"
+res <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/revision_analysis/satellites/walusat/WAluSat_chm13v1.0_mon-array.txt") %>%
+  filter(chr=="chr14") %>%
+  filter(start > 261225) %>%
+  filter(end < 633292)
+```
+
+
+```{r 5kb, echo=F}
+#HSat - chr16:49,163,529-49,239,753
+#BSat - chr1:128,192,361-128,275,698
+#D4Z4 - chr4:193,435,153-193,459,930
+#U2 - chr17:44,108,084-44,173,473 (this is the example)
+#TAF11L chr5:17,519,402-17,575,266 - proseq
+#USPL chr4:9,197,957-9,261,769
+
+
+region=data.frame(chr="chr14", start=261225, end=633292) %>%
+  GRanges()
+chm13.ovl <- FindOvls(chm13_meth, region) %>%
+  mutate(cell_line="chm13")
+hg002.ovl <- FindOvls(hg002_meth, region)%>%
+  mutate(cell_line="hg002")
+
+ovl.all <- rbind(chm13.ovl,hg002.ovl)
+
+# bin data to make plot pretty
+n_windows=50000
+ovl.all$cut = cut(chm13.ovl$start, breaks=n_windows)
+
+chm13.ovl.labs <- ovl.all %>%
+  group_by(cut,cell_line) %>%
+  summarise(med = mean(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(cell_line) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 100, NA),top_smooth = rollmean(top, 10, NA),bot_smooth = rollmean(bot, 10, NA))
+
+# plot -- include annotation for number of repeats in each group
+p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth, color=cell_line), alpha=.5)+
+  geom_line(aes(y=med_smooth), alpha=.5, size=1) +
+  labs( x = "Genomic Position", y = "Aggregated Methylation Frequency") +
+  theme_classic()+theme(legend.position = "top")
+
+p
+
+arrows <- res %>%
+  mutate(start=ifelse(Orientation=="pos", start, end), end=ifelse(Orientation=="+", end, start))
+
+
+arrow <- ggplot()+ geom_segment(data = arrows, aes(x = start, xend = end, y = 0, yend = 0), 
+               colour = "black", 
+               arrow = arrow())+theme_void()+coord_cartesian(c(as.data.frame(region)$start,as.data.frame(region)$end))
+
+top_row <- plot_grid(p,arrow, align="v", ncol=1,rel_heights = c(1/2,1/10))
+top_row
+
+ggsave(
+  paste0(figs,"CHM13_", type, "Methylation.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 4,
+)
+```
+
+```{r 5kb, echo=F}
+#HSat - chr16:49,163,529-49,239,753
+#BSat - chr1:128,192,361-128,275,698
+#D4Z4 - chr4:193,435,153-193,459,930
+#U2 - chr17:44,108,084-44,173,473 (this is the example)
+#TAF11L chr5:17,519,402-17,575,266 - proseq
+#USPL chr4:9,197,957-9,261,769
+
+
+region=data.frame(chr="chr14", start=349984, end=354953) %>%
+  GRanges()
+chm13.ovl <- FindOvls(chm13_meth, region) %>%
+  mutate(cell_line="chm13")
+hg002.ovl <- FindOvls(hg002_meth, region)%>%
+  mutate(cell_line="hg002")
+
+ovl.all <- rbind(chm13.ovl,hg002.ovl)
+
+# bin data to make plot pretty
+n_windows=10000
+ovl.all$cut = cut(chm13.ovl$start, breaks=n_windows)
+
+chm13.ovl.labs <- ovl.all %>%
+  group_by(cut,cell_line) %>%
+  summarise(med = mean(methylated_frequency), top = quantile(methylated_frequency, 0.75), bot = quantile(methylated_frequency, 0.25), n_genes = length(methylated_frequency)) %>%
+  mutate(x_tmp = str_sub(cut, 2, -2)) %>% 
+  separate(x_tmp, c("min", "max"), sep = ",") %>% 
+  mutate_at(c("min", "max"), as.double) %>%
+  ungroup() %>%
+  group_by(cell_line) %>%
+  arrange(min) %>%
+  mutate(med_smooth = rollmean(med, 5, NA),top_smooth = rollmean(top, 10, NA),bot_smooth = rollmean(bot, 10, NA))
+
+# plot -- include annotation for number of repeats in each group
+p <- ggplot(chm13.ovl.labs,aes( x = min, y = med_smooth, color=cell_line), alpha=.5)+
+  geom_line(aes(y=med_smooth), alpha=.5, size=1) +
+  labs( x = "Genomic Position", y = "Aggregated Methylation Frequency") +
+  theme_classic()+theme(legend.position = "top")+geom_point()
+
+p
+
+arrows <- res %>%
+  mutate(start=ifelse(Orientation=="pos", start, end), end=ifelse(Orientation=="+", end, start))
+
+
+arrow <- ggplot()+ geom_segment(data = arrows, aes(x = start, xend = end, y = 0, yend = 0), 
+               colour = "black", 
+               arrow = arrow())+theme_void()+coord_cartesian(c(as.data.frame(region)$start,as.data.frame(region)$end))
+
+top_row <- plot_grid(p,arrow, align="v", ncol=1,rel_heights = c(1/2,1/10))
+top_row
+
+ggsave(
+  paste0(figs,"CHM13_", type, "Methylation.pdf"),
+  plot = top_row,
+  scale = 1,
+  width = 10,
+  height = 4,
+)
+```
+
+
+
+
+
+
+
+
+
