@@ -35,11 +35,11 @@ des <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/
   GRanges()
 bsseq.gr <- GRanges(hg002.bsseq)
 bsseq.ref <- FindOvls(t2t.cpg.loci,bsseq.gr) %>%
-  select(-c(width,strand)) %>%
+  dplyr::select(-c(width,strand)) %>%
   dplyr::rename("chromosome"=seqnames)
 
 grch38.ref <- FindOvls(hg38.cpg.loci,hg38_bsseq) %>%
-  select(-c(width,strand)) %>%
+  dplyr::select(-c(width,strand)) %>%
   dplyr::rename("chromosome"=seqnames)
 
 hg002.all <- rbind(hg002.nanopore,bsseq.ref,grch38.ref)
@@ -68,6 +68,7 @@ ggsave(
 
 
 total.stat <- hg002.all %>%
+#  filter(called_sites >= 5) %>%
   group_by(method) %>%
   dplyr::summarize(total=sum(num_motifs_in_group)) %>%
   mutate(which="sampled")

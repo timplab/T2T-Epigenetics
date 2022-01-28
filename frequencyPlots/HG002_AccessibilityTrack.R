@@ -21,7 +21,8 @@ binnedSum <- function(bins, numvar, mcolname)
   bins
 }
 
-gcalls.gr <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002/nanonome/methylation_calls/chm13_whole_genome/pooled/HG002_nanonome_GpCmethylationFrequency.tsv")%>%
+gcalls.gr <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/HG002/nanonome/methylation_calls/chm13_whole_genome/pooled/HG002_nanonome_GpCmethylationFrequency.tsv") %>%
+  filter(!grepl("GCG", group_sequence)) %>%
   filter(chromosome != "chrY") %>%
   GRanges()
 
