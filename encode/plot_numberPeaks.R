@@ -38,6 +38,18 @@ ggsave(filename = paste0(figs, "/GRCh38_chm13peaks_vertical.pdf"), plot = last_p
        width = 10,
        height = 3)
 
+all_marks.sum  <- all_marks %>%
+  mutate(type=ifelse(mark %in% c('H3K4me1','H3K27ac','H3K36me3',"CTCF",'H3K4me3'), "activating", "repressing")) %>%
+  group_by(asm, type) %>%
+  summarise(num=sum(num))
+
+ggplot(data=all_marks.sum, aes(y=num, x=type, fill=asm))+geom_bar(stat = "identity", position='dodge')+ theme(text = element_text(size=20))+theme_classic()+labs(x="Cell Line", y = "Number of MACs Peaks")
+
+
+ggsave(filename = paste0(figs, "/GRCh38_chm13peaks_aggregated.pdf"), plot = last_plot(),
+       width = 5,
+       height = 5)
+
 
 all_marks <- read_delim("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/encode/encode_macs2_peaks_all/encode_macs2_peaks/beds/all_peaks_num.txt", delim = "\t", col_names = F) %>%
   dplyr::select(c(X5,X6)) %>%
