@@ -126,27 +126,30 @@ repdat.sum <- dat %>%
   
 stat.sum <- merge(perc, repdat.sum, by="rep")
 
-ggplot(stat.sum, aes(x=perc_high, y=mean_diff, color=rep))+geom_point(size=3)+theme_classic()+ scale_color_manual(values = censatColors, drop = FALSE)+theme(text=element_text(size=20))
+library(SummarizedExperiment)
+ggplot(stat.sum, aes(x=perc_high, y=mean_diff, color=rep))+geom_point(size=3)+theme_classic()+ scale_color_manual(values = censatColors, drop = FALSE)+theme(text=element_text(size=20))+annotate(x=70, y=3, 
+         label=paste("R = ", round(cor(stat.sum$perc_high, stat.sum$mean_diff),2)), 
+         geom="text", size=5)
+cor.test(stat.sum$perc_high, stat.sum$mean_diff)
 
 ggsave("CurrentMean_vsPercHigh.pdf",path = "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures",plot = last_plot(), 
        height=5, 
        width=8)
 
 ```
+
 ```{r}
-cov <- read_tsv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/reference/repeat_fasta/coverage_repeat_intersections.bed", col_names = F) %>%
-  select(X1, X2, X3, X4, X8) %>%
-  filter(X8 %in% list) %>%
-  rename(X1="chr", X2="start", X3="end", X4="cov", X8="rep")
 
-cov.stat <- cov %>%
-  group_by(rep) %>%
-  summarise(meanCov=mean(cov), sdCov=sd(cov))
+cov <- read_csv("/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/reference/repeat_fasta/Average_coverage.csv") %>%
+  rename(X10="rep") %>%
+  mutate(coverage=as.numeric(coverage))
+all.sum <- merge(stat.sum, cov, by="rep")
 
-all.sum <- merge(stat.sum, cov.stat, by="rep")
+ggplot(all.sum, aes(x=perc_high, y=coverage, color=rep))+geom_point(size=3)+theme_classic()+ scale_color_manual(values = censatColors, drop = FALSE)+theme(text=element_text(size=20))+annotate(x=65, y=35, 
+         label=paste("R = ", round(cor(all.sum$perc_high, all.sum$coverage),2)), 
+         geom="text", size=5)
 
-ggplot(all.sum, aes(x=perc_high, y=meanCov, color=rep))+geom_point(size=3)+theme_classic()+ scale_color_manual(values = censatColors, drop = FALSE)+theme(text=element_text(size=20))
-
+cor.test(all.sum$perc_high, all.sum$coverage)
 ggsave("meanCov_vsPercHigh.pdf",path = "/kyber/Data/Nanopore/Analysis/gmoney/CHM13/v1.0_final_assembly/figures",plot = last_plot(), 
        height=5, 
        width=8)

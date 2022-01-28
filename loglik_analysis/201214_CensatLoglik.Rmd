@@ -97,3 +97,16 @@ ggsave(
 
 ```
 
+```{r}
+all_calls <- read_delim(paste0(dat, "/methylation_calls/methylation_calls_50kb_LogLikCounts.tsv"), col_names = F, delim=" ") %>%
+  mutate(X1=as.numeric(X1)) %>%
+  mutate(quality = case_when(X1 > 1.5 | X1 < -1.5 ~ "high", 
+                             TRUE ~ "low")) %>%
+  group_by(quality) %>%
+  summarize(num=sum(X2)) %>%
+  ungroup() %>%
+  spread(quality, num) %>%
+  mutate(total = high+low, perc_high = (high/total)*100)
+```
+
+
