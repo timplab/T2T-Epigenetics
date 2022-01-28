@@ -1,4 +1,4 @@
-workdir: /atium/Data/Nanopore/projects/210124_mason_bisulfite # path to save the analysis outputs
-codedir: /home/gmoney/projects/chm13_meth/scripts/v1.0_final_assembly/bisulfite # path to this dir
-reference: /atium/Data/Nanopore/projects/210124_mason_bisulfite/reference # path to reference genome
+workdir: /uru/Data/old_atium/Data/Nanopore/projects/210124_mason_bisulfite # path to save the analysis outputs
+codedir: /home/gmoney/T2T-Epigenetics/bisulfite/epiQC  # path to this dir
+reference: /uru/Data/old_atium/Data/Nanopore/projects/210124_mason_bisulfite/reference # path to reference genome
 threads: 60 # available cores
